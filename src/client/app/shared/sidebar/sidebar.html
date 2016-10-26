@@ -13,7 +13,7 @@
             <li class="nested" [ngClass]="{'expand' : showMenu === 'pages' }">
                 <ul class="submenu">
                     <li>
-                        <a href><span>Operação</span></a>
+                        <a [routerLink]="['operacao-investimento']" [routerLinkActive]="['router-link-active']" href><span>Operação</span></a>
                     </li>
                     <li>
                         <a href><span>Acompanhamento</span></a>
