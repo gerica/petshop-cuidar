@@ -9,4 +9,14 @@
 	Funcionalidade de apresentar todas as operações abertas e os totais.
 	Funcionalidade de apresentar o saldo das operações abertas, consolidadas ou individuais.
 	Funcionalidade de relatório de ganhos/percas por período.
+	Funcionalidade de calcular as mestas, STOP GAIN e STOP LOST.
+	Relatório se a saída do papel obedeceu as metas.
+
+- Cotação
+	Funcionalidade de atualizar a cotação com a BOVESPA, manualmente.
+	Funcionalidade de atualizar a cotação com a BOVESPA, automaticamente.
+
+- Configuração
+	Funcionalidade de selecionar quais papeis serão utilizado pelo sistema, isto é quais papeis serão atualizados,cotação atualizada, automaticamente pela BOVESTA.
+	Funcionalidade de informar qual será a meta de saída. STOP GAIN e STOP LOST
 
