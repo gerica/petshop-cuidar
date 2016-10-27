@@ -1,0 +1,12 @@
+***********************************Tarefas****************************************
+- Usuário
+	Criar funcionalidade de registrar usuário.
+	Funcionalidade de verificar a duplicidade.
+
+- Operação
+	Funcionalidade de operação de entrada.
+	Funcionalidade de operação de saída.
+	Funcionalidade de apresentar todas as operações abertas e os totais.
+	Funcionalidade de apresentar o saldo das operações abertas, consolidadas ou individuais.
+	Funcionalidade de relatório de ganhos/percas por período.
+
