@@ -11,23 +11,23 @@ import 'rxjs/add/operator/catch';
 import { Usuario} from '../shared/entity/usuario';
 
 // URL BACK END
-import { URL_AUTH } from '../common/url_const';
+import { URL_REGISTRAR } from '../common/url_const';
 
 
 @Injectable()
-export class LoginService {
-    private _url = URL_AUTH;    
+export class SignupService {
+    private _url = URL_REGISTRAR;    
 
     constructor(private http: Http) { }    
 
-    public login(usuario): Observable<any>{        
+    public registrar(usuario): Observable<any>{        
       let body = JSON.stringify(usuario);
       
       return this.http.post(this._url, body, { headers: contentHeaders })
                       // ...and calling .json() on the response to return data
                        .map((res:Response) => res.json())
                        //...errors if any
-                       .catch((error:any) => Observable.throw(error.text()));
+                       .catch((error:any) => Observable.throw(error.json()));
      }     
 
 }

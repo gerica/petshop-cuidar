@@ -1,7 +1,11 @@
 ***********************************Tarefas****************************************
 - Usuário
-	Criar funcionalidade de registrar usuário.
-	Funcionalidade de verificar a duplicidade.
+	(+) Criar funcionalidade de registrar usuário.
+	(+)	Funcionalidade de verificar a duplicidade.
+	(+)	Alterar a forma que é feita a autenticação, para utilizar o email, e retornar o usuário.
+	(*)	Criar funcionalidade de ROLES.
+	(+)	Validar email
+	(+)	Validar quantidade de letras para a senha.
 
 - Operação
 	Funcionalidade de operação de entrada.

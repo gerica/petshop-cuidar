@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Usuario} from '../../shared/entity/usuario';
 
 @Component({
     moduleId: module.id,
@@ -7,6 +9,12 @@ import { Component } from '@angular/core';
 })
 
 export class TopNavComponent {
+	usuario: Usuario;
+
+	constructor(private router: Router) { 
+		this.usuario = JSON.parse(localStorage.getItem('usuario_investimento'));		
+	}
+
 	changeTheme(color: string): void {
 		var link: any = $('<link>');
 		link
@@ -25,5 +33,12 @@ export class TopNavComponent {
 		var mainContainer: any = $('.main-container');
 		sidebar.toggleClass('sidebar-left-zero');
 		mainContainer.toggleClass('main-container-ml-zero');
+	}
+
+	logout(): void{
+	    localStorage.removeItem('id_token');
+	    localStorage.removeItem('usuario_investimento');
+    	this.router.navigate(['']);
+
 	}
 }
