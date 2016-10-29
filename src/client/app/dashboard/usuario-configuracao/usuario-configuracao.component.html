@@ -30,9 +30,9 @@
                                     <fieldset class="form-group">
                                         <label>Email:</label>
                                         <input type="text" class="form-control" id="email" name="email" [(ngModel)]="usuario.email" #email="ngModel" readonly>
-                                    </fieldset>                                    
+                                    </fieldset>
                                 </div>
-                            </div>                                                                                    
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <fieldset class="form-group">
@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <fieldset class="form-group">
                                         <label>Senha:</label>
-                                        <input type="password"  class="form-control" placeholder="Senha" id="password" name="password" [(ngModel)]="usuario.password" #password="ngModel" required>
+                                        <input type="password" class="form-control" placeholder="Senha" id="password" name="password" [(ngModel)]="usuario.password" #password="ngModel" required>
                                     </fieldset>
                                     <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
                                         A password é obrigatório.
@@ -77,22 +77,43 @@
                             </div>
                         </div>
                     </tab>
-                    <tab heading="Conifurar Papeis">
+                    <tab heading="Configurar Papeis">
                         <div class="row">
                             <div class="col-xl-12 col-lg-12">
                                 <div class="card card-block">
-                                    
+                                    <h5>Selecione quais papeis serão <b>atualizados pela BOVESPA diariamente.</b></h5>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Ações</th>
+                                                <th>Nome</th>
+                                                <th>Papel</th>
+                                                <th>Setor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let papel of papeis">
+                                                <td>
+                                                    <i *ngIf="papel.ativo == false" class="fa fa-square-o" aria-hidden="true " title="Operação de saída " style="cursor:pointer " (click)="ativarDesativarPapel(papel)"></i>
+                                                    <i *ngIf="papel.ativo == true" class="fa fa-check-square-o" aria-hidden="true " title="Analisar Cotação " style="cursor:pointer " (click)="ativarDesativarPapel(papel)"></i>
+                                                </td>
+                                                <td>{{papel.nome}}</td>
+                                                <td>{{papel.papel}}</td>
+                                                <td>{{papel.setor}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </tab>
-                    <tab heading="Configurar Meta">
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12">
-                                <div class="card card-block">
-                                </div>  
+                    <tab heading="Configurar Meta ">
+                        <div class="row ">
+                            <div class="col-xl-12 col-lg-12 ">
+                                <div class="card card-block ">
+                                </div>
                             </div>
-                        </div> 
+                        </div>
                     </tab>
                 </tabset>
             </div>

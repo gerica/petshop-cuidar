@@ -1,4 +1,4 @@
-import {Fundamento} from './fundamento';
+import { Fundamento } from './fundamento';
 
 export class Papel {
     id: number;
@@ -6,5 +6,6 @@ export class Papel {
     papel: string;
     setor: number;
     rank: number;
+    ativo: boolean;
     fundamento: Fundamento;
 }

@@ -1,133 +1,102 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {UsuarioConfiguracaoService} from './usuario-configuracao.service';
-import {Papel} from '../../shared/entity/papel';
+import { UsuarioService } from '../../shared/service/usuario.service';
+import { PapelService } from '../../shared/service/papel.service';
 
-import {AlertaUtil} from '../../shared/utils/alerta-util';
-import { Usuario} from '../../shared/entity/usuario';
+import { Papel } from '../../shared/entity/papel';
+
+import { AlertaUtil } from '../../shared/utils/alerta-util';
+import { Usuario } from '../../shared/entity/usuario';
 
 @Component({
-	moduleId: module.id,
+    moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './usuario-configuracao.component.html',
-    providers: [UsuarioConfiguracaoService]
+    providers: [UsuarioService, PapelService]
 })
 
 export class UsuarioConfiguracaoComponent implements OnInit {
 
-	/*Variaveis*/
+    /*Variaveis*/
     papeis: Papel[];
-	alertaUtil: AlertaUtil;
-	usuario: Usuario;
+    alertaUtil: AlertaUtil;
+    usuario: Usuario;
 
-	/*Construtor*/
-	constructor (private operacaoService: UsuarioConfiguracaoService) {
-		this.alertaUtil = new AlertaUtil();
-		this.usuario = JSON.parse(localStorage.getItem('usuario_investimento'));
-		console.log(this.usuario);
-	}
+    /*Construtor*/
+    constructor(private usuarioService: UsuarioService, private papelService: PapelService) {
+        this.alertaUtil = new AlertaUtil();
+        this.usuario = JSON.parse(localStorage.getItem('usuario_investimento'));
+    }
 
-	/*Métodos*/
-	ngOnInit(): void {
-        // this.getAllPapel();
+    /*Métodos*/
+    ngOnInit(): void {
+        this.recuperarTodosPapeis();
         // this.getAllOperacaoEntrada();
     }
 
-/*	getAllPapel(): void {
-        this.operacaoService.getAllPapel()
-                .subscribe( 
-                    data => {
-                    		this.papeis = data;
-                            console.log('Sucesso getAllPapel().')
-                    }
-                    ,
-                    error => {
-                        this.alertaUtil.addMessage(
-                        		{
-							     	type: 'danger',
-							     	closable: true,
-							     	msg: error
-								}
-                        	)
-                        ;
-                    } 
-                );
-    }  */
+        recuperarTodosPapeis(): void {
+        this.papelService.recuperarTodosPapeis()
+            .subscribe(
+                data => {
+                    this.papeis = data;
+                    console.log('Sucesso recuperarTodosPapeis().');
+                },
+                error => {
+                    this.alertaUtil.addMessage({
+                        type: 'danger',
+                        closable: true,
+                        msg: error
+                    });
+                }
+            );
+    }
 
-	alterarUsuario(event: any): void {
-		event.preventDefault();
+        alterarUsuario(event: any): void {
+        event.preventDefault();
 
-	    this.operacaoService.alterarUsuario(this.usuario)
-	               .subscribe(
-	                   result => {
-	                       	let usuarioLocal = result.objeto;
-                            usuarioLocal.password = '';
-                            localStorage.setItem('usuario_investimento', JSON.stringify(usuarioLocal));
-	                        this.alertaUtil.addMessage(
-                        		{
-							     	type: 'success',
-							     	closable: true,
-							     	msg: result.message
-								}
-                        	);
-	                   },
-	                    err => {
-	                        // Log errors if any                                    
-	                        this.alertaUtil.addMessage(
-                        		{
-							     	type: 'danger',
-							     	closable: true,
-							     	msg: err.message
-								}
-                        	);
-	                });
-	}
+        this.usuarioService.alterarUsuario(this.usuario)
+            .subscribe(
+                result => {
+                    let usuarioLocal = result.objeto;
+                    usuarioLocal.password = '';
+                    localStorage.setItem('usuario_investimento', JSON.stringify(usuarioLocal));
+                    this.alertaUtil.addMessage({
+                        type: 'success',
+                        closable: true,
+                        msg: result.message
+                    });
+                },
+                err => {
+                    // Log errors if any                                    
+                    this.alertaUtil.addMessage({
+                        type: 'danger',
+                        closable: true,
+                        msg: err.message
+                    });
+                });
+    }
 
+        ativarDesativarPapel(papel: Papel): void {
+        this.papelService.ativarDesativarPapel(papel)
+            .subscribe(
+                result => {
+                    // this.recuperarTodosPapeis();
+                    papel.ativo = !papel.ativo;
+                    this.alertaUtil.addMessage({
+                        type: 'success',
+                        closable: true,
+                        msg: result.message
+                    });
+                    console.log('Sucesso ativarDesativarPapel().' + papel.papel);
+                },
+                error => {
+                    this.alertaUtil.addMessage({
+                        type: 'danger',
+                        closable: true,
+                        msg: error.message
+                    });
+                }
+            );
+    }
 
-/*	gravarOperacaoSaida(event): void{
-		event.preventDefault(); 
-		
-	    this.operacaoService.salvar(this.operacaoModal)
-	               .subscribe(
-	                   result => { 	                   		
-	                       this.getAllOperacaoEntrada();
-	                       this.alertaUtil.addMessage(
-                        		{
-							     	type: 'success',
-							     	closable: true,
-							     	msg: result.message
-								}
-                        	);
-	                   },
-	                    err => {
-	                        // Log errors if any                                    
-	                        this.alertaUtil.addMessage(
-                        		{
-							     	type: 'danger',
-							     	closable: true,
-							     	msg: err.message
-								}
-                        	);
-	                });
-	}
-
-	getAllOperacaoEntrada(): void {
-        this.operacaoService.getAllOperacaoEntrada()
-                .subscribe( 
-                    data => {                    		
-                            console.log('Sucesso getAllOperacaoEntrada().');
-                    }
-                    ,
-                    error => {
-                        this.alertaUtil.addMessage(
-                        		{
-							     	type: 'danger',
-							     	closable: true,
-							     	msg: error
-								}
-                        	);
-                    } 
-                );
-    }     
-*/
 }
