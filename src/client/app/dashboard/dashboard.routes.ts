@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 import { HomeRoutes } from './home/index';
 import { BlankPageRoutes } from './blank-page/index';
 import { OperacaoInvestimentoRoutes } from './operacao-investimento/index';
+import { UsuarioConfiguracaoRoutes } from './usuario-configuracao/index';
 
 
 import { DashboardComponent } from './index';
@@ -12,9 +13,10 @@ export const DashboardRoutes: Route[] = [
     	path: 'dashboard',
     	component: DashboardComponent,
     	children: [
-	    	...HomeRoutes,	    
+	    	...HomeRoutes,
 	    	...BlankPageRoutes,
-            ...OperacaoInvestimentoRoutes,        
+        ...OperacaoInvestimentoRoutes,
+        ...UsuarioConfiguracaoRoutes
     	]
   	}
 ];

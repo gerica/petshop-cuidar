@@ -11,8 +11,8 @@ import { Usuario} from '../../shared/entity/usuario';
 export class TopNavComponent {
 	usuario: Usuario;
 
-	constructor(private router: Router) { 
-		this.usuario = JSON.parse(localStorage.getItem('usuario_investimento'));		
+	constructor(private router: Router) {
+		this.usuario = JSON.parse(localStorage.getItem('usuario_investimento'));
 	}
 
 	changeTheme(color: string): void {
@@ -28,14 +28,14 @@ export class TopNavComponent {
 		body.toggleClass('rtl');
 	}
 
-	sidebarToggler(): void  {
+	sidebarToggler(): void {
 		var sidebar: any = $('#sidebar');
 		var mainContainer: any = $('.main-container');
 		sidebar.toggleClass('sidebar-left-zero');
 		mainContainer.toggleClass('main-container-ml-zero');
 	}
 
-	logout(): void{
+	logout(): void {
 	    localStorage.removeItem('id_token');
 	    localStorage.removeItem('usuario_investimento');
     	this.router.navigate(['']);

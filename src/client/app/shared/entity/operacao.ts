@@ -1,7 +1,7 @@
 import {Papel} from './papel';
 
 export class Operacao {
-	data: Date;	
+	data: Date;
 	tipoOperacao: string;
 	precoUnitario: number;
 	quantidade: number;

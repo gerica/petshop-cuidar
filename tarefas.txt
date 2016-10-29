@@ -6,6 +6,7 @@
 	(*)	Criar funcionalidade de ROLES.
 	(+)	Validar email
 	(+)	Validar quantidade de letras para a senha.
+	(+)	Funcionalidade para poder alterar nome e senha.
 
 - Operação
 	Funcionalidade de operação de entrada.

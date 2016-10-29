@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertaUtil} from '../shared/utils/alerta-util';
-import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 import { SignupService } from './signup.service';
 
 import { Usuario} from '../shared/entity/usuario';
@@ -17,25 +16,25 @@ import { Usuario} from '../shared/entity/usuario';
 	providers: [SignupService]
 })
 
-export class SignupComponent { 
+export class SignupComponent {
 	alertaUtil: AlertaUtil;
-	usuario: Usuario;  
+	usuario: Usuario;
 
 		/*Construtor*/
-	constructor (private router: Router, private signupService: SignupService) {		
+	constructor (private router: Router, private signupService: SignupService) {
 		this.alertaUtil = new AlertaUtil();
-		this.usuario = new Usuario();  
+		this.usuario = new Usuario();
 	}
 
-	registrar(event): void {        
-      event.preventDefault();  
-      if(this.validarPassword()){
+	registrar(event: any): void {
+      event.preventDefault();
+      if(this.validarPassword()) {
        		// Get all comments
        		this.signupService.registrar(this.usuario)
                          .subscribe(
-                             result => { 
-                                 
-                                 this.router.navigate(['']);                        
+                             result => {
+
+                                 this.router.navigate(['']);
                                  this.alertaUtil.addMessage(
                                   {
                                        type: 'success',
@@ -45,7 +44,7 @@ export class SignupComponent {
                                   );
                              },
                               err => {
-                                  // Log errors if any                                    
+                                  // Log errors if any
                                   this.alertaUtil.addMessage(
                                   {
                                        type: 'danger',
@@ -63,12 +62,12 @@ export class SignupComponent {
 	      }
 	      );
     }
-                         
+
       // DESENVOLVER SEM O SERVIDOR
       // this.router.navigate(['/dashboard/home']);                        
   }
-  validarPassword(): boolean{
-  	return this.usuario.password == this.usuario.passwordrp;
+  validarPassword(): boolean {
+  	return this.usuario.password === this.usuario.passwordrp;
 
   }
 

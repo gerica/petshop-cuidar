@@ -4,7 +4,7 @@
 */
 export class AlertaUtil {
 	/* Alert component */
-	public alerts:Array<Object>;	 
+	public alerts:Array<Object>;
 
 	 public closeAlert(i:number):void {
 	   this.alerts.splice(i, 1);
@@ -24,12 +24,12 @@ export class AlertaUtil {
 	 *    closable: true
 	 *  }
 	 */
-	 public addMessage(...objMessage): void{
+	 public addMessage(...objMessage: any[]): void {
 	 	this.alerts = new Array();
 	 	console.log(this.alerts);
 	 	for (var i = objMessage.length - 1; i >= 0; i--) {
-	 		this.alerts.push(objMessage[i])
-	 	}	 	
+	 		this.alerts.push(objMessage[i]);
+	 	}
 	 }
 	/* END*/
 }

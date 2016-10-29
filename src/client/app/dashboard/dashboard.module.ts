@@ -7,6 +7,7 @@ import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { HomeModule } from './home/home.module';
 import { BlankPageModule } from './blank-page/blankPage.module';
 import { OperacaoInvestimentoModule } from './operacao-investimento/operacao-investimento.module';
+import { UsuarioConfiguracaoModule } from './usuario-configuracao/usuario-configuracao.module';
 
 
 import { DashboardComponent } from './dashboard.component';
@@ -23,9 +24,10 @@ import { AuthGuard } from '../common/auth.guard';
     	RouterModule,
     	DropdownModule,
         ModalModule,
-    	HomeModule,        
+    	HomeModule,
         BlankPageModule,
         OperacaoInvestimentoModule,
+        UsuarioConfiguracaoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
