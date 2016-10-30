@@ -24,4 +24,4 @@
 - Configuração
 	(+) Funcionalidade de selecionar quais papeis serão utilizado pelo sistema, isto é quais papeis serão atualizados,cotação atualizada, automaticamente pela BOVESTA.
 	(+) Funcionalidade de filtar por nome do papel.
-	Funcionalidade de informar qual será a meta de saída. STOP GAIN e STOP LOST
+	(+) Funcionalidade de informar qual será a meta de saída. STOP GAIN e STOP LOST

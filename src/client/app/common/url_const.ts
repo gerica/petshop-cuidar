@@ -16,3 +16,7 @@ export const URL_ATIVAR_DESATIVAR_PAPEL: string = URL_BACK_END + 'ativarDesativa
 // SERVIÇOS DE OPERACAO
 export const URL_SALVAR_OPERACAO: string = URL_BACK_END + 'salvarOperacao';
 export const URL_RECUPERAR_OPERACAO_ENTRADA_ABERTA: string = URL_BACK_END + 'recuperarOperacaoEntradaAberta';
+
+// SERVIÇÕS DE CONFIGURAÇÃO ANALISE COTAÇAÕ
+export const URL_RECUPERAR_CONFIGURACAO_ANALISE_COTACAO: string = URL_BACK_END + 'recuperarConfiguracaoAnalise';
+export const URL_SALVAR_CONFIGURACAO_ANALISE_COTACAO: string = URL_BACK_END + 'salvarConfiguracaoAnalise';

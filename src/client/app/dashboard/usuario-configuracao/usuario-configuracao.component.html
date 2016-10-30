@@ -19,11 +19,11 @@
         </div>
     </div>
     <!-- /.row -->
-    <form role="form" #ConfiguracaoForm="ngForm" (submit)="alterarUsuario($event)">
-        <div class="col-lg-12">
-            <div class="card card-block">
-                <tabset>
-                    <tab heading="Informações Cadastrais">
+    <div class="col-lg-12">
+        <div class="card card-block">
+            <tabset>
+                <tab heading="Informações Cadastrais">
+                    <form role="form" #infoCadastralForm="ngForm" (submit)="alterarUsuario($event)">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -76,8 +76,10 @@
                                 </div>
                             </div>
                         </div>
-                    </tab>
-                    <tab heading="Configurar Papeis">
+                    </form>
+                </tab>
+                <tab heading="Configurar Papeis">
+                    <form role="form" #configPapelForm="ngForm">
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group">
@@ -116,18 +118,80 @@
                                 </div>
                             </div>
                         </div>
-                    </tab>
-                    <tab heading="Configurar Meta ">
-                        <div class="row ">
-                            <div class="col-xl-12 col-lg-12 ">
-                                <div class="card card-block ">
+                    </form>
+                </tab>
+                <tab heading="Configurar Meta ">
+                    <form role="form" #configMetaForm="ngForm" (submit)="alterarConfiguracaoAnalise($event)">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <fieldset class="form-group">
+                                        <label>Stop Loss:</label>
+                                        <input class="form-control" placeholder="Stop Loss" id="riscoStopLoss" name="riscoStopLoss" [(ngModel)]="configuracaoAnaliseCotacoes.riscoStopLoss" #riscoStopLoss="ngModel" required>
+                                    </fieldset>
+                                    <div [hidden]="riscoStopLoss.valid || riscoStopLoss.pristine" class="alert alert-danger">
+                                        Campo obrigatório.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <fieldset class="form-group">
+                                        <label>Stop Gain:</label>
+                                        <input class="form-control" placeholder="Stop Gain" id="riscoStopWin" name="riscoStopWin" [(ngModel)]="configuracaoAnaliseCotacoes.riscoStopWin" #riscoStopWin="ngModel" required>
+                                    </fieldset>
+                                    <div [hidden]="riscoStopWin.valid || riscoStopWin.pristine" class="alert alert-danger">
+                                        Campo obrigatório.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </tab>
-                </tabset>
-            </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <fieldset class="form-group">
+                                        <label>Quantidade dias para apresentar ações:</label>
+                                        <input class="form-control" placeholder="Quantidade dias para apresentar ações:" id="qtdDiasApresentarCotacoes" name="qtdDiasApresentarCotacoes" [(ngModel)]="configuracaoAnaliseCotacoes.qtdDiasApresentarCotacoes" #qtdDiasApresentarCotacoes="ngModel" required>
+                                    </fieldset>
+                                    <div [hidden]="qtdDiasApresentarCotacoes.valid || qtdDiasApresentarCotacoes.pristine" class="alert alert-danger">
+                                        Campo obrigatório.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <fieldset class="form-group">
+                                        <label>Quantidade dias para calculo do stop loss:</label>
+                                        <input type="text" class="form-control" placeholder="Quantidade dias para calculo do stop loss" id="qtdDiasCalculoStopLoss" name="qtdDiasCalculoStopLoss" [(ngModel)]="configuracaoAnaliseCotacoes.qtdDiasCalculoStopLoss" #qtdDiasCalculoStopLoss="ngModel" required>
+                                    </fieldset>
+                                    <div [hidden]="qtdDiasCalculoStopLoss.valid || qtdDiasCalculoStopLoss.pristine" class="alert alert-danger">
+                                        Campo obrigatório.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <fieldset class="form-group">
+                                        <label>Quantidade dias para calculo do stop gain</label>
+                                        <input type="text" class="form-control" placeholder="Quantidade dias para calculo do stop gain" id="qtdDiasCalculoStopWin" name="qtdDiasCalculoStopWin" [(ngModel)]="configuracaoAnaliseCotacoes.qtdDiasCalculoStopWin" #qtdDiasCalculoStopWin="ngModel" required>
+                                    </fieldset>
+                                    <div [hidden]="qtdDiasCalculoStopWin.valid || qtdDiasCalculoStopWin.pristine" class="alert alert-danger">
+                                        Campo é obrigatório.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Gravar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </tab>
+            </tabset>
         </div>
-    </form>
+    </div>
     <!-- /.row -->
 </div>
