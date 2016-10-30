@@ -79,6 +79,16 @@
                     </tab>
                     <tab heading="Configurar Papeis">
                         <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <fieldset class="form-group">
+                                        <label>Filtar:</label>
+                                        <input type="text" class="form-control" [(ngModel)]="query" id="query" name="query" placeholder="Filtar...">
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xl-12 col-lg-12">
                                 <div class="card card-block">
                                     <h5>Selecione quais papeis serão <b>atualizados pela BOVESPA diariamente.</b></h5>
@@ -92,7 +102,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let papel of papeis">
+                                            <tr *ngFor="let papel of papeis | papeisPipe:query">
                                                 <td>
                                                     <i *ngIf="papel.ativo == false" class="fa fa-square-o" aria-hidden="true " title="Operação de saída " style="cursor:pointer " (click)="ativarDesativarPapel(papel)"></i>
                                                     <i *ngIf="papel.ativo == true" class="fa fa-check-square-o" aria-hidden="true " title="Analisar Cotação " style="cursor:pointer " (click)="ativarDesativarPapel(papel)"></i>

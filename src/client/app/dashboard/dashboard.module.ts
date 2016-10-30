@@ -12,8 +12,8 @@ import { UsuarioConfiguracaoModule } from './usuario-configuracao/usuario-config
 
 import { DashboardComponent } from './dashboard.component';
 
-import {TopNavComponent} from '../shared/index';
-import {SidebarComponent} from '../shared/index';
+import { TopNavComponent } from '../shared/index';
+import { SidebarComponent } from '../shared/index';
 
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from '../common/auth.guard';
@@ -21,17 +21,17 @@ import { AuthGuard } from '../common/auth.guard';
 @NgModule({
     imports: [
         CommonModule,
-    	RouterModule,
-    	DropdownModule,
+        RouterModule,
+        DropdownModule,
         ModalModule,
-    	HomeModule,
+        HomeModule,
         BlankPageModule,
         OperacaoInvestimentoModule,
         UsuarioConfiguracaoModule,
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
-    providers : [AuthGuard,...AUTH_PROVIDERS]
+    providers: [AuthGuard, ...AUTH_PROVIDERS]
 })
 
-export class DashboardModule { }
+export class DashboardModule {}

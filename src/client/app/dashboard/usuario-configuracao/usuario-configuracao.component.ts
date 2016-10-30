@@ -21,6 +21,7 @@ export class UsuarioConfiguracaoComponent implements OnInit {
     papeis: Papel[];
     alertaUtil: AlertaUtil;
     usuario: Usuario;
+    query: string;
 
     /*Construtor*/
     constructor(private usuarioService: UsuarioService, private papelService: PapelService) {

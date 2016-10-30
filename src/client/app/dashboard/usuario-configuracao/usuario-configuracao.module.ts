@@ -10,6 +10,7 @@ import {
 } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { UsuarioConfiguracaoComponent } from './usuario-configuracao.component';
+import { PapelTabelaPipe } from '../../shared/pipe/papel-tabela.pipe';
 
 @NgModule({
     imports: [
@@ -20,7 +21,7 @@ import { UsuarioConfiguracaoComponent } from './usuario-configuracao.component';
         TabsModule,
         ModalModule
     ],
-    declarations: [UsuarioConfiguracaoComponent],
+    declarations: [UsuarioConfiguracaoComponent, PapelTabelaPipe],
     exports: [UsuarioConfiguracaoComponent]
 })
 

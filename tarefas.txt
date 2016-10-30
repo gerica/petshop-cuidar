@@ -22,6 +22,6 @@
 	Funcionalidade de atualizar a cotação com a BOVESPA, automaticamente.
 
 - Configuração
-	Funcionalidade de selecionar quais papeis serão utilizado pelo sistema, isto é quais papeis serão atualizados,cotação atualizada, automaticamente pela BOVESTA.
+	(+) Funcionalidade de selecionar quais papeis serão utilizado pelo sistema, isto é quais papeis serão atualizados,cotação atualizada, automaticamente pela BOVESTA.
+	(+) Funcionalidade de filtar por nome do papel.
 	Funcionalidade de informar qual será a meta de saída. STOP GAIN e STOP LOST
-
