@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Operacao } from '../../shared/entity/operacao';
+import { OperacaoSaida } from '../../shared/entity/operacao-saida';
 
 import { URL_RECUPERAR_OPERACAO_ENTRADA_ABERTA } from '../../common/url_const';
 import { URL_SALVAR_OPERACAO_ENTRADA } from '../../common/url_const';
@@ -37,7 +38,7 @@ export class OperacaoService {
             .catch((error: any) => Observable.throw(error.json()));
     }
 
-    public gravarOperacaoSaida(operacao: Operacao): Observable < any > {
+    public gravarOperacaoSaida(operacao: OperacaoSaida): Observable < any > {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader(contentHeaders);
         let body = JSON.stringify(operacao);

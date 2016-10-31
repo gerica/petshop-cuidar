@@ -215,87 +215,92 @@
 <!-- Modal para apresentar informções da operação -->
 <div bsModal #modalOperacaoSaida="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content" *ngIf="operacaoModal">
-            <form role="form" #OperacaoFormModal="ngForm" (submit)="gravarOperacaoSaida($event)">
-                <div class="modal-header">
-                    <button type="button" class="close" (click)="modalOperacaoSaida.hide()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h5 class="modal-title">Operação Saída do Papel: <small>{{operacaoModal.papel.papel}}</small></h5>
-                </div>
+        <div class="modal-content" *ngIf="operacaoSaida">
+            <form role="form" *ngIf="activeOperacaoSaidaForm
+" #operacaoSaidaFormModal="ngForm" (submit)="gravarOperacaoSaida($event)">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <fieldset class="form-group">
-                                    <label>Data:</label>
-                                    <input type="date" class="form-control" id="data" name="data" [(ngModel)]="operacaoModal.data" #data="ngModel" required>
-                                </fieldset>
-                                <div [hidden]="data.valid || data.pristine" class="alert alert-danger">
-                                    A data é obrigatório.
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header card-default">
+                                    Operação Saída do Papel: <small>{{operacaoSaida.operacaoEntrada.papel.papel}}</small>
+                                    <button type="button" class="close" (click)="modalOperacaoEditar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>Operação</label>
-                                <input type="text" class="form-control" id="tipoOperacao" name="tipoOperacao" [(ngModel)]="operacaoModal.tipoOperacao" #tipoOperacao="ngModel" readonly="">
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <fieldset class="form-group">
-                                    <label>Preço Unitário:</label>
-                                    <input type="text" class="form-control" placeholder="Preço Unitário" id="precoUnitario" name="precoUnitario" [(ngModel)]="operacaoModal.precoUnitario" required #precoUnitario="ngModel">
-                                </fieldset>
-                                <div [hidden]="precoUnitario.valid || precoUnitario.pristine" class="alert alert-danger">
-                                    O preço unitário é obrigatório.
+                                <div class="card-block bg-white">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <fieldset class="form-group">
+                                                    <label>Data:</label>
+                                                    <input type="date" class="form-control" id="data" name="data" [(ngModel)]="operacaoSaida.data" #data="ngModel" required>
+                                                </fieldset>
+                                                <div [hidden]="data.valid || data.pristine" class="alert alert-danger">
+                                                    A data é obrigatório.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Operação</label>
+                                                <input type="text" class="form-control" id="tipoOperacao" name="tipoOperacao" [(ngModel)]="operacaoSaida.tipoOperacao" #tipoOperacao="ngModel" readonly="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <fieldset class="form-group">
+                                                    <label>Preço Unitário:</label>
+                                                    <input type="text" class="form-control" placeholder="Preço Unitário" id="precoUnitario" name="precoUnitario" [(ngModel)]="operacaoSaida.precoUnitario" required #precoUnitario="ngModel">
+                                                </fieldset>
+                                                <div [hidden]="precoUnitario.valid || precoUnitario.pristine" class="alert alert-danger">
+                                                    O preço unitário é obrigatório.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <fieldset class="form-group">
+                                                    <label>Quantidade:</label>
+                                                    <input class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" [(ngModel)]="operacaoSaida.quantidade" #quantidade="ngModel" required>
+                                                </fieldset>
+                                                <div [hidden]="quantidade.valid || quantidade.pristine" class="alert alert-danger">
+                                                    A quantidade é obrigatório.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <fieldset class="form-group">
+                                                    <label>Despesa:</label>
+                                                    <input class="form-control" placeholder="Despesa" id="despesa" name="despesa" [(ngModel)]="operacaoSaida.despesa" #despesa="ngModel" required>
+                                                </fieldset>
+                                                <div [hidden]="despesa.valid || despesa.pristine" class="alert alert-danger">
+                                                    A despesa é obrigatório.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="form-group">
+                                                <fieldset class="form-group">
+                                                    <label>Observação</label>
+                                                    <textarea class="form-control" rows="3" id="observacao" name="observacao" [(ngModel)]="operacaoSaida.observacao" #observacao="ngModel" required></textarea>
+                                                </fieldset>
+                                                <div [hidden]="observacao.valid || observacao.pristine" class="alert alert-danger">
+                                                    Observação é obrigatório.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-primary">Gravar</button>
+                                            <button type="button" class="btn btn-warning" (click)="modalOperacaoSaida.hide()">Fechar</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <fieldset class="form-group">
-                                    <label>Quantidade:</label>
-                                    <input class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" [(ngModel)]="operacaoModal.quantidade" #quantidade="ngModel" required>
-                                </fieldset>
-                                <div [hidden]="quantidade.valid || quantidade.pristine" class="alert alert-danger">
-                                    A quantidade é obrigatório.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <fieldset class="form-group">
-                                    <label>Despesa:</label>
-                                    <input class="form-control" placeholder="Despesa" id="despesa" name="despesa" [(ngModel)]="operacaoModal.despesa" #despesa="ngModel" required>
-                                </fieldset>
-                                <div [hidden]="despesa.valid || despesa.pristine" class="alert alert-danger">
-                                    A despesa é obrigatório.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="form-group">
-                                <fieldset class="form-group">
-                                    <label>Observação</label>
-                                    <textarea class="form-control" rows="3" id="observacao" name="observacao" [(ngModel)]="operacaoModal.observacao" #observacao="ngModel" required></textarea>
-                                </fieldset>
-                                <div [hidden]="observacao.valid || observacao.pristine" class="alert alert-danger">
-                                    Observação é obrigatório.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Gravar</button>
-                                <button type="button" class="btn btn-warning" (click)="modalOperacaoSaida.hide()">Fechar</button>
                             </div>
                         </div>
                     </div>

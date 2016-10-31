@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Papel } from '../../shared/entity/papel';
 import { Operacao } from '../../shared/entity/operacao';
+import { OperacaoSaida } from '../../shared/entity/operacao-saida';
 
 import { PapelService } from '../../shared/service/papel.service';
 import { OperacaoService } from '../../shared/service/operacao.service';
@@ -26,9 +27,11 @@ export class OperacaoInvestimentoComponent implements OnInit {
     papeis: Papel[];
     operacao: Operacao;
     operacaoModal: Operacao;
+    operacaoSaida: OperacaoSaida;
     alertaUtil: AlertaUtil;
     operacoes: Operacao[];
     activeOperacaoForm = true;
+    activeOperacaoSaidaForm = true;
 
     /*Cons
 trutor*/
@@ -46,6 +49,11 @@ trutor*/
         this.alertaUtil = new AlertaUtil();
         this.activeOperacaoForm = false;
         setTimeout(() => this.activeOperacaoForm = true, 0);
+    }
+
+    public novaOperacaoSaida() {
+        this.activeOperacaoSaidaForm = false;
+        setTimeout(() => this.activeOperacaoSaidaForm = true, 0);
     }
 
     public recuperarPapeisAtivo(): void {
@@ -90,10 +98,12 @@ trutor*/
 
     public gravarOperacaoSaida(event: any): void {
         event.preventDefault();
-        this.operacaoService.gravarOperacaoSaida(this.operacaoModal)
+        this.operacaoService.gravarOperacaoSaida(this.operacaoSaida)
             .subscribe(
                 result => {
                     this.recuperarOperacaoEntradaAberta();
+                    this.novaOperacaoSaida();
+                    this.modalOperacaoSaida.hide();
 
                     this.alertaUtil.addMessage({
                         type: 'success',
@@ -149,13 +159,14 @@ trutor*/
     }
 
     public showModalOperacaoSaida(operacao: Operacao): void {
-        this.operacaoModal = new Operacao();
-        this.operacaoModal.papel = operacao.papel;
-        this.operacaoModal.quantidade = operacao.quantidade;
+        this.operacaoSaida = new OperacaoSaida();
+        this.operacaoSaida.operacaoEntrada = operacao;
+        this.operacaoSaida.operacaoEntrada.papel = operacao.papel;
+        this.operacaoSaida.quantidade = operacao.quantidade;
         if ('Comprar' === operacao.tipoOperacao) {
-            this.operacaoModal.tipoOperacao = 'Vender';
+            this.operacaoSaida.tipoOperacao = 'Vender';
         } else {
-            this.operacaoModal.tipoOperacao = 'Comprar';
+            this.operacaoSaida.tipoOperacao = 'Comprar';
         }
         this.modalOperacaoSaida.show();
     }
