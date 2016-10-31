@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../shared/service/usuario.service';
 import { PapelService } from '../../shared/service/papel.service';
 import { ConfiguracaoAnaliseCotacaoService } from '../../shared/service/configuracao-analise-cotacao.service';
+import { CotacaoService } from '../../shared/service/cotacao.service';
 
 import { Papel } from '../../shared/entity/papel';
 import { ConfiguracaoAnaliseCotacoes } from '../../shared/entity/configuracaoAnaliseCotacoes';
@@ -14,7 +15,7 @@ import { Usuario } from '../../shared/entity/usuario';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './usuario-configuracao.component.html',
-    providers: [UsuarioService, PapelService, ConfiguracaoAnaliseCotacaoService]
+    providers: [UsuarioService, PapelService, ConfiguracaoAnaliseCotacaoService, CotacaoService]
 })
 
 export class UsuarioConfiguracaoComponent implements OnInit {
@@ -29,7 +30,8 @@ export class UsuarioConfiguracaoComponent implements OnInit {
     /*Construtor*/
     constructor(private usuarioService: UsuarioService, //
         private papelService: PapelService, //
-        private configuracaoAnaliseService: ConfiguracaoAnaliseCotacaoService) {
+        private configuracaoAnaliseService: ConfiguracaoAnaliseCotacaoService, //
+        private cotacaoService: CotacaoService) {
         this.alertaUtil = new AlertaUtil();
         this.usuario = JSON.parse(localStorage.getItem('usuario_investimento'));
         this.configuracaoAnaliseCotacoes = new ConfiguracaoAnaliseCotacoes();
@@ -146,5 +148,47 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                 );
         }
         // FINAL FUNCIONALIDADES DA ABA CONFIGURAR META
+
+    // FUNCIONALIDADE DA ABA Atualizar Cotação
+        atualizarHistoricoBMF(): void {
+        this.cotacaoService.atualizarHistoricoBMF()
+            .subscribe(
+                result => {
+                    this.alertaUtil.addMessage({
+                        type: 'success',
+                        closable: true,
+                        msg: result.message
+                    });
+                },
+                err => {
+                    // Log errors if any                                    
+                    this.alertaUtil.addMessage({
+                        type: 'danger',
+                        closable: true,
+                        msg: err.message
+                    });
+                });
+    }
+
+        atualizarAtualBMF(): void {
+            this.cotacaoService.atualizarAtualBMF()
+                .subscribe(
+                    result => {
+                        this.alertaUtil.addMessage({
+                            type: 'success',
+                            closable: true,
+                            msg: result.message
+                        });
+                    },
+                    err => {
+                        // Log errors if any                                    
+                        this.alertaUtil.addMessage({
+                            type: 'danger',
+                            closable: true,
+                            msg: err.message
+                        });
+                    });
+        }
+        // FINAL FUNCIONALIDADE DA ABA Atualizar Cotação
 
 }

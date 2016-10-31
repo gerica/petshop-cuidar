@@ -2,10 +2,6 @@
 
 Utilizando o tamplate: *SB Admin rewritten in Angular2 and Bootstrap 4*
 
-# Sistama de controle de operação em ações
-
-Utilizando o tamplate: *SB Admin rewritten in Angular2 and Bootstrap 4*
-
 ### Funcionalidades
 - Configurar qual ação será atualizada.
 - Configurar o stop loss e stop gain.

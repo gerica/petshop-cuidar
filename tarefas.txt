@@ -18,7 +18,7 @@
 	Relatório se a saída do papel obedeceu as metas.
 
 - Cotação
-	Funcionalidade de atualizar a cotação com a BOVESPA, manualmente.
+	(+) Funcionalidade de atualizar a cotação com a BOVESPA, manualmente.
 	Funcionalidade de atualizar a cotação com a BOVESPA, automaticamente.
 
 - Configuração
