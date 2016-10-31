@@ -5,11 +5,8 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-//import {Operacao} from '../../shared/entity/operacao';
-
 import { URL_ATUALIZAR_HISTORICO_BMF } from '../../common/url_const';
 import { URL_ATUALIZAR_ATUAL_BMF } from '../../common/url_const';
-
 
 @Injectable()
 export class CotacaoService {
