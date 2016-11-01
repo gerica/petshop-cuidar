@@ -131,7 +131,7 @@
                                         <div class="row">
                                             <div class="col-xl-12 col-lg-12">
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover">
+                                                    <table class="table table-hover table-sm">
                                                         <thead>
                                                             <tr>
                                                                 <th>Ações</th>
@@ -172,39 +172,7 @@
                         </div>
                     </tab>
                     <tab heading="Operações Fechadas">
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12">
-                                <div class="card card-block">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Data</th>
-                                                    <th>Papel</th>
-                                                    <th>Tipo de Operação</th>
-                                                    <th>Preço Unitário</th>
-                                                    <th>Quantidade</th>
-                                                    <th>Despesa</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let operacao of operacoes">
-                                                    <td>{{operacao.data | date: 'dd/MM/yyyy'}}</td>
-                                                    <td>{{operacao.papel.papel}}</td>
-                                                    <td>{{operacao.tipoOperacao}}</td>
-                                                    <td>{{operacao.precoUnitario | currency:'BRL':true}}</td>
-                                                    <td>{{operacao.quantidade}}</td>
-                                                    <td>{{operacao.despesa | currency:'BRL':true}}</td>
-                                                    <td>{{operacao.totalOperacao | currency:'BRL':true}}</td>
-                                                    <!-- <td>{{operacao.observacao}}</td> -->
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <tab-operacao-fechada [atualizarListaSaidas]="atualizarListaSaidas"></tab-operacao-fechada>
                     </tab>
                 </tabset>
             </div>

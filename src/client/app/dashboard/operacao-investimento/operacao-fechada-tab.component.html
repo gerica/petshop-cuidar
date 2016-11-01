@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header card-default">
+                <i class="fa fa-file-text" *ngIf="mostarTabelaSaida" aria-hidden="true" title="Saídas" (click)="showHideTabelaSaida()" title="Esconder operações de saída"></i>
+                <i class="fa fa-file-text-o" *ngIf="!mostarTabelaSaida" aria-hidden="true" title="Saídas" (click)="showHideTabelaSaida()" title="Apresentar operações de saída"></i>
+                <span style=" text-indent: 50px;"> - Operação Entrada</span>
+            </div>
+            <div class="card-block">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Papel</th>
+                            <th>Tipo Operação</th>
+                            <th>Preço Unitário</th>
+                            <th>Despesa</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let operacaoEntrada of operacoes; let i = index;" [class.table-success]="operacaoEntrada.saldoOperacao >0" [class.table-danger]="operacaoEntrada.saldoOperacao <0">
+                        <tr>
+                            <td><b>{{operacaoEntrada.data | date: 'dd/MM/yyyy'}}</b></td>
+                            <td><b>{{operacaoEntrada.papel.papel}}</b></td>
+                            <td><b>{{operacaoEntrada.tipoOperacao}}</b></td>
+                            <td><b>{{operacaoEntrada.precoUnitario | currency:'BRL':true}}</b></td>
+                            <td><b>{{operacaoEntrada.despesa | currency:'BRL':true}}</b></td>
+                            <td><b>{{operacaoEntrada.saldoOperacao | currency:'BRL':true}}</b></td>
+                        </tr>
+                        <tr *ngIf="mostarTabelaSaida">
+                            <td style="text-align: center; vertical-align: middle"><i class="fa fa-arrow-right fa-2x" aria-hidden="true" title="Saídas"></i></td>
+                            <td colspan="3">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Preço Unitário</th>
+                                            <th>Quantidade</th>
+                                            <th>Despesa</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let operacaoSaida of operacaoEntrada.operacoesSaida">
+                                            <td>{{operacaoSaida.data | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{operacaoSaida.precoUnitario | currency:'BRL':true}}</td>
+                                            <td>{{operacaoSaida.quantidade}}</td>
+                                            <td>{{operacaoSaida.despesa | currency:'BRL':true}}</td>
+                                            <td>{{operacaoSaida.totalOperacao | currency:'BRL':true}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

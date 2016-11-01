@@ -1,4 +1,5 @@
 import { Papel } from './papel';
+import { OperacaoSaida } from './operacao-saida';
 
 export class Operacao {
     id: number;
@@ -11,4 +12,6 @@ export class Operacao {
     papel: Papel;
 
     totalOperacao: number;
+    saldoOperacao: number;
+    operacoesSaida: OperacaoSaida[];
 }

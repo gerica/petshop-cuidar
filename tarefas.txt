@@ -1,13 +1,15 @@
 *A*FAZER***********************************Tarefas****************************************
 - Usuário
 
-- Operação	
-	Funcionalidade de operação de saída.
+- Operação		
 	Funcionalidade de apresentar todas as operações abertas e os totais.
-	Funcionalidade de apresentar o saldo das operações abertas, consolidadas ou individuais.
+	Funcionalidade de apresentar o saldo das operações abertas, 
+	Funcionalidade de apresentar o saldo das operações consolidadas,
+	Funcionalidade de apresentar o saldo das operações individuais.
 	Funcionalidade de relatório de ganhos/percas por período.
 	Funcionalidade de calcular as mestas, STOP GAIN e STOP LOST.
 	Relatório se a saída do papel obedeceu as metas.
+	Funcionalidade de excluir somente poderá ser realizada se não houver nenhuma operação de saída.
 
 - Cotação	
 	Funcionalidade de atualizar a cotação com a BOVESPA, automaticamente.
@@ -17,6 +19,9 @@
 - Dashboard
 	Adicionar tabela com informações de operações.
 	Adicionar chart para acompanhar rentabilidade.
+
+- Refectory
+	Adicionar componentes para as tabs da funcionalidade de operações.
 	
 
 *REALIZADA***********************************Tarefas****************************************
@@ -40,3 +45,5 @@
 
 - Operação
 	(+) Funcionalidade de operação de entrada CRUD.
+	(+) Funcionalidade de operação de saída.
+	Funcionalidade de apresentar o saldo das operações fechadas. 

@@ -32,9 +32,9 @@ export class OperacaoInvestimentoComponent implements OnInit {
     operacoes: Operacao[];
     activeOperacaoForm = true;
     activeOperacaoSaidaForm = true;
+    atualizarListaSaidas = 0;
 
-    /*Cons
-trutor*/
+    /*Construtor*/
     constructor(private operacaoService: OperacaoService, private papelService: PapelService) {}
 
     /*Métodos*/
@@ -103,6 +103,7 @@ trutor*/
                 result => {
                     this.recuperarOperacaoEntradaAberta();
                     this.novaOperacaoSaida();
+                    this.atualizarListaSaidas++;
                     this.modalOperacaoSaida.hide();
 
                     this.alertaUtil.addMessage({
@@ -138,7 +139,6 @@ trutor*/
             );
     }
 
-
     public showModalOperacaoEditar(operacao: Operacao): void {
         this.operacaoModal = new Operacao();
 
@@ -155,6 +155,7 @@ trutor*/
 
     public showModalOperacaoExcluir(operacao: Operacao): void {
         this.operacaoModal = operacao;
+        console.log("tem que chamar")
         this.modalOperacaoExcluir.show();
     }
 
@@ -238,8 +239,8 @@ trutor*/
     }
 
     private calcularCamposOperacao(): void {
-        for (var i = 0; i < this.operacoes.length; i++) {
-            this.operacoes[i].totalOperacao = (this.operacoes[i].quantidade * this.operacoes[i].precoUnitario) + this.operacoes[i].despesa;
-        }
+        // for (var i = 0; i < this.operacoes.length; i++) {
+        //     this.operacoes[i].totalOperacao = (this.operacoes[i].quantidade * this.operacoes[i].precoUnitario) + this.operacoes[i].despesa;
+        // }
     }
 }

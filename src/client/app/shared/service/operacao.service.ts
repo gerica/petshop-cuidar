@@ -9,6 +9,7 @@ import { Operacao } from '../../shared/entity/operacao';
 import { OperacaoSaida } from '../../shared/entity/operacao-saida';
 
 import { URL_RECUPERAR_OPERACAO_ENTRADA_ABERTA } from '../../common/url_const';
+import { URL_RECUPERAR_OPERACAO_SAIDA } from '../../common/url_const';
 import { URL_SALVAR_OPERACAO_ENTRADA } from '../../common/url_const';
 import { URL_SALVAR_OPERACAO_SAIDA } from '../../common/url_const';
 import { URL_EXCLUIR_OPERACAO_ENTRADA } from '../../common/url_const';
@@ -79,6 +80,17 @@ export class OperacaoService {
         this.createAuthorizationHeader(contentHeaders);
 
         return this.http.get(URL_RECUPERAR_OPERACAO_ENTRADA_ABERTA, { headers: contentHeaders })
+            // ...sucesso
+            .map((response: Response) => response.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error.text()));
+    }
+
+    public recuperarOperacaoSaida(): Observable < any > {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URL_RECUPERAR_OPERACAO_SAIDA, { headers: contentHeaders })
             // ...sucesso
             .map((response: Response) => response.json())
             //...errors if any

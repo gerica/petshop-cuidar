@@ -17,7 +17,7 @@ export const URL_ATIVAR_DESATIVAR_PAPEL: string = URL_BACK_END + 'ativarDesativa
 export const URL_SALVAR_OPERACAO_ENTRADA: string = URL_BACK_END + 'salvarOperacaoEntrada';
 export const URL_SALVAR_OPERACAO_SAIDA: string = URL_BACK_END + 'salvarOperacaoSaida';
 export const URL_RECUPERAR_OPERACAO_ENTRADA_ABERTA: string = URL_BACK_END + 'recuperarOperacaoEntradaAberta';
-export const URL_RECUPERAR_OPERACAO_ENTRADA_FECHADA: string = URL_BACK_END + 'recuperarOperacaoEntradaFechada';
+export const URL_RECUPERAR_OPERACAO_SAIDA: string = URL_BACK_END + 'recuperarOperacaoSaida';
 export const URL_EXCLUIR_OPERACAO_ENTRADA: string = URL_BACK_END + 'excluirOperacaoEntrada';
 export const URL_EDITAR_OPERACAO_ENTRADA: string = URL_BACK_END + 'editarOperacaoEntrada';
 
