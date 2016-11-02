@@ -21,7 +21,7 @@
 	Adicionar chart para acompanhar rentabilidade.
 
 - Refectory
-	Adicionar componentes para as tabs da funcionalidade de operações.
+	Na tela de operações, aba de operações fechadas, adicionar funcionalidade de abrir e fechar um item da tabela.
 	
 
 *REALIZADA***********************************Tarefas****************************************
@@ -46,4 +46,7 @@
 - Operação
 	(+) Funcionalidade de operação de entrada CRUD.
 	(+) Funcionalidade de operação de saída.
-	Funcionalidade de apresentar o saldo das operações fechadas. 
+	(+) Funcionalidade de apresentar o saldo das operações fechadas. 
+
+- Refectory
+	(+) Adicionar componentes para as tabs da funcionalidade de operações.

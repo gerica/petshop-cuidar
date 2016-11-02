@@ -23,7 +23,6 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
 
     /*Métodos*/
     public ngOnInit(): void {
-        console.log("ngOnInit");
         this.recuperarOperacaoSaida();
         this.operacoes = new Array();
 
@@ -36,7 +35,6 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
             let from = JSON.stringify(changedProp.previousValue);
             let to = JSON.stringify(changedProp.currentValue);
             if (from !== to) {
-                // console.log("ngOnChanges + atualizou ");
                 this.recuperarOperacaoSaida();
                 break;
             }
@@ -60,8 +58,25 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
                 }
             );
     }
-    public showHideTabelaSaida(): void {
+    index: number;
+    public showHideTabelaSaida(index: number): void {
         this.mostarTabelaSaida = !this.mostarTabelaSaida;
+        if (index !== undefined) {
+            this.index = index;
+        }
+
+    }
+    public mostarTabelaSaida_f(index: number): boolean {
+        console.log('mostarTabelaSaida_f');
+        if (this.index === undefined) {
+            return this.mostarTabelaSaida;
+        } else {
+            if (this.index === index) {
+                this.index = undefined;
+                return this.mostarTabelaSaida;
+            }
+        }
+        return false;
     }
     private montarListaOperacaoEntrada(): void {
         this.operacoes = new Array();

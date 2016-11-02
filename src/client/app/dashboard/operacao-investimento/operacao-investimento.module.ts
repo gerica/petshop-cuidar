@@ -18,6 +18,7 @@ import {
 
 import { OperacaoInvestimentoComponent } from './operacao-investimento.component';
 import { OperacaoFechadaTabComponent } from './operacao-fechada-tab.component';
+import { OperacaoAbertaTabComponent } from './operacao-aberta-tab.component';
 
 @NgModule({
     imports: [
@@ -35,7 +36,7 @@ import { OperacaoFechadaTabComponent } from './operacao-fechada-tab.component';
         ModalModule,
         TypeaheadModule
     ],
-    declarations: [OperacaoInvestimentoComponent, OperacaoFechadaTabComponent],
+    declarations: [OperacaoInvestimentoComponent, OperacaoFechadaTabComponent, OperacaoAbertaTabComponent],
     exports: [OperacaoInvestimentoComponent]
 })
 
