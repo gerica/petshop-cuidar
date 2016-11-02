@@ -75,7 +75,7 @@ export class OperacaoAbertaTabComponent implements OnInit, OnChanges {
                     this.novaOperacaoSaida();
                     this.modalOperacaoSaida.hide();
 
-                    this.notifyOperacaoSaidaEmit("atualizar lista de operações de saída");
+                    this.notifyOperacaoSaidaEmit('atualizar lista de operações de saída');
                     this.notifyAlertaEmit({
                         type: 'success',
                         closable: true,
@@ -111,7 +111,7 @@ export class OperacaoAbertaTabComponent implements OnInit, OnChanges {
 
     public showModalOperacaoExcluir(operacao: Operacao): void {
         this.operacaoModal = operacao;
-        this.notifyOperacaoSaidaEmit("atualizar lista de operações de saída");
+        this.notifyOperacaoSaidaEmit('atualizar lista de operações de saída');
         this.modalOperacaoExcluir.show();
     }
 

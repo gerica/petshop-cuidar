@@ -9,8 +9,8 @@
                     <thead>
                         <tr>
                             <th>
-                                <i class="fa fa-minus-square-o" style="cursor:pointer" *ngIf="mostarTabelaSaida" aria-hidden="true" title="Saídas" (click)="showHideTabelaSaida()" title="Esconder operações de saída"></i>
-                                <i class="fa fa-plus-square-o" style="cursor:pointer" *ngIf="!mostarTabelaSaida" aria-hidden="true" title="Saídas" (click)="showHideTabelaSaida()" title="Apresentar operações de saída"></i>
+                                <i class="fa fa-minus-square-o" style="cursor:pointer" *ngIf="mostarTabelaSaidaAll" aria-hidden="true" title="Saídas" (click)="showHideTabelaSaidaAll()" title="Esconder operações de saída"></i>
+                                <i class="fa fa-plus-square-o" style="cursor:pointer" *ngIf="!mostarTabelaSaidaAll" aria-hidden="true" title="Saídas" (click)="showHideTabelaSaidaAll()" title="Apresentar operações de saída"></i>
                             </th>
                             <th>Data</th>
                             <th>Papel</th>
@@ -23,8 +23,8 @@
                     <tbody *ngFor="let operacaoEntrada of operacoes; let i = index;" [class.table-success]="operacaoEntrada.saldoOperacao >0" [class.table-danger]="operacaoEntrada.saldoOperacao <0">
                         <tr>
                             <td>
-                                <i class="fa fa-minus-square-o" style="cursor:pointer" *ngIf="mostarTabelaSaida" aria-hidden="true" title="Saídas" (click)="showHideTabelaSaida(i)" title="Esconder operações de saída"></i>
-                                <i class="fa fa-plus-square-o" style="cursor:pointer" *ngIf="!mostarTabelaSaida" aria-hidden="true" title="Saídas" (click)="showHideTabelaSaida(i)" title="Apresentar operações de saída"></i>
+                                <i class="fa fa-minus-square-o" style="cursor:pointer" *ngIf="operacaoEntrada.flagShow" aria-hidden="true" title="Saídas" (click)="showHideColuna(operacaoEntrada)" title="Esconder operações de saída"></i>
+                                <i class="fa fa-plus-square-o" style="cursor:pointer" *ngIf="!operacaoEntrada.flagShow" aria-hidden="true" title="Saídas" (click)="showHideColuna(operacaoEntrada)" title="Apresentar operações de saída"></i>
                             </td>
                             <td><b>{{operacaoEntrada.data | date: 'dd/MM/yyyy'}}</b></td>
                             <td><b>{{operacaoEntrada.papel.papel}}</b></td>
@@ -33,9 +33,10 @@
                             <td><b>{{operacaoEntrada.despesa | currency:'BRL':true}}</b></td>
                             <td><b>{{operacaoEntrada.saldoOperacao | currency:'BRL':true}}</b></td>
                         </tr>
-                        <tr *ngIf="mostarTabelaSaida_f(i)">
+                        <tr *ngIf="operacaoEntrada.flagShow">
                             <td></td>
-                            <td style="text-align: center; vertical-align: middle"><i class="fa fa-arrow-right fa-2x" aria-hidden="true" title="Saídas"></i></td>
+                            <td style="text-align: center; vertical-align: middle">
+                                <i class="fa fa-long-arrow-right fa-3x" aria-hidden="true" title="Operação(ões) Saída(s)"></i></td>
                             <td colspan="3">
                                 <table class="table table-sm">
                                     <thead>

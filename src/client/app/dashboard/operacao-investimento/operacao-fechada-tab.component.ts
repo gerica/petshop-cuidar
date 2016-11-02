@@ -16,7 +16,8 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
     operacoesSaida: OperacaoSaida[];
     operacoes: Operacao[];
     alertaUtil: AlertaUtil;
-    mostarTabelaSaida = false;
+    mostarTabelaSaidaAll = false;
+    operacaoEntrada: Operacao;
 
     /*Construtor*/
     constructor(private operacaoService: OperacaoService) {}
@@ -58,25 +59,16 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
                 }
             );
     }
-    index: number;
-    public showHideTabelaSaida(index: number): void {
-        this.mostarTabelaSaida = !this.mostarTabelaSaida;
-        if (index !== undefined) {
-            this.index = index;
-        }
 
-    }
-    public mostarTabelaSaida_f(index: number): boolean {
-        console.log('mostarTabelaSaida_f');
-        if (this.index === undefined) {
-            return this.mostarTabelaSaida;
-        } else {
-            if (this.index === index) {
-                this.index = undefined;
-                return this.mostarTabelaSaida;
-            }
+    public showHideTabelaSaidaAll(): void {
+        this.mostarTabelaSaidaAll = !this.mostarTabelaSaidaAll;
+        for (let x = 0; x < this.operacoes.length; x++) {
+            this.operacoes[x].flagShow = this.mostarTabelaSaidaAll;
         }
-        return false;
+    }
+    public showHideColuna(operacaoEntrada: Operacao): void {
+        operacaoEntrada.flagShow = !operacaoEntrada.flagShow;
+
     }
     private montarListaOperacaoEntrada(): void {
         this.operacoes = new Array();

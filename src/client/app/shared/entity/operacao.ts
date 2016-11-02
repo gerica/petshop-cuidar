@@ -14,4 +14,5 @@ export class Operacao {
     totalOperacao: number;
     saldoOperacao: number;
     operacoesSaida: OperacaoSaida[];
+    flagShow: boolean = false;
 }
