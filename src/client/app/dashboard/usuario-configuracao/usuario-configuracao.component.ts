@@ -38,12 +38,11 @@ export class UsuarioConfiguracaoComponent implements OnInit {
     }
 
     /*Métodos*/
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.recuperarTodosPapeis();
         this.recuperarConfiguracaoAnalise();
     }
-
-        recuperarTodosPapeis(): void {
+    public recuperarTodosPapeis(): void {
         this.papelService.recuperarTodosPapeis()
             .subscribe(
                 data => {
@@ -59,8 +58,7 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                 }
             );
     }
-
-        alterarUsuario(event: any): void {
+    public alterarUsuario(event: any): void {
         event.preventDefault();
 
         this.usuarioService.alterarUsuario(this.usuario)
@@ -84,32 +82,30 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                     });
                 });
     }
-
-        ativarDesativarPapel(papel: Papel): void {
-        this.papelService.ativarDesativarPapel(papel)
-            .subscribe(
-                result => {
-                    // this.recuperarTodosPapeis();
-                    papel.ativo = !papel.ativo;
-                    this.alertaUtil.addMessage({
-                        type: 'success',
-                        closable: true,
-                        msg: result.message
-                    });
-                    console.log('Sucesso ativarDesativarPapel().' + papel.papel);
-                },
-                error => {
-                    this.alertaUtil.addMessage({
-                        type: 'danger',
-                        closable: true,
-                        msg: error.message
-                    });
-                }
-            );
-    }
-
-    // FUNCIONALIDADES DA ABA CONFIGURAR META
-        alterarConfiguracaoAnalise(event: any): void {
+    public ativarDesativarPapel(papel: Papel): void {
+            this.papelService.ativarDesativarPapel(papel)
+                .subscribe(
+                    result => {
+                        // this.recuperarTodosPapeis();
+                        papel.ativo = !papel.ativo;
+                        this.alertaUtil.addMessage({
+                            type: 'success',
+                            closable: true,
+                            msg: result.message
+                        });
+                        console.log('Sucesso ativarDesativarPapel().' + papel.papel);
+                    },
+                    error => {
+                        this.alertaUtil.addMessage({
+                            type: 'danger',
+                            closable: true,
+                            msg: error.message
+                        });
+                    }
+                );
+        }
+        // FUNCIONALIDADES DA ABA CONFIGURAR META
+    public alterarConfiguracaoAnalise(event: any): void {
         event.preventDefault();
 
         this.configuracaoAnaliseService.salvarConfiguracaoAnalise(this.configuracaoAnaliseCotacoes)
@@ -130,8 +126,7 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                     });
                 });
     }
-
-        recuperarConfiguracaoAnalise(): void {
+    public recuperarConfiguracaoAnalise(): void {
             this.configuracaoAnaliseService.recuperarConfiguracaoAnalise()
                 .subscribe(
                     result => {
@@ -148,9 +143,8 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                 );
         }
         // FINAL FUNCIONALIDADES DA ABA CONFIGURAR META
-
-    // FUNCIONALIDADE DA ABA Atualizar Cotação
-        atualizarHistoricoBMF(): void {
+        // FUNCIONALIDADE DA ABA Atualizar Cotação
+    public atualizarHistoricoBMF(): void {
         this.cotacaoService.atualizarHistoricoBMF()
             .subscribe(
                 result => {
@@ -169,8 +163,7 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                     });
                 });
     }
-
-        atualizarAtualBMF(): void {
+    public atualizarAtualBMF(): void {
             this.cotacaoService.atualizarAtualBMF()
                 .subscribe(
                     result => {

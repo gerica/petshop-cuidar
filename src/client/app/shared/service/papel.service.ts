@@ -11,6 +11,7 @@ import { Papel } from '../entity/papel';
 import { URL_ATIVAR_DESATIVAR_PAPEL } from '../../common/url_const';
 import { URL_RECUPERAR_TODOS_PAPEIS } from '../../common/url_const';
 import { URL_RECUPERAR_PAPEIS_ATIVO } from '../../common/url_const';
+import { URL_RECUPERAR_BALANCO_HOJE } from '../../common/url_const';
 
 
 @Injectable()
@@ -52,6 +53,16 @@ export class PapelService {
         this.createAuthorizationHeader(contentHeaders);
 
         return this.http.get(URL_RECUPERAR_PAPEIS_ATIVO, { headers: contentHeaders })
+            // ...sucesso
+            .map((response: Response) => response.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error.text()));
+    }
+    public recuperarBalancoHoje(): Observable < any > {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URL_RECUPERAR_BALANCO_HOJE, { headers: contentHeaders })
             // ...sucesso
             .map((response: Response) => response.json())
             //...errors if any

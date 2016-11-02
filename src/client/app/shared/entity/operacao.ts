@@ -1,5 +1,6 @@
 import { Papel } from './papel';
 import { OperacaoSaida } from './operacao-saida';
+import { Cotacao } from './cotacao';
 
 export class Operacao {
     id: number;
@@ -15,4 +16,5 @@ export class Operacao {
     saldoOperacao: number;
     operacoesSaida: OperacaoSaida[];
     flagShow: boolean = false;
+    ultimaCotacao: Cotacao = new Cotacao();
 }
