@@ -26,52 +26,35 @@ export class HomeComponent implements OnInit {
         this.recuperarBalancoHoje();
     }
     public recuperarBalancoHoje(): void {
-            this.papelService.recuperarBalancoHoje()
-                .subscribe(
-                    data => {
-                        this.balancos = data.objeto;
-                    },
-                    error => {
-                        this.alertaUtil.addMessage({
-                            type: 'danger',
-                            closable: true,
-                            msg: error
-                        });
-                    }
-                );
-        }
-        /*
-        public recuperarUltimaCotacao(): void {
-            for (var i = 0; i < this.operacoes.length; i++) {
-                this.cotacaoService.recuperarUltimaCotacao(this.operacoes[i].papel.id)
-                    .subscribe(
-                        data => {
-                            let cotacaoResult: Cotacao = data.objeto;
-                            for (var i = 0; i < this.operacoes.length; i++) {
-                                if (this.operacoes[i].papel.id === cotacaoResult.papel.id) {
-                                    this.operacoes[i].ultimaCotacao = cotacaoResult;
-                                }
-                            }
-                            this.calcularSaldoDiario();
-                        },
-                        error => {
-                            this.alertaUtil.addMessage({
-                                type: 'danger',
-                                closable: true,
-                                msg: error
-                            });
-                        }
-                    );
-            }
-        }
-        private calcularSaldoDiario(): void {
-            for (var i = 0; i < this.operacoes.length; i++) {
-                if (this.operacoes[i].ultimaCotacao !== undefined) {
-                    console.log(this.operacoes[i].ultimaCotacao.fechamento);
-                    this.operacoes[i].saldoOperacao = (this.operacoes[i].ultimaCotacao.fechamento * this.operacoes[i].quantidade) -
-                        (this.operacoes[i].precoUnitario * this.operacoes[i].quantidade);
+        this.papelService.recuperarBalancoHoje()
+            .subscribe(
+                data => {
+                    this.balancos = data.objeto;
+                    this.calcularTotais();
+                },
+                error => {
+                    this.alertaUtil.addMessage({
+                        type: 'danger',
+                        closable: true,
+                        msg: error
+                    });
                 }
-            }
-        }*/
+            );
+    }
+    private calcularTotais(): void {
+        let tempTotalInvesrimento: number = 0;
+        let tempTotalSaldo: number = 0;
+        let tempBalanco: BalancoHoje = new BalancoHoje();
+
+        for (var i = 0; i < this.balancos.length; i++) {
+            tempTotalInvesrimento += this.balancos[i].totalInvestimento;
+            tempTotalSaldo += this.balancos[i].saldoLucroPrejuizo;
+        }
+        tempBalanco.papel = 'Totais';
+        tempBalanco.totalInvestimento = tempTotalInvesrimento;
+        tempBalanco.saldoLucroPrejuizo = tempTotalSaldo;
+
+        this.balancos[this.balancos.length] = tempBalanco;
+    }
 
 }
