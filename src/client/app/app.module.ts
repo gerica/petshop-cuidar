@@ -12,22 +12,22 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-	imports: [
-		BrowserModule,
-		HttpModule,
-		RouterModule.forRoot(routes),
-		LoginModule,
-		SignupModule,
-		DashboardModule,
-		SharedModule.forRoot()
-	],
-	declarations: [AppComponent],
-	providers: [{
-		provide: APP_BASE_HREF,
-		useValue: '<%= APP_BASE %>'
-	}],
-	bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        HttpModule,
+        RouterModule.forRoot(routes),
+        LoginModule,
+        SignupModule,
+        DashboardModule,
+        SharedModule.forRoot()
+    ],
+    declarations: [AppComponent],
+    providers: [{
+        provide: APP_BASE_HREF,
+        useValue: '<%= APP_BASE %>'
+    }],
+    bootstrap: [AppComponent]
 
 })
 
-export class AppModule { }
+export class AppModule {}

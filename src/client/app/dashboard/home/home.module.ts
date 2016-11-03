@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
-
 import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-    imports: [CommonModule, AlertModule],
+    imports: [SharedModule, AlertModule],
     declarations: [HomeComponent],
 })
 

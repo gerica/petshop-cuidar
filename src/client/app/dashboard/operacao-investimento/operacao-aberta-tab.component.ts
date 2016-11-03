@@ -1,6 +1,5 @@
 import { Component, OnInit, OnChanges, Input, SimpleChange, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Operacao } from '../../shared/entity/operacao';
-import { OperacaoSaida } from '../../shared/entity/operacao-saida';
 import { OperacaoService } from '../../shared/service/operacao.service';
 import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 
@@ -13,43 +12,71 @@ import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 
 export class OperacaoAbertaTabComponent implements OnInit, OnChanges {
     @Input() atualizarListaEntradas = 0;
-    @ViewChild('modalOperacaoSaida') public modalOperacaoSaida: ModalDirective;
     @ViewChild('modalOperacaoEditar') public modalOperacaoEditar: ModalDirective;
     @ViewChild('modalOperacaoExcluir') public modalOperacaoExcluir: ModalDirective;
     @Output() notifyAlerta: EventEmitter < any > = new EventEmitter < any > ();
     @Output() notifyOperacaoSaida: EventEmitter < any > = new EventEmitter < any > ();
     operacoes: Operacao[];
-    activeOperacaoSaidaForm = true;
     operacaoModal: Operacao;
-    operacaoSaida: OperacaoSaida;
+    notifyAbriModal: Operacao;
 
 
     /*Construtor*/
     constructor(private operacaoService: OperacaoService) {}
 
     /*Métodos*/
-    public ngOnInit(): void {
-        // this.recuperarOperacaoEntradaAberta();
-    }
+    public ngOnInit(): void {}
+        /**
+         * Método que é chamado toda vez que o objeto com @Input sofrer alguma alteração.
+         * Nesse caso o objeto é: atualizarListaEntradas
+         */
     public ngOnChanges(changes: {
-        [propKey: string]: SimpleChange
-    }) {
-        for (let propName in changes) {
-            let changedProp = changes[propName];
-            let from = JSON.stringify(changedProp.previousValue);
-            let to = JSON.stringify(changedProp.currentValue);
-            if (from !== to) {
-                this.recuperarOperacaoEntradaAberta();
-                break;
-            }
+            [propKey: string]: SimpleChange
+        }) {
+            for (let propName in changes) {
+                let changedProp = changes[propName];
+                let from = JSON.stringify(changedProp.previousValue);
+                let to = JSON.stringify(changedProp.currentValue);
+                if (from !== to) {
+                    this.recuperarOperacaoEntradaAberta();
+                    break;
+                }
 
-        };
-    }
+            };
+        }
+        /**
+         * Método que quando acionado chamará um método no componente pai. 
+         * Nesse caso chamará
+         * OperacaoInvestimentoComponent.onNotifyAlerta()
+         */
     public notifyAlertaEmit(message: any) {
-        this.notifyAlerta.emit(message);
-    }
+            this.notifyAlerta.emit(message);
+        }
+        /**
+         * Método que quando acionado chamará um método no componente pai. 
+         * Nesse caso chamará
+         * OperacaoInvestimentoComponent.onNotifyOperacaoSaidaReceber()
+         */
     public notifyOperacaoSaidaEmit(message: any) {
-        this.notifyOperacaoSaida.emit(message);
+            this.notifyOperacaoSaida.emit(message);
+        }
+        /**
+         * Método será chamado toda vez que o componete filho, marcado com @Output(), emitir algum sinal para ele.
+         * Nesse caso o componete @Output() notifyFecharModal da classe OperacaoSaidaModalComponent.
+         */
+    public onNotifyFecharModal(message: any): void {
+        console.log(message);
+        this.recuperarOperacaoEntradaAberta();
+        this.notifyAbriModal = null;
+        this.notifyOperacaoSaidaEmit('atualizar lista de operações de saída');
+        if (message.type !== 'close') {
+            this.notifyAlertaEmit({
+                type: message.type,
+                closable: true,
+                msg: message.msg
+            });
+        }
+
     }
     public recuperarOperacaoEntradaAberta(): void {
         this.operacaoService.recuperarOperacaoEntradaAberta()
@@ -65,35 +92,6 @@ export class OperacaoAbertaTabComponent implements OnInit, OnChanges {
                     });
                 }
             );
-    }
-    public gravarOperacaoSaida(event: any): void {
-        event.preventDefault();
-        this.operacaoService.gravarOperacaoSaida(this.operacaoSaida)
-            .subscribe(
-                result => {
-                    this.recuperarOperacaoEntradaAberta();
-                    this.novaOperacaoSaida();
-                    this.modalOperacaoSaida.hide();
-
-                    this.notifyOperacaoSaidaEmit('atualizar lista de operações de saída');
-                    this.notifyAlertaEmit({
-                        type: 'success',
-                        closable: true,
-                        msg: result.message
-                    });
-                },
-                err => {
-                    // Log errors if any
-                    this.notifyAlertaEmit({
-                        type: 'danger',
-                        closable: true,
-                        msg: err.message
-                    });
-                });
-    }
-    public novaOperacaoSaida() {
-        this.activeOperacaoSaidaForm = false;
-        setTimeout(() => this.activeOperacaoSaidaForm = true, 0);
     }
     public showModalOperacaoEditar(operacao: Operacao): void {
         this.operacaoModal = new Operacao();
@@ -116,16 +114,7 @@ export class OperacaoAbertaTabComponent implements OnInit, OnChanges {
     }
 
     public showModalOperacaoSaida(operacao: Operacao): void {
-        this.operacaoSaida = new OperacaoSaida();
-        this.operacaoSaida.operacaoEntrada = operacao;
-        this.operacaoSaida.operacaoEntrada.papel = operacao.papel;
-        this.operacaoSaida.quantidade = operacao.quantidade;
-        if ('Comprar' === operacao.tipoOperacao) {
-            this.operacaoSaida.tipoOperacao = 'Vender';
-        } else {
-            this.operacaoSaida.tipoOperacao = 'Comprar';
-        }
-        this.modalOperacaoSaida.show();
+        this.notifyAbriModal = operacao;
     }
 
     public excluirOperacaoEntrada(event: any): void {
@@ -175,8 +164,6 @@ export class OperacaoAbertaTabComponent implements OnInit, OnChanges {
                     });
                 });
     }
-
-
     set operacaoModalData(e: any) {
         e = e.split('-');
         let d = new Date(Date.UTC(e[0], e[1] - 1, e[2]));

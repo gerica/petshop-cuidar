@@ -78,7 +78,7 @@ export class OperacaoInvestimentoComponent implements OnInit {
     public onNotifyAlerta(message: any): void {
         this.alertaUtil.addMessage(message);
     }
-    public notifyOperacaoSaidaReceber(message: any): void {
+    public onNotifyOperacaoSaidaReceber(message: any): void {
         this.atualizarListaSaidas++;
     }
 }

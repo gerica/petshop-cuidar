@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import {
@@ -19,11 +18,13 @@ import {
 import { OperacaoInvestimentoComponent } from './operacao-investimento.component';
 import { OperacaoFechadaTabComponent } from './operacao-fechada-tab.component';
 import { OperacaoAbertaTabComponent } from './operacao-aberta-tab.component';
+import { SharedModule } from '../../shared/shared.module';
+// import { OperacaoSaidaModalComponent } from '../../shared/components/operacao-saida-modal.component';
+
 
 @NgModule({
     imports: [
         BrowserModule,
-        FormsModule,
         RouterModule,
         AlertModule,
         ButtonsModule,
@@ -34,7 +35,8 @@ import { OperacaoAbertaTabComponent } from './operacao-aberta-tab.component';
         TabsModule,
         TooltipModule,
         ModalModule,
-        TypeaheadModule
+        TypeaheadModule,
+        SharedModule
     ],
     declarations: [OperacaoInvestimentoComponent, OperacaoFechadaTabComponent, OperacaoAbertaTabComponent],
     exports: [OperacaoInvestimentoComponent]

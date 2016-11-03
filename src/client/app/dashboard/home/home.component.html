@@ -31,7 +31,7 @@
                                         </tr>
                                     </thead>
                                     <tbody *ngFor="let balanco of balancos; let i = index;" [class.table-success]="balanco.lucroPrejuizo >0" [class.table-danger]="balanco.lucroPrejuizo <0">
-                                        <tr>
+                                        <tr (dblclick)="showModalOperacaoSaida(balanco)">
                                             <td>{{balanco.papel}}</td>
                                             <td>{{balanco.dataInvestimento | date: 'dd/MM/yyyy'}}</td>
                                             <td>{{balanco.valorInvestimento | currency:'BRL':true}}</td>
@@ -52,3 +52,4 @@
         </div>
     </div>
 </div>
+<modal-operacao-saida [notifyAbriModal]="notifyAbriModal" (notifyFecharModal)="onNotifyFecharModal($event)"></modal-operacao-saida>

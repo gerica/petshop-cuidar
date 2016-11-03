@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BalancoHoje } from '../../shared/entity/balanco-hoje';
+import { Operacao } from '../../shared/entity/operacao';
 import { PapelService } from '../../shared/service/papel.service';
 
 import { AlertaUtil } from '../../shared/utils/alerta-util';
@@ -17,6 +18,7 @@ import { AlertaUtil } from '../../shared/utils/alerta-util';
 export class HomeComponent implements OnInit {
     balancos: BalancoHoje[];
     alertaUtil: AlertaUtil = new AlertaUtil();
+    notifyAbriModal: Operacao;
 
     /*Construtor*/
     constructor(private papelService: PapelService) {}
@@ -40,6 +42,9 @@ export class HomeComponent implements OnInit {
                     });
                 }
             );
+    }
+    public showModalOperacaoSaida(operacao: Operacao): void {
+        this.notifyAbriModal = operacao;
     }
     private calcularTotais(): void {
         let tempTotalInvesrimento: number = 0;
