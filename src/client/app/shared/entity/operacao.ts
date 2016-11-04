@@ -12,9 +12,12 @@ export class Operacao {
     observacao: string;
     papel: Papel;
 
+    // campos utilizados em tela
     totalOperacao: number;
     saldoOperacao: number;
     operacoesSaida: OperacaoSaida[];
     flagShow: boolean = false;
     ultimaCotacao: Cotacao = new Cotacao();
+    stopLoss: number;
+    stopGain: number;
 }

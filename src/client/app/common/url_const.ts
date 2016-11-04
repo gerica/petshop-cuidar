@@ -1,5 +1,5 @@
 // BACK - END, SERVIÇOS
-const URL_BACK_END: string = 'http://localhost:8080/investimentoRestFul/';
+const URL_BACK_END: string = 'http://localhost:8180/investimentoRestFul/';
 
 // SERVIÇO DE AUTENTICAÇÃO
 export const URL_AUTH: string = URL_BACK_END + 'auth';
@@ -27,6 +27,7 @@ export const URL_EDITAR_OPERACAO_ENTRADA: string = URL_BACK_END + 'editarOperaca
 export const URL_RECUPERAR_CONFIGURACAO_ANALISE_COTACAO: string = URL_BACK_END + 'recuperarConfiguracaoAnalise';
 export const URL_SALVAR_CONFIGURACAO_ANALISE_COTACAO: string = URL_BACK_END + 'salvarConfiguracaoAnalise';
 export const URL_RECUPERAR_ULTIMA_COTACAO: string = URL_BACK_END + 'recuperarUltimaCotacao';
+export const URL_RECUPERAR_COTACAO_POR_DATA: string = URL_BACK_END + 'recuperarCotacaoPorData';
 
 // SERVIÇOS DE ATUALIZAR COTAÇÃO COM A BOVESPA
 export const URL_ATUALIZAR_HISTORICO_BMF: string = URL_BACK_END + 'atualizarHistoricoBMF';

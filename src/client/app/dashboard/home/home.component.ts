@@ -8,7 +8,7 @@ import { AlertaUtil } from '../../shared/utils/alerta-util';
 /**
  *    This class represents the lazy loaded HomeComponent.
  */
-@Component({
+@Component( {
     moduleId: module.id,
     selector: 'home-cmp',
     templateUrl: 'home.component.html',
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     notifyAbriModal: Operacao;
 
     /*Construtor*/
-    constructor(private papelService: PapelService) {}
+    constructor( private papelService: PapelService ) { }
 
     /*Métodos*/
     public ngOnInit(): void {
@@ -30,34 +30,26 @@ export class HomeComponent implements OnInit {
     public recuperarBalancoHoje(): void {
         this.papelService.recuperarBalancoHoje()
             .subscribe(
-                data => {
-                    this.balancos = data.objeto;
-                    this.calcularTotais();
-                },
-                error => {
-                    this.alertaUtil.addMessage({
-                        type: 'danger',
-                        closable: true,
-                        msg: error
-                    });
-                }
+            data => {
+                this.balancos = data.objeto;
+                this.calcularTotais();
+            },
+            error => {
+                this.handleMessage( 'danger', error );
+            }
             );
     }
-    public showModalOperacaoSaida(operacao: Operacao): void {
-            this.notifyAbriModal = operacao;
-        }
-        /**
-         * Método será chamado toda vez que o componete filho, marcado com @Output(), emitir algum sinal para ele.
-         * Nesse caso o componete @Output() notifyFecharModal da classe OperacaoSaidaModalComponent.
-         */
-    public onNotifyFecharModal(message: any): void {
+    public showModalOperacaoSaida( operacao: Operacao ): void {
+        this.notifyAbriModal = operacao;
+    }
+    /**
+     * Método será chamado toda vez que o componete filho, marcado com @Output(), emitir algum sinal para ele.
+     * Nesse caso o componete @Output() notifyFecharModal da classe OperacaoSaidaModalComponent.
+     */
+    public onNotifyFecharModal( message: any ): void {
         this.recuperarBalancoHoje();
-        if (message.type !== 'close') {
-            this.alertaUtil.addMessage({
-                type: message.type,
-                closable: true,
-                msg: message.msg
-            });
+        if ( message.type !== 'close' ) {
+            this.handleMessage( message.type, message.msg );
         }
         this.notifyAbriModal = null;
     }
@@ -65,8 +57,9 @@ export class HomeComponent implements OnInit {
         let tempTotalInvesrimento: number = 0;
         let tempTotalSaldo: number = 0;
         let tempBalanco: BalancoHoje = new BalancoHoje();
+        let tempSaldo: BalancoHoje = new BalancoHoje();
 
-        for (var i = 0; i < this.balancos.length; i++) {
+        for ( var i = 0; i < this.balancos.length; i++ ) {
             tempTotalInvesrimento += this.balancos[i].totalInvestimento;
             tempTotalSaldo += this.balancos[i].saldoLucroPrejuizo;
         }
@@ -74,7 +67,19 @@ export class HomeComponent implements OnInit {
         tempBalanco.totalInvestimento = tempTotalInvesrimento;
         tempBalanco.saldoLucroPrejuizo = tempTotalSaldo;
 
+        tempSaldo.papel = 'Saldo';
+        tempSaldo.saldoLucroPrejuizo = tempTotalSaldo - tempBalanco.totalInvestimento;
+
         this.balancos[this.balancos.length] = tempBalanco;
+        this.balancos[this.balancos.length] = tempSaldo;
+    }
+    private handleMessage( tipo: string, message: string ) {
+        this.alertaUtil.addMessage( {
+            type: tipo,
+            closable: true,
+            msg: message
+        });
+
     }
 
 }

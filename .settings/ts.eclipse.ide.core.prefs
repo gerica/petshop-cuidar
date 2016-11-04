@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+tslintEmbeddedTypeScriptId=TypeScript (2.0.6)
+tslintInstalledTypeScriptPath=
+tslintStrategy=UseCustomTslintJson
+tslintUseCustomTslingJsonFile=${project_loc\:tslint.json}
+tslintUseEmbeddedTypeScript=true

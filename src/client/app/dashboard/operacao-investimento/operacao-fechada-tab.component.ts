@@ -4,7 +4,7 @@ import { OperacaoSaida } from '../../shared/entity/operacao-saida';
 import { OperacaoService } from '../../shared/service/operacao.service';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
 
-@Component({
+@Component( {
     moduleId: module.id,
     selector: 'tab-operacao-fechada',
     templateUrl: './operacao-fechada-tab.component.html',
@@ -20,7 +20,7 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
     operacaoEntrada: Operacao;
 
     /*Construtor*/
-    constructor(private operacaoService: OperacaoService) {}
+    constructor( private operacaoService: OperacaoService ) { }
 
     /*Métodos*/
     public ngOnInit(): void {
@@ -28,14 +28,14 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
         this.operacoes = new Array();
 
     }
-    public ngOnChanges(changes: {
+    public ngOnChanges( changes: {
         [propKey: string]: SimpleChange
     }) {
-        for (let propName in changes) {
+        for ( let propName in changes ) {
             let changedProp = changes[propName];
-            let from = JSON.stringify(changedProp.previousValue);
-            let to = JSON.stringify(changedProp.currentValue);
-            if (from !== to) {
+            let from = JSON.stringify( changedProp.previousValue );
+            let to = JSON.stringify( changedProp.currentValue );
+            if ( from !== to ) {
                 this.recuperarOperacaoSaida();
                 break;
             }
@@ -45,28 +45,28 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
     public recuperarOperacaoSaida(): void {
         this.operacaoService.recuperarOperacaoSaida()
             .subscribe(
-                data => {
-                    this.operacoesSaida = data;
-                    this.montarListaOperacaoEntrada();
-                    this.calcularSaldoOperacao();
-                },
-                error => {
-                    this.alertaUtil.addMessage({
-                        type: 'danger',
-                        closable: true,
-                        msg: error
-                    });
-                }
+            data => {
+                this.operacoesSaida = data;
+                this.montarListaOperacaoEntrada();
+                this.calcularSaldoOperacao();
+            },
+            error => {
+                this.alertaUtil.addMessage( {
+                    type: 'danger',
+                    closable: true,
+                    msg: error
+                });
+            }
             );
     }
 
     public showHideTabelaSaidaAll(): void {
         this.mostarTabelaSaidaAll = !this.mostarTabelaSaidaAll;
-        for (let x = 0; x < this.operacoes.length; x++) {
+        for ( let x = 0; x < this.operacoes.length; x++ ) {
             this.operacoes[x].flagShow = this.mostarTabelaSaidaAll;
         }
     }
-    public showHideColuna(operacaoEntrada: Operacao): void {
+    public showHideColuna( operacaoEntrada: Operacao ): void {
         operacaoEntrada.flagShow = !operacaoEntrada.flagShow;
 
     }
@@ -75,11 +75,11 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
         let tempOperacao: Operacao;
         let adicionar = true;
 
-        for (let i = 0; i < this.operacoesSaida.length; i++) {
+        for ( let i = 0; i < this.operacoesSaida.length; i++ ) {
 
-            if (this.operacoes.length > 0) {
-                for (let x = 0; x < this.operacoes.length; x++) {
-                    if (this.operacoes[x].id === this.operacoesSaida[i].operacaoEntrada.id) {
+            if ( this.operacoes.length > 0 ) {
+                for ( let x = 0; x < this.operacoes.length; x++ ) {
+                    if ( this.operacoes[x].id === this.operacoesSaida[i].operacaoEntrada.id ) {
                         tempOperacao = this.operacoes[x];
                         adicionar = false;
                         this.operacoesSaida[i].operacaoEntrada = null;
@@ -87,7 +87,7 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
                     }
 
                 }
-                if (tempOperacao === null) {
+                if ( tempOperacao === null ) {
                     tempOperacao = this.operacoesSaida[i].operacaoEntrada;
                     this.operacoesSaida[i].operacaoEntrada = null;
                 }
@@ -97,12 +97,12 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
             }
 
             // adicionar na lista de retonro
-            if (tempOperacao.operacoesSaida === undefined) {
-                tempOperacao.operacoesSaida = new Array < OperacaoSaida > ();
+            if ( tempOperacao.operacoesSaida === undefined ) {
+                tempOperacao.operacoesSaida = new Array<OperacaoSaida>();
             }
 
             tempOperacao.operacoesSaida[tempOperacao.operacoesSaida.length] = this.operacoesSaida[i];
-            if (adicionar) {
+            if ( adicionar ) {
                 this.operacoes[this.operacoes.length] = tempOperacao;
             }
             tempOperacao = null;
@@ -116,16 +116,16 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
         let parcialSaldoSaida = 0;
         let qtdSaida = 0;
 
-        if (this.operacoes.length > 0) {
-            for (let x = 0; x < this.operacoes.length; x++) {
+        if ( this.operacoes.length > 0 ) {
+            for ( let x = 0; x < this.operacoes.length; x++ ) {
                 tempOperacao = this.operacoes[x];
-                for (let i = 0; i < tempOperacao.operacoesSaida.length; i++) {
+                for ( let i = 0; i < tempOperacao.operacoesSaida.length; i++ ) {
                     tempOperacaoSaida = tempOperacao.operacoesSaida[i];
                     parcialSaldoSaida += tempOperacaoSaida.totalOperacao;
                     qtdSaida += tempOperacaoSaida.quantidade;
 
                 }
-                tempOperacao.saldoOperacao = parcialSaldoSaida - ((tempOperacao.precoUnitario * qtdSaida) + tempOperacao.despesa);
+                tempOperacao.saldoOperacao = parcialSaldoSaida - ( ( tempOperacao.precoUnitario * qtdSaida ) + tempOperacao.despesa );
                 let operacaoSaidaSaldo = new OperacaoSaida();
                 operacaoSaidaSaldo.totalOperacao = parcialSaldoSaida;
                 tempOperacao.operacoesSaida[tempOperacao.operacoesSaida.length] = operacaoSaidaSaldo;
