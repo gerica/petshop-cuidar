@@ -1,3 +1,5 @@
+import { Operacao } from './operacao';
+
 export class BalancoHoje {
     papel: string;
     dataInvestimento: Date;
@@ -8,4 +10,5 @@ export class BalancoHoje {
     porcentagemLucroPrejuizo: number;
     lucroPrejuizo: number;
     saldoLucroPrejuizo: number;
+    operacaoEntrada: Operacao;
 }

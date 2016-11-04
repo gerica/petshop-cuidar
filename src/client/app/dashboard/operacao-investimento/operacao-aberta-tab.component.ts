@@ -65,7 +65,6 @@ export class OperacaoAbertaTabComponent implements OnInit, OnChanges {
          * Nesse caso o componete @Output() notifyFecharModal da classe OperacaoSaidaModalComponent.
          */
     public onNotifyFecharModal(message: any): void {
-        console.log(message);
         this.recuperarOperacaoEntradaAberta();
         this.notifyAbriModal = null;
         this.notifyOperacaoSaidaEmit('atualizar lista de operações de saída');

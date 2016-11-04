@@ -44,7 +44,22 @@ export class HomeComponent implements OnInit {
             );
     }
     public showModalOperacaoSaida(operacao: Operacao): void {
-        this.notifyAbriModal = operacao;
+            this.notifyAbriModal = operacao;
+        }
+        /**
+         * Método será chamado toda vez que o componete filho, marcado com @Output(), emitir algum sinal para ele.
+         * Nesse caso o componete @Output() notifyFecharModal da classe OperacaoSaidaModalComponent.
+         */
+    public onNotifyFecharModal(message: any): void {
+        this.recuperarBalancoHoje();
+        if (message.type !== 'close') {
+            this.alertaUtil.addMessage({
+                type: message.type,
+                closable: true,
+                msg: message.msg
+            });
+        }
+        this.notifyAbriModal = null;
     }
     private calcularTotais(): void {
         let tempTotalInvesrimento: number = 0;
