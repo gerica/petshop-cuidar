@@ -85,7 +85,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr *ngFor="let saida of operacoesSaida">
-                                                            <td>{{saida.operacaoEntrada.papel.papel}}</td>
+                                                            <td>{{saida?.operacaoEntrada?.papel.papel}}</td>
                                                             <td>{{saida.operacaoEntrada.tipoOperacao}}</td>
                                                             <td>{{saida.operacaoEntrada.precoUnitario | currency:'BRL':true}}</td>
                                                             <td>{{saida.operacaoEntrada.data | date: 'dd/MM/yyyy'}}</td>
@@ -95,6 +95,29 @@
                                                             <td>{{saida.despesa | currency:'BRL':true}}</td>
                                                             <td>{{saida.totalOperacao | currency:'BRL':true}}</td>
                                                             <!-- <td>{{operacao.observacao}}</td> -->
+                                                        </tr>                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="col-xl-12 col-lg-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Total Entrada</th>
+                                                            <th>Total Despesa</th>
+                                                            <th>Total Saída</th>
+                                                            <th>Saldo</th>                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody [class.table-success]="relatorioSaidaSaldo.saldo >0" [class.table-danger]="relatorioSaidaSaldo.saldo <0">
+                                                        <tr>
+                                                        	<td>{{relatorioSaidaSaldo.totalEntrada | currency:'BRL':true}}</td>
+                                                            <td>{{relatorioSaidaSaldo.despesa | currency:'BRL':true}}</td>
+                                                            <td>{{relatorioSaidaSaldo.totalSaida | currency:'BRL':true}}</td>
+                                                            <td>{{relatorioSaidaSaldo.saldo | currency:'BRL':true}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

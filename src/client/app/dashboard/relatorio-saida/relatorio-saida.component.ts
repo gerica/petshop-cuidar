@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
 import { RelatorioSaida } from './relatorio-saida';
+import { RelatorioSaidaSaldo } from './relatorio-saida-saldo';
 import { Ano } from './ano';
 import { Mes } from './mes';
 import { Papel } from '../../shared/entity/papel';
@@ -47,6 +48,7 @@ export class RelatorioSaidaComponent implements OnInit {
     papeis: Papel[];
     papelDefault: Papel;
     operacoesSaida: OperacaoSaida[];
+    relatorioSaidaSaldo: RelatorioSaidaSaldo;
 
     /*Construtor*/
     constructor( private papelService: PapelService, private operacaoService: OperacaoService ) { }
@@ -74,15 +76,17 @@ export class RelatorioSaidaComponent implements OnInit {
     }
     public pesquisarRelatorioSaida( event: any ): void {
         event.preventDefault();
-        this.operacaoService.recuperarRelatorioSaida( this.relatorioSaida.ano.num, this.relatorioSaida.mes.id, this.relatorioSaida.papel.id )
+        this.operacaoService.recuperarRelatorioSaida( this.relatorioSaida.ano.num,
+            this.relatorioSaida.mes.id, this.relatorioSaida.papel.id )
             .subscribe(
             data => {
                 this.operacoesSaida = data.objeto;
+                this.calcularSaldo();
                 if ( this.operacoesSaida.length === 0 ) {
                     this.alertaUtil.addMessage( {
                         type: 'warning',
                         closable: true,
-                        msg: "Nenhum resultado para os parâmetros informado."
+                        msg: 'Nenhum resultado para os parâmetros informado.'
                     });
                 } else {
                     this.alertaUtil.addMessage( {
@@ -133,6 +137,30 @@ export class RelatorioSaidaComponent implements OnInit {
             }
         }
         return null;
+    }
+    private calcularSaldo(): void {
+        this.relatorioSaidaSaldo = new RelatorioSaidaSaldo();
+        let tempTotalSaida: number = 0;
+        let tempTotalEntrada: number = 0;
+        let tempTotalDespesa: number = 0;
+
+        for ( var i = 0; i < this.operacoesSaida.length; i++ ) {
+            tempTotalSaida += this.operacoesSaida[i].precoUnitario * this.operacoesSaida[i].quantidade;
+            tempTotalEntrada += this.operacoesSaida[i].operacaoEntrada.precoUnitario * this.operacoesSaida[i].quantidade;
+            if ( i === 0 ) {
+                tempTotalDespesa += this.operacoesSaida[i].operacaoEntrada.despesa + this.operacoesSaida[i].despesa;
+            } else {
+                tempTotalDespesa += this.operacoesSaida[i].despesa;
+
+            }
+
+        }
+
+        this.relatorioSaidaSaldo.despesa = tempTotalDespesa;
+        this.relatorioSaidaSaldo.totalSaida = tempTotalSaida;
+        this.relatorioSaidaSaldo.totalEntrada = tempTotalEntrada;
+        this.relatorioSaidaSaldo.saldo = this.relatorioSaidaSaldo.totalSaida - (this.relatorioSaidaSaldo.totalEntrada + this.relatorioSaidaSaldo.despesa);
+
     }
 
 }
