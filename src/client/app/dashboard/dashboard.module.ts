@@ -7,13 +7,14 @@ import { HomeModule } from './home/home.module';
 import { BlankPageModule } from './blank-page/blankPage.module';
 import { OperacaoInvestimentoModule } from './operacao-investimento/operacao-investimento.module';
 import { UsuarioConfiguracaoModule } from './usuario-configuracao/usuario-configuracao.module';
+import { RelatorioSaidaModule } from './relatorio-saida/relatorio-saida.module';
 import { DashboardComponent } from './dashboard.component';
 import { TopNavComponent } from '../shared/index';
 import { SidebarComponent } from '../shared/index';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from '../common/auth.guard';
 
-@NgModule({
+@NgModule( {
     imports: [
         CommonModule,
         RouterModule,
@@ -23,10 +24,11 @@ import { AuthGuard } from '../common/auth.guard';
         BlankPageModule,
         OperacaoInvestimentoModule,
         UsuarioConfiguracaoModule,
+        RelatorioSaidaModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
     providers: [AuthGuard, ...AUTH_PROVIDERS]
 })
 
-export class DashboardModule {}
+export class DashboardModule { }

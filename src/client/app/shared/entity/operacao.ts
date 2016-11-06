@@ -18,6 +18,4 @@ export class Operacao {
     operacoesSaida: OperacaoSaida[];
     flagShow: boolean = false;
     ultimaCotacao: Cotacao = new Cotacao();
-    stopLoss: number;
-    stopGain: number;
 }

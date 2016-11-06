@@ -24,9 +24,10 @@ export class OperacaoAbertaTabComponent implements OnChanges {
     operacoes: Operacao[];
     operacaoModal: Operacao;
     notifyAbriModal: Operacao;
+    stopLoss: number;
+    stopGain: number;
     private configuracaoAnaliseCotacoes: ConfiguracaoAnaliseCotacoes;
     private cotacaoOperacaoEntrada: Cotacao;
-
 
     /*Construtor*/
     constructor( private operacaoService: OperacaoService, //
@@ -231,12 +232,14 @@ export class OperacaoAbertaTabComponent implements OnChanges {
             //            this.cotacaoOperacaoEntrada !== undefined && this.cotacaoOperacaoEntrada !== null 
 
             if ( this.configuracaoAnaliseCotacoes.riscoStopLoss !== undefined && this.configuracaoAnaliseCotacoes.riscoStopLoss !== null ) {
-                this.operacaoModal.stopLoss = this.operacaoModal.precoUnitario - ( ( this.configuracaoAnaliseCotacoes.riscoStopLoss / 100 ) //
-                    * this.operacaoModal.precoUnitario );
+                this.configuracaoAnaliseCotacoes.riscoStopLoss = this.configuracaoAnaliseCotacoes.riscoStopLoss / 100;
+                this.stopLoss = this.operacaoModal.precoUnitario - (//
+                    this.configuracaoAnaliseCotacoes.riscoStopLoss * this.operacaoModal.precoUnitario );
             }
             if ( this.configuracaoAnaliseCotacoes.riscoStopWin !== undefined && this.configuracaoAnaliseCotacoes.riscoStopWin !== null ) {
-                this.operacaoModal.stopGain = this.operacaoModal.precoUnitario + ( ( this.configuracaoAnaliseCotacoes.riscoStopWin / 100 ) //
-                    * this.operacaoModal.precoUnitario );
+                this.configuracaoAnaliseCotacoes.riscoStopWin = this.configuracaoAnaliseCotacoes.riscoStopWin / 100;
+                this.stopGain = this.operacaoModal.precoUnitario + ( //
+                    this.configuracaoAnaliseCotacoes.riscoStopWin * this.operacaoModal.precoUnitario );
             }
         }
 

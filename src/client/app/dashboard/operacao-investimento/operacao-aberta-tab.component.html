@@ -187,7 +187,7 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header card-default">
-                                Stop Loss/Gain do papel: <small>{{operacaoModal.papel.papel}}</small>
+                                Stop Loss/Gain do papel: <small>{{operacaoModal.papel.papel}}.</small>                            
                                 <button type="button" class="close" (click)="modalStopLossGain.hide()" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -196,14 +196,14 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>Stop Loss</label>
-                                            <p class="form-control-static">{{operacaoModal.stopLoss | currency:'BRL':true}}</p>
+                                            <label>Stop Loss <small>O Risco considerado foi de: {{configuracaoAnaliseCotacoes?.riscoStopLoss| percent:'1.2-2'}}</small></label>
+                                            <p class="form-control-static">{{stopLoss | currency:'BRL':true}}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>Stop Gain</label>
-                                            <p class="form-control-static">{{operacaoModal.stopGain | currency:'BRL':true}}</p>
+                                            <label>Stop Gain: <small>O Risco considerado foi de: {{configuracaoAnaliseCotacoes?.riscoStopWin| percent:'1.2-2'}}</small></label>
+                                            <p class="form-control-static">{{stopGain | currency:'BRL':true}}</p>
                                         </div>
                                     </div>
                                     <div class="row">

@@ -7,20 +7,33 @@
             <i class="fa fa-fw fa-dashboard"></i> Dashboard
         </a>        
         <div class="nested-menu">
-            <a class="list-group-item" (click)="addExpandClass('pages')">
+            <a class="list-group-item" (click)="addExpandClass('pages1')">
                 <span><i class="fa fa-plus"></i> &nbsp; Carteira</span>
             </a>
-            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages' }">
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages1' }" *ngIf="showMenu === 'pages1'">
                 <ul class="submenu">
                     <li>
                         <a [routerLink]="['operacao-investimento']" [routerLinkActive]="['router-link-active']" href><span>Operação</span></a>
                     </li>
                     <li>
-                        <a href><span>Acompanhamento</span></a>
+                        <a  [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span>Acompanhamento</span></a>
                     </li>
                 </ul>
             </li>
         </div>
+        
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('pages2')">
+                <span><i class="fa fa-file-pdf-o"></i> &nbsp; Relatórios</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages2' }" *ngIf="showMenu === 'pages2'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['relatorio-saida']" [routerLinkActive]="['router-link-active']" href><span>Saídas</span></a>
+                    </li>                    
+                </ul>
+            </li>
+        </div>        
         <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i> &nbsp;Página em Branco
         </a>        

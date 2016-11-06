@@ -16,7 +16,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 - Operação	
 	
-	+ Funcionalidade de apresentar o saldo das operações consolidadas,
+	+ **Funcionalidade de apresentar o saldo das operações consolidadas**.
 	+ Funcionalidade de apresentar o saldo das operações individuais.
 	+ Funcionalidade de relatório de ganhos/percas por período.	
 	+ Relatório se a saída do papel obedeceu as metas.
@@ -32,7 +32,8 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 - Configuração
 
 - Dashboard
-	+ Adicionar tabela com informações de operações.
+
+
 	+ Adicionar chart para acompanhar rentabilidade.
 
 - Refectory
@@ -72,3 +73,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 	+ Adicionar componentes para as tabs da funcionalidade de operações.
 	+ Na tela de operações, aba de operações fechadas, adicionar funcionalidade de abrir e fechar um item da tabela.
+
+- Dashboard
+
+	+ Adicionar tabela com informações de operações.

@@ -13,6 +13,7 @@ export const URL_RECUPERAR_PAPEIS_ATIVO: string = URL_BACK_END + 'recuperarPapei
 export const URL_RECUPERAR_TODOS_PAPEIS: string = URL_BACK_END + 'recuperarTodosPapeis';
 export const URL_ATIVAR_DESATIVAR_PAPEL: string = URL_BACK_END + 'ativarDesativarPapel';
 export const URL_RECUPERAR_BALANCO_HOJE: string = URL_BACK_END + 'recuperarBalancoHoje';
+export const URL_RECUPERAR_PAPEIS_OPERECAO: string = URL_BACK_END + 'recuperarPapeisOperacao';
 
 // SERVIÇOS DE OPERACAO
 export const URL_SALVAR_OPERACAO_ENTRADA: string = URL_BACK_END + 'salvarOperacaoEntrada';
@@ -21,6 +22,7 @@ export const URL_RECUPERAR_OPERACAO_ENTRADA_ABERTA: string = URL_BACK_END + 'rec
 export const URL_RECUPERAR_OPERACAO_SAIDA: string = URL_BACK_END + 'recuperarOperacaoSaida';
 export const URL_EXCLUIR_OPERACAO_ENTRADA: string = URL_BACK_END + 'excluirOperacaoEntrada';
 export const URL_EDITAR_OPERACAO_ENTRADA: string = URL_BACK_END + 'editarOperacaoEntrada';
+export const URL_RECUPERAR_RELATORIO_SAIDA: string = URL_BACK_END + 'recuperarRelatorioSaida';
 
 
 // SERVIÇOS DE CONFIGURAÇÃO ANALISE COTAÇÃO
