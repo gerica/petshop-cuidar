@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BalancoHoje } from '../../shared/entity/balanco-hoje';
 import { Operacao } from '../../shared/entity/operacao';
 import { PapelService } from '../../shared/service/papel.service';
-
 import { AlertaUtil } from '../../shared/utils/alerta-util';
+import { Home } from './home';
 
 /**
  *    This class represents the lazy loaded HomeComponent.
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
     balancos: BalancoHoje[];
     alertaUtil: AlertaUtil = new AlertaUtil();
     notifyAbriModal: Operacao;
+    homeSaldo: Home;
 
     /*Construtor*/
     constructor( private papelService: PapelService ) { }
@@ -54,24 +55,20 @@ export class HomeComponent implements OnInit {
         this.notifyAbriModal = null;
     }
     private calcularTotais(): void {
+        this.homeSaldo = new Home();
         let tempTotalInvesrimento: number = 0;
         let tempTotalSaldo: number = 0;
-        let tempBalanco: BalancoHoje = new BalancoHoje();
-        let tempSaldo: BalancoHoje = new BalancoHoje();
+
 
         for ( var i = 0; i < this.balancos.length; i++ ) {
             tempTotalInvesrimento += this.balancos[i].totalInvestimento;
             tempTotalSaldo += this.balancos[i].saldoLucroPrejuizo;
         }
-        tempBalanco.papel = 'Totais';
-        tempBalanco.totalInvestimento = tempTotalInvesrimento;
-        tempBalanco.saldoLucroPrejuizo = tempTotalSaldo;
+        this.homeSaldo.totalInvestido = tempTotalInvesrimento;
+        this.homeSaldo.saldoLucroPrejuizo = tempTotalSaldo;
 
-        tempSaldo.papel = 'Saldo';
-        tempSaldo.saldoLucroPrejuizo = tempTotalSaldo - tempBalanco.totalInvestimento;
+        this.homeSaldo.saldoTotal = tempTotalSaldo - this.homeSaldo.totalInvestido;
 
-        this.balancos[this.balancos.length] = tempBalanco;
-        this.balancos[this.balancos.length] = tempSaldo;
     }
     private handleMessage( tipo: string, message: string ) {
         this.alertaUtil.addMessage( {

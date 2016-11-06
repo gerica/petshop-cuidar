@@ -95,7 +95,7 @@
                                                             <td>{{saida.despesa | currency:'BRL':true}}</td>
                                                             <td>{{saida.totalOperacao | currency:'BRL':true}}</td>
                                                             <!-- <td>{{operacao.observacao}}</td> -->
-                                                        </tr>                                                        
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -109,12 +109,12 @@
                                                             <th>Total Entrada</th>
                                                             <th>Total Despesa</th>
                                                             <th>Total Saída</th>
-                                                            <th>Saldo</th>                                                            
+                                                            <th>Saldo</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody [class.table-success]="relatorioSaidaSaldo.saldo >0" [class.table-danger]="relatorioSaidaSaldo.saldo <0">
                                                         <tr>
-                                                        	<td>{{relatorioSaidaSaldo.totalEntrada | currency:'BRL':true}}</td>
+                                                            <td>{{relatorioSaidaSaldo.totalEntrada | currency:'BRL':true}}</td>
                                                             <td>{{relatorioSaidaSaldo.despesa | currency:'BRL':true}}</td>
                                                             <td>{{relatorioSaidaSaldo.totalSaida | currency:'BRL':true}}</td>
                                                             <td>{{relatorioSaidaSaldo.saldo | currency:'BRL':true}}</td>

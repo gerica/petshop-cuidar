@@ -37,8 +37,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 - Refectory
 
-	+ Alterar a tabela da página home para adicionar o saldo. 
-	
+7	
 ## REALIZADA
 - Usuário
 
@@ -74,6 +73,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 	+ Adicionar componentes para as tabs da funcionalidade de operações.
 	+ Na tela de operações, aba de operações fechadas, adicionar funcionalidade de abrir e fechar um item da tabela.
 	+ A data esta sendo convertida para string e com isso ficando incorreta.
+	+ Alterar a tabela da página home para adicionar o saldo. 
 
 - Dashboard
 
