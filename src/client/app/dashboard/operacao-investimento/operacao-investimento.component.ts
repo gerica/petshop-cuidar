@@ -54,6 +54,7 @@ export class OperacaoInvestimentoComponent implements OnInit {
     }
     public gravarOperacaoEntrada(event: any): void {
         event.preventDefault();
+        this.operacao.converterStringToDate();
 
         this.operacaoService.gravarOperacaoEntrada(this.operacao)
             .subscribe(

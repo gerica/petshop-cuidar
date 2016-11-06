@@ -119,7 +119,6 @@ export class RelatorioSaidaComponent implements OnInit {
         this.relatorioSaida.ano = this.recuperarAno( anoCorrente );
         this.relatorioSaida.mes = this.recuperarMes( mesCorrente );
 
-        console.log( this.relatorioSaida );
     }
     private recuperarAno( num: number ): Ano {
         for ( var i = 0; i < this.anos.length; i++ ) {
@@ -159,7 +158,8 @@ export class RelatorioSaidaComponent implements OnInit {
         this.relatorioSaidaSaldo.despesa = tempTotalDespesa;
         this.relatorioSaidaSaldo.totalSaida = tempTotalSaida;
         this.relatorioSaidaSaldo.totalEntrada = tempTotalEntrada;
-        this.relatorioSaidaSaldo.saldo = this.relatorioSaidaSaldo.totalSaida - (this.relatorioSaidaSaldo.totalEntrada + this.relatorioSaidaSaldo.despesa);
+        this.relatorioSaidaSaldo.saldo = this.relatorioSaidaSaldo.totalSaida -
+            ( this.relatorioSaidaSaldo.totalEntrada + this.relatorioSaidaSaldo.despesa );
 
     }
 

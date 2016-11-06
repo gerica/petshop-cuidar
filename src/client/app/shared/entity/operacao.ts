@@ -18,4 +18,15 @@ export class Operacao {
     operacoesSaida: OperacaoSaida[];
     flagShow: boolean = false;
     ultimaCotacao: Cotacao = new Cotacao();
+
+    public converterStringToDate(): void {
+        if ( typeof this.data === 'string' ) {
+            let temp: string = '' + this.data;
+
+            let ano: number = parseInt( temp.substring( 0, 4 ) );
+            let mes: number = parseInt( temp.substring( 5, 7 ) ) - 1;
+            let dia: number = parseInt( temp.substring( 8, 10 ) );
+            this.data = new Date( ano, mes, dia );
+        }
+    }
 }

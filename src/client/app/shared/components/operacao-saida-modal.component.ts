@@ -31,9 +31,7 @@ export class OperacaoSaidaModalComponent implements OnChanges {
     }) {
         for ( let propName in changes ) {
             let changedProp = changes[propName];
-            //            let from = changedProp.previousValue;
             let to = changedProp.currentValue;
-            //            console.log( 'from: ' + from + '; to: ' + to );
             if ( to !== undefined && to instanceof Object ) {
                 this.showModalOperacaoSaida( to );
                 break;
@@ -47,6 +45,8 @@ export class OperacaoSaidaModalComponent implements OnChanges {
     }
     public gravarOperacaoSaida( event: any ): void {
         event.preventDefault();
+        this.operacaoSaida.converterStringToDate();
+
         this.operacaoService.gravarOperacaoSaida( this.operacaoSaida )
             .subscribe(
             result => {

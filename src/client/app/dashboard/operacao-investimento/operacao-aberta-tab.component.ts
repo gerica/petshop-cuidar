@@ -90,7 +90,7 @@ export class OperacaoAbertaTabComponent implements OnChanges {
         this.operacaoService.recuperarOperacaoEntradaAberta()
             .subscribe(
             data => {
-                this.operacoes = data;
+                this.operacoes = data.objeto;
             },
             error => {
                 this.notifyAlertaEmit( {
@@ -215,7 +215,6 @@ export class OperacaoAbertaTabComponent implements OnChanges {
         let d = new Date( Date.UTC( e[0], e[1] - 1, e[2] ) );
         let dataOperacaoLocal = new Date();
         dataOperacaoLocal.setFullYear( d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() );
-
         this.operacaoModal.data = dataOperacaoLocal;
     }
 
