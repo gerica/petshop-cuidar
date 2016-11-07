@@ -24,7 +24,7 @@ export class LoginComponent {
 
     login(event: any): void {
         event.preventDefault();
-
+/*
         // Get all comments
         this.loginSerice.login(this.usuario)
             .subscribe(
@@ -44,9 +44,9 @@ export class LoginComponent {
                         msg: err
                     });
                 });
-
+*/
         // DESENVOLVER SEM O SERVIDOR
-        // this.router.navigate(['/dashboard/home']);
+         this.router.navigate(['/dashboard/home']);
     }
     public atualizarAtualBMF(): void {
         this.cotacaoService.atualizarAtualBMF()

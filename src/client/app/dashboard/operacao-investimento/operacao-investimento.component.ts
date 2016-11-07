@@ -82,4 +82,41 @@ export class OperacaoInvestimentoComponent implements OnInit {
     public onNotifyOperacaoSaidaReceber(message: any): void {
         this.atualizarListaSaidas++;
     }
+    
+    onKey(event:any) {
+        console.log(event.keyCode);                
+        if ((event.keyCode >= 48 && event.keyCode <= 57) || // números teclado superior
+            (event.keyCode >= 96 && event.keyCode <= 105) ||// números teclado direito
+            (event.keyCode >= 8 && event.keyCode <= 9) || // apagar e tab
+            event.keyCode === 46 || // telacal del
+            (event.keyCode >= 35 && event.keyCode <= 39) || // telca direita
+            (event.keyCode >= 16 && event.keyCode <= 17) // shift e alt
+            ) {
+            this.operacao.precoUnitario = event.target.value;
+        } else {
+            if (this.operacao.precoUnitario.length >1) {
+                this.operacao.precoUnitario = this.operacao.precoUnitario.substring(0,this.operacao.precoUnitario.length-1);
+                
+            } else {
+                this.operacao.precoUnitario = '';
+
+            }
+        }
+
+        if (this.operacao.precoUnitario.length >=1) {
+            if (event.keyCode === 110 ) {
+                let adicionar: boolean = true;
+                for (var i = this.operacao.precoUnitario.length - 1; i >= 0; i--) {
+                   if(this.operacao.precoUnitario.charAt(i) ===','){
+                        adicionar = false;
+                        break;
+                   }
+                }
+                if (adicionar) {
+                    this.operacao.precoUnitario = event.target.value;
+                } 
+            }
+        }
+
+    }
 }

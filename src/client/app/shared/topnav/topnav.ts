@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario} from '../../shared/entity/usuario';
 
@@ -8,12 +8,15 @@ import { Usuario} from '../../shared/entity/usuario';
     templateUrl: 'topnav.html',
 })
 
-export class TopNavComponent {
+export class TopNavComponent implements OnInit {
 	usuario: Usuario;
 
-	constructor(private router: Router) {
-		this.usuario = JSON.parse(localStorage.getItem('usuario_investimento'));
-	}
+	constructor(private router: Router) {}
+
+	    /*Métodos*/
+    public ngOnInit(): void {
+        this.usuario = JSON.parse(localStorage.getItem('usuario_investimento'));
+    }
 
 	changeTheme(color: string): void {
 		var link: any = $('<link>');

@@ -20,7 +20,7 @@ import { OperacaoFechadaTabComponent } from './operacao-fechada-tab.component';
 import { OperacaoAbertaTabComponent } from './operacao-aberta-tab.component';
 import { SharedModule } from '../../shared/shared.module';
 // import { OperacaoSaidaModalComponent } from '../../shared/components/operacao-saida-modal.component';
-
+import { InputMaskCurrentDirective } from '../../shared/directive/input-mask-current.directive';
 
 @NgModule({
     imports: [
@@ -38,8 +38,9 @@ import { SharedModule } from '../../shared/shared.module';
         TypeaheadModule,
         SharedModule
     ],
-    declarations: [OperacaoInvestimentoComponent, OperacaoFechadaTabComponent, OperacaoAbertaTabComponent],
+    declarations: [OperacaoInvestimentoComponent, OperacaoFechadaTabComponent, OperacaoAbertaTabComponent, InputMaskCurrentDirective],
     exports: [OperacaoInvestimentoComponent]
 })
 
 export class OperacaoInvestimentoModule {}
+

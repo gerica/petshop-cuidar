@@ -26,6 +26,7 @@ export class OperacaoFechadaTabComponent implements OnInit, OnChanges {
     public ngOnInit(): void {
         this.recuperarOperacaoSaida();
         this.operacoes = new Array();
+        this.alertaUtil = new AlertaUtil();
 
     }
     public ngOnChanges( changes: {

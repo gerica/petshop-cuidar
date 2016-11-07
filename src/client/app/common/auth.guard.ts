@@ -6,7 +6,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  private semServidor = false;
+  private semServidor = true;
 
   constructor(private router: Router) {}
 

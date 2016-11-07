@@ -64,7 +64,7 @@
                                                 <div class="form-group">
                                                     <fieldset class="form-group">
                                                         <label>Preço Unitário:</label>
-                                                        <input type="text" class="form-control" placeholder="precoUnitario" id="precoUnitario" name="precoUnitario" [(ngModel)]="operacao.precoUnitario" required #precoUnitario="ngModel">
+                                                        <input type="text" class="form-control" placeholder="precoUnitario" id="precoUnitario" name="precoUnitario" [(ngModel)]="operacao.precoUnitario" required #precoUnitario="ngModel" (keyup)="onKey($event)">
                                                     </fieldset>
                                                     <div [hidden]="precoUnitario.valid || precoUnitario.pristine" class="alert alert-danger">
                                                         O preço unitário é obrigatório.
@@ -77,7 +77,7 @@
                                                 <div class="form-group">
                                                     <fieldset class="form-group">
                                                         <label>Quantidade:</label>
-                                                        <input class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" [(ngModel)]="operacao.quantidade" #quantidade="ngModel" required>
+                                                        <input class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" [(ngModel)]="operacao.quantidade" #quantidade="ngModel" required [inputMaskCurrent]="quantidade">
                                                     </fieldset>
                                                     <div [hidden]="quantidade.valid || quantidade.pristine" class="alert alert-danger">
                                                         A quantidade é obrigatório.
