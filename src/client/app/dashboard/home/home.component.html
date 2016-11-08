@@ -3,9 +3,38 @@
         {{ alert?.msg }}
     </alert>
     <h2 class="text-muted">Dashboard <small>Investimentos</small></h2>
-    <div class="row">
+    <div class="row" *ngIf="balancos?.length > 0">
+        <div class="col-sm-3">
+            <div class="card card-primary card-inverse">
+                <div class="card-header card-primary">
+                    Total Investido
+                </div>
+                <div class="card-block bg-white">
+                    {{homeSaldo.totalInvestido | currency:'BRL':true}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card card-primary card-inverse">
+                <div class="card-header card-primary">
+                    Saldo Lucro/Prejuízo
+                </div>
+                <div class="card-block bg-white">
+                    {{homeSaldo.saldoLucroPrejuizo | currency:'BRL':true}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card card-inverse" [class.card-danger]="homeSaldo.saldoTotal <0" [class.card-success]="homeSaldo.saldoTotal >0">
+                <div class="card-header" [class.card-danger]="homeSaldo.saldoTotal <0" [class.card-success]="homeSaldo.saldoTotal >0">
+                    Saldo
+                </div>
+                <div class="card-block bg-white">
+                    {{homeSaldo.saldoTotal | currency:'BRL':true}}
+                </div>
+            </div>
+        </div>
     </div>
-    <hr>
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -41,25 +70,6 @@
                                             <td>{{balanco.porcentagemLucroPrejuizo| percent:'3.4-4'}}</td>
                                             <td>{{balanco.lucroPrejuizo | currency:'BRL':true}}</td>
                                             <td>{{balanco.saldoLucroPrejuizo | currency:'BRL':true}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <hr>
-                            <div class="table-responsive">
-                                <table class="table table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Total Investido</th>
-                                            <th>Saldo Lucro/Prejuízo</th>
-                                            <th>Saldo</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody [class.table-success]="homeSaldo.saldoTotal >0" [class.table-danger]="homeSaldo.saldoTotal <0">
-                                        <tr>
-                                            <td>{{homeSaldo.totalInvestido | currency:'BRL':true}}</td>
-                                            <td>{{homeSaldo.saldoLucroPrejuizo | currency:'BRL':true}}</td>
-                                            <td>{{homeSaldo.saldoTotal | currency:'BRL':true}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

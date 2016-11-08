@@ -33,9 +33,9 @@ export class PapelService {
 
         return this.http.post( URL_ATIVAR_DESATIVAR_PAPEL, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
-            .map(( res: any ) => res.json() )
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.json() ) );
+            .catch( this.handleError );
     }
 
     public recuperarTodosPapeis(): Observable<any> {
@@ -43,10 +43,10 @@ export class PapelService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_TODOS_PAPEIS, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
     }
 
     public recuperarPapeisAtivo(): Observable<any> {
@@ -54,20 +54,20 @@ export class PapelService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_PAPEIS_ATIVO, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
     }
     public recuperarBalancoHoje(): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_BALANCO_HOJE, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
     }
     /**
      * Retorna todos os papeis que já ocorreu alguma operação
@@ -77,10 +77,27 @@ export class PapelService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_PAPEIS_OPERECAO, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
+    }
+
+    private extractData( res: Response ) {
+        return res.json();
+    }
+    private handleError( error: Response | any ) {
+        // In a real world app, we might use a remote logging infrastructure
+        let errMsg: string;
+        if ( error instanceof Response ) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify( body );
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error( errMsg );
+        return Observable.throw( error.json() );
     }
 
 }

@@ -67,6 +67,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 	+ Funcionalidade de apresentar o saldo das operações fechadas. 
 	+ Funcionalidade de excluir somente poderá ser realizada se não houver nenhuma operação de saída.
 	+ Funcionalidade de apresentar o saldo das operações abertas.
+	* Adicionar saldo na tela de home.
 
 - Refectory
 
@@ -74,6 +75,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 	+ Na tela de operações, aba de operações fechadas, adicionar funcionalidade de abrir e fechar um item da tabela.
 	+ A data esta sendo convertida para string e com isso ficando incorreta.
 	+ Alterar a tabela da página home para adicionar o saldo. 
+	+ Refatorando os serviços para adicionar métodos padrão de tratamento de retorno.
 
 - Dashboard
 

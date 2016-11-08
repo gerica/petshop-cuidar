@@ -37,7 +37,8 @@
                                             <div class="form-group">
                                                 <fieldset class="form-group">
                                                     <label>Preço Unitário:</label>
-                                                    <input type="text" class="form-control" placeholder="Preço Unitário" id="precoUnitario" name="precoUnitario" [(ngModel)]="operacaoSaida.precoUnitario" required #precoUnitario="ngModel">
+                                                    <input type="text" class="form-control" placeholder="Preço Unitário" id="precoUnitario" name="precoUnitario" 
+                                                    [(ngModel)]="operacaoSaida.precoUnitario" required #precoUnitario="ngModel" [inputMaskCurrent]="precoUnitario.value" maxlength="10">
                                                 </fieldset>
                                                 <div [hidden]="precoUnitario.valid || precoUnitario.pristine" class="alert alert-danger">
                                                     O preço unitário é obrigatório.
@@ -48,7 +49,8 @@
                                             <div class="form-group">
                                                 <fieldset class="form-group">
                                                     <label>Quantidade:</label>
-                                                    <input class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" [(ngModel)]="operacaoSaida.quantidade" #quantidade="ngModel" required>
+                                                    <input class="form-control" placeholder="Quantidade" id="quantidade" name="quantidade" [(ngModel)]="operacaoSaida.quantidade" #quantidade="ngModel" required
+                                                    [inputMaskCurrent]="quantidade.value" maxlength="10">
                                                 </fieldset>
                                                 <div [hidden]="quantidade.valid || quantidade.pristine" class="alert alert-danger">
                                                     A quantidade é obrigatório.
@@ -61,7 +63,8 @@
                                             <div class="form-group">
                                                 <fieldset class="form-group">
                                                     <label>Despesa:</label>
-                                                    <input class="form-control" placeholder="Despesa" id="despesa" name="despesa" [(ngModel)]="operacaoSaida.despesa" #despesa="ngModel" required>
+                                                    <input class="form-control" placeholder="Despesa" id="despesa" name="despesa" [(ngModel)]="operacaoSaida.despesa" #despesa="ngModel" required
+                                                    [inputMaskCurrent]="despesa.value" maxlength="10">
                                                 </fieldset>
                                                 <div [hidden]="despesa.valid || despesa.pristine" class="alert alert-danger">
                                                     A despesa é obrigatório.

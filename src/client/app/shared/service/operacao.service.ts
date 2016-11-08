@@ -31,25 +31,27 @@ export class OperacaoService {
     public gravarOperacaoEntrada( operacao: Operacao ): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader( contentHeaders );
+        operacao.prepararDadosParaServidor();
         let body = JSON.stringify( operacao );
 
         return this.http.post( URL_SALVAR_OPERACAO_ENTRADA, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
-            .map(( res: any ) => res.json() )
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.json() ) );
+            .catch( this.handleError );
     }
 
     public gravarOperacaoSaida( operacao: OperacaoSaida ): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader( contentHeaders );
+        operacao.prepararDadosParaServidor();
         let body = JSON.stringify( operacao );
 
         return this.http.post( URL_SALVAR_OPERACAO_SAIDA, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
-            .map(( res: any ) => res.json() )
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.json() ) );
+            .catch( this.handleError );
     }
 
     public excluirOperacaoEntrada( operacao: Operacao ): Observable<any> {
@@ -59,21 +61,22 @@ export class OperacaoService {
 
         return this.http.post( URL_EXCLUIR_OPERACAO_ENTRADA, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
-            .map(( res: any ) => res.json() )
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.json() ) );
+            .catch( this.handleError );
     }
 
     public editarOperacaoEntrada( operacao: Operacao ): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader( contentHeaders );
+        operacao.prepararDadosParaServidor();
         let body = JSON.stringify( operacao );
 
         return this.http.post( URL_EDITAR_OPERACAO_ENTRADA, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
-            .map(( res: any ) => res.json() )
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.json() ) );
+            .catch( this.handleError );
     }
 
     public recuperarOperacaoEntradaAberta(): Observable<any> {
@@ -81,10 +84,10 @@ export class OperacaoService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_OPERACAO_ENTRADA_ABERTA, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
     }
 
     public recuperarOperacaoSaida(): Observable<any> {
@@ -92,10 +95,10 @@ export class OperacaoService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_OPERACAO_SAIDA, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
     }
 
     public recuperarRelatorioSaida( ano: number, mes: number, idPapel: number ): Observable<any> {
@@ -103,10 +106,27 @@ export class OperacaoService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_RELATORIO_SAIDA + '/' + ano + '/' + mes + '/' + idPapel, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
+    }
+
+    private extractData( res: Response ) {
+        return res.json();
+    }
+    private handleError( error: Response | any ) {
+        // In a real world app, we might use a remote logging infrastructure
+        let errMsg: string;
+        if ( error instanceof Response ) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify( body );
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error( errMsg );
+        return Observable.throw( error.json() );
     }
 
 }

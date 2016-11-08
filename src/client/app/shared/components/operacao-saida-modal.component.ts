@@ -45,7 +45,6 @@ export class OperacaoSaidaModalComponent implements OnChanges {
     }
     public gravarOperacaoSaida( event: any ): void {
         event.preventDefault();
-        this.operacaoSaida.converterStringToDate();
 
         this.operacaoService.gravarOperacaoSaida( this.operacaoSaida )
             .subscribe(

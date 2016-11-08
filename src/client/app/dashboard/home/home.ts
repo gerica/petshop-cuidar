@@ -1,4 +1,4 @@
-export class Home {    
+export class Home {
     totalInvestido: number;
     saldoLucroPrejuizo: number;
     saldoTotal: number;

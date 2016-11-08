@@ -19,7 +19,7 @@ export class Operacao {
     flagShow: boolean = false;
     ultimaCotacao: Cotacao = new Cotacao();
 
-    public converterStringToDate(): void {
+    public prepararDadosParaServidor(): void {
         if ( typeof this.data === 'string' ) {
             let temp: string = '' + this.data;
 
@@ -28,5 +28,10 @@ export class Operacao {
             let dia: number = parseInt( temp.substring( 8, 10 ) );
             this.data = new Date( ano, mes, dia );
         }
+        this.precoUnitario = parseFloat( this.precoUnitario.toString().replace( /,/g, '.' ) );
+        this.quantidade = parseFloat( this.quantidade.toString().replace( /,/g, '.' ) );
+        this.despesa = parseFloat( this.despesa.toString().replace( /,/g, '.' ) );
+
+
     }
 }

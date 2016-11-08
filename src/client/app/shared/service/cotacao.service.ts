@@ -26,10 +26,10 @@ export class CotacaoService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_ATUALIZAR_HISTORICO_BMF, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.json() ) );
+            .catch( this.handleError );
     }
 
     public atualizarAtualBMF(): Observable<any> {
@@ -37,10 +37,10 @@ export class CotacaoService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_ATUALIZAR_ATUAL_BMF, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.json() ) );
+            .catch( this.handleError );
     }
 
     public recuperarUltimaCotacao( idPapel: number ): Observable<any> {
@@ -48,10 +48,10 @@ export class CotacaoService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_ULTIMA_COTACAO + '/' + idPapel, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
     }
 
     public recuperarCotacaoPorData( data: Date ): Observable<any> {
@@ -59,10 +59,27 @@ export class CotacaoService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_COTACAO_POR_DATA + '/' + data, { headers: contentHeaders })
-            // ...sucesso
-            .map(( response: Response ) => response.json() )
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
             //...errors if any
-            .catch(( error: any ) => Observable.throw( error.text() ) );
+            .catch( this.handleError );
+    }
+
+    private extractData( res: Response ) {
+        return res.json();
+    }
+    private handleError( error: Response | any ) {
+        // In a real world app, we might use a remote logging infrastructure
+        let errMsg: string;
+        if ( error instanceof Response ) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify( body );
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error( errMsg );
+        return Observable.throw( error.json() );
     }
 
 }

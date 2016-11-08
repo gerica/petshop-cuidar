@@ -17,15 +17,16 @@ import {
 
 import { NameListService } from './name-list/index';
 import { OperacaoSaidaModalComponent } from '../shared/components/operacao-saida-modal.component';
+import { InputMaskCurrentDirective } from '../shared/directive/input-mask-current.directive';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
-@NgModule({
+@NgModule( {
     imports: [CommonModule, RouterModule, ModalModule, FormsModule],
-    declarations: [OperacaoSaidaModalComponent],
-    exports: [CommonModule, FormsModule, RouterModule, OperacaoSaidaModalComponent]
+    declarations: [OperacaoSaidaModalComponent, InputMaskCurrentDirective],
+    exports: [CommonModule, FormsModule, RouterModule, OperacaoSaidaModalComponent, InputMaskCurrentDirective]
 })
 
 export class SharedModule {
