@@ -18,10 +18,10 @@ export class InputMaskCurrentDirective {
     }
 
     private get_numbers( input: string ): any {
-        if ( input !== undefined){
-            if(typeof input === 'string') {
+        if ( input !== undefined ) {
+            if ( typeof input === 'string' ) {
                 return input.match( /[0-9.,]+/g );
-            } else if(typeof input === 'number') {
+            } else if ( typeof input === 'number' ) {
                 return input;
             }
         }

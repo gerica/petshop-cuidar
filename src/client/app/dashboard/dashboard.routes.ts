@@ -5,6 +5,7 @@ import { BlankPageRoutes } from './blank-page/index';
 import { OperacaoInvestimentoRoutes } from './operacao-investimento/index';
 import { UsuarioConfiguracaoRoutes } from './usuario-configuracao/index';
 import { RelatorioSaidaRoutes } from './relatorio-saida/index';
+import { CotacaoGraficoRoutes } from './cotacao-grafico/index';
 
 
 import { DashboardComponent } from './index';
@@ -18,7 +19,8 @@ export const DashboardRoutes: Route[] = [
             ...BlankPageRoutes,
             ...OperacaoInvestimentoRoutes,
             ...UsuarioConfiguracaoRoutes,
-            ...RelatorioSaidaRoutes
+            ...RelatorioSaidaRoutes,
+            ...CotacaoGraficoRoutes
         ]
     }
 ];

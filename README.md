@@ -16,9 +16,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 - Operação	
 	
-	+ **Funcionalidade de apresentar o saldo das operações consolidadas**.
-	+ Funcionalidade de apresentar o saldo das operações individuais.
-	+ Funcionalidade de relatório de ganhos/percas por período.	
+	+ Funcionalidade de apresentar o saldo das operações individuais.		
 	+ Relatório se a saída do papel obedeceu as metas.
 
 - Home
@@ -32,8 +30,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 - Configuração
 
 - Dashboard
-
-	+ Adicionar chart para acompanhar rentabilidade.
+	
 
 - Refectory
 
@@ -59,6 +56,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 - Cotação
 
 	+ Funcionalidade de atualizar a cotação com a BOVESPA, manualmente.
+	+ Adicionar chart para acompanhar rentabilidade.
 
 - Operação
 
@@ -68,6 +66,8 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 	+ Funcionalidade de excluir somente poderá ser realizada se não houver nenhuma operação de saída.
 	+ Funcionalidade de apresentar o saldo das operações abertas.
 	* Adicionar saldo na tela de home.
+	+ Funcionalidade de apresentar o saldo das operações consolidadas.
+	+ Funcionalidade de relatório de ganhos/percas por período.
 
 - Refectory
 
@@ -80,3 +80,4 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 - Dashboard
 
 	+ Adicionar tabela com informações de operações.
+	

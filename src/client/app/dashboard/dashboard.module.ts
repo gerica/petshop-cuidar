@@ -13,6 +13,7 @@ import { TopNavComponent } from '../shared/index';
 import { SidebarComponent } from '../shared/index';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from '../common/auth.guard';
+import { CotacaoGraficoModule } from './cotacao-grafico/cotacao-grafico.module';
 
 @NgModule( {
     imports: [
@@ -24,7 +25,8 @@ import { AuthGuard } from '../common/auth.guard';
         BlankPageModule,
         OperacaoInvestimentoModule,
         UsuarioConfiguracaoModule,
-        RelatorioSaidaModule
+        RelatorioSaidaModule,
+        CotacaoGraficoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],

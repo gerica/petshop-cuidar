@@ -30,6 +30,7 @@ export const URL_RECUPERAR_CONFIGURACAO_ANALISE_COTACAO: string = URL_BACK_END +
 export const URL_SALVAR_CONFIGURACAO_ANALISE_COTACAO: string = URL_BACK_END + 'salvarConfiguracaoAnalise';
 export const URL_RECUPERAR_ULTIMA_COTACAO: string = URL_BACK_END + 'recuperarUltimaCotacao';
 export const URL_RECUPERAR_COTACAO_POR_DATA: string = URL_BACK_END + 'recuperarCotacaoPorData';
+export const URL_RECUPERAR_COTACOES_POR_PAPEL: string = URL_BACK_END + 'recuperarCotacoesPorPapel';
 
 // SERVIÇOS DE ATUALIZAR COTAÇÃO COM A BOVESPA
 export const URL_ATUALIZAR_HISTORICO_BMF: string = URL_BACK_END + 'atualizarHistoricoBMF';

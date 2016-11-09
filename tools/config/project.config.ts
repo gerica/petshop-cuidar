@@ -15,7 +15,7 @@ export class ProjectConfig extends SeedConfig {
   ];
   constructor() {
     super();
-    // this.APP_TITLE = 'Put name of your app here';
+     this.APP_TITLE = 'Carteira de Investimentos';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;

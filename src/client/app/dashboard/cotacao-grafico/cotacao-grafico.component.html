@@ -1,0 +1,70 @@
+<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+    {{ alert?.msg }}
+</alert>
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Configuração
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Cotação - Gráfico
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="col-lg-12">
+        <div class="card card-block">
+            <tabset>
+                <tab heading="Cotação Gráfico">
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header card-default">
+                                    Cotação
+                                </div>
+                                <div class="card-block bg-white">
+                                    <form role="form" #cotacaoGraficoForm="ngForm" (submit)="pesquisarGraficoPorCotacao($event)">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Papel</label>
+                                                    <select class="form-control" id="papelSelect" name="papelSelect" [(ngModel)]="papel" #papelSelect="ngModel">
+                                                        <option *ngFor="let p of papeis" [ngValue]="p">{{p.papel}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                     *ngIf="cotacoesArray?.length > 0" -->
+                    <div class="row" >
+	                    <div class="col-xl-12">
+					            <div class="card card-block">
+					                <div id="snow-depth" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+					            </div>
+					        </div>
+	                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
