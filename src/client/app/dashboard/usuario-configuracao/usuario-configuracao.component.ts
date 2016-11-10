@@ -26,6 +26,12 @@ export class UsuarioConfiguracaoComponent implements OnInit {
     usuario: Usuario;
     query: string;
     configuracaoAnaliseCotacoes: ConfiguracaoAnaliseCotacoes;
+    max: number = 50;
+    showWarning: boolean;
+    dynamic: number;
+    tipo: string;
+    isShowProgressbar: boolean = false;
+    valueBar: number = 0;
 
     /*Construtor*/
     constructor( private usuarioService: UsuarioService, //
@@ -146,9 +152,12 @@ export class UsuarioConfiguracaoComponent implements OnInit {
     // FINAL FUNCIONALIDADES DA ABA CONFIGURAR META
     // FUNCIONALIDADE DA ABA Atualizar Cotação
     public atualizarHistoricoBMF(): void {
+        this.isShowProgressbar = true;
+        this.showProgressBar();
         this.cotacaoService.atualizarHistoricoBMF()
             .subscribe(
             result => {
+                this.isShowProgressbar = false;
                 this.alertaUtil.addMessage( {
                     type: 'success',
                     closable: true,
@@ -156,6 +165,7 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                 });
             },
             err => {
+                this.isShowProgressbar = false;
                 // Log errors if any                                    
                 this.alertaUtil.addMessage( {
                     type: 'danger',
@@ -165,9 +175,12 @@ export class UsuarioConfiguracaoComponent implements OnInit {
             });
     }
     public atualizarAtualBMF(): void {
+        this.isShowProgressbar = true;
+        this.showProgressBar();
         this.cotacaoService.atualizarAtualBMF()
             .subscribe(
             result => {
+                this.isShowProgressbar = false;
                 this.alertaUtil.addMessage( {
                     type: 'success',
                     closable: true,
@@ -175,6 +188,7 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                 });
             },
             err => {
+                this.isShowProgressbar = false;
                 // Log errors if any                                    
                 this.alertaUtil.addMessage( {
                     type: 'danger',
@@ -183,6 +197,22 @@ export class UsuarioConfiguracaoComponent implements OnInit {
                 });
             });
     }
+
+    public showProgressBar(): void {
+        setTimeout(() => {
+            if ( this.isShowProgressbar ) {
+                this.showProgressBar();
+            }
+        }, 500 );
+
+        console.log( 'chamou ' + this.valueBar );
+        this.valueBar++;
+        this.dynamic = this.valueBar;
+        if ( this.valueBar === this.max ) {
+            this.valueBar = 0;
+
+        }
+    };
     // FINAL FUNCIONALIDADE DA ABA Atualizar Cotação
 
 }

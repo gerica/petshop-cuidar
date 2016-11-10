@@ -6,23 +6,25 @@ import { RouterModule } from '@angular/router';
 import {
     AlertModule,
     TabsModule,
-    ModalModule
+    ModalModule,
+    ProgressbarModule
 } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { UsuarioConfiguracaoComponent } from './usuario-configuracao.component';
 import { PapelTabelaPipe } from '../../shared/pipe/papel-tabela.pipe';
 
-@NgModule({
+@NgModule( {
     imports: [
         BrowserModule,
         FormsModule,
         RouterModule,
         AlertModule,
         TabsModule,
-        ModalModule
+        ModalModule,
+        ProgressbarModule
     ],
     declarations: [UsuarioConfiguracaoComponent, PapelTabelaPipe],
     exports: [UsuarioConfiguracaoComponent]
 })
 
-export class UsuarioConfiguracaoModule {}
+export class UsuarioConfiguracaoModule { }

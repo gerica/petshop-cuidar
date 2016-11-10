@@ -29,6 +29,8 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 - Configuração
 
+	+ Adicionar barra de progresso nas telas.
+
 - Dashboard
 	
 
