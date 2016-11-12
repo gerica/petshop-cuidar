@@ -10,6 +10,7 @@ import { URL_ATUALIZAR_ATUAL_BMF } from '../../common/url_const';
 import { URL_RECUPERAR_ULTIMA_COTACAO } from '../../common/url_const';
 import { URL_RECUPERAR_COTACAO_POR_DATA } from '../../common/url_const';
 import { URL_RECUPERAR_COTACOES_POR_PAPEL } from '../../common/url_const';
+import { URL_RECUPERAR_BALANCO_CARTEIRA } from '../../common/url_const';
 
 @Injectable()
 export class CotacaoService {
@@ -71,6 +72,17 @@ export class CotacaoService {
         this.createAuthorizationHeader( contentHeaders );
 
         return this.http.get( URL_RECUPERAR_COTACOES_POR_PAPEL + '/' + idPapel, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map( this.extractData )
+            //...errors if any
+            .catch( this.handleError );
+    }
+
+    public recuperarBalancoCarteira(): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader( contentHeaders );
+
+        return this.http.get( URL_RECUPERAR_BALANCO_CARTEIRA, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map( this.extractData )
             //...errors if any

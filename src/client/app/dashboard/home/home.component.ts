@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BalancoHoje } from '../../shared/entity/balanco-hoje';
+import { BalancoHoje } from './balanco-hoje';
+import { BalancoCarteira } from './balanco-carteira';
 import { Operacao } from '../../shared/entity/operacao';
 import { PapelService } from '../../shared/service/papel.service';
+import { CotacaoService } from '../../shared/service/cotacao.service';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
 import { Home } from './home';
 
@@ -12,22 +14,26 @@ import { Home } from './home';
     moduleId: module.id,
     selector: 'home-cmp',
     templateUrl: 'home.component.html',
-    providers: [PapelService]
+    providers: [PapelService, CotacaoService]
 })
 
 export class HomeComponent implements OnInit {
     balancos: BalancoHoje[];
+    balancosCarteira: BalancoCarteira[];
+    balancoArray: any[];
     alertaUtil: AlertaUtil = new AlertaUtil();
     notifyAbriModal: Operacao;
     homeSaldo: Home;
+    menorCotacao: number = 0;
 
     /*Construtor*/
-    constructor( private papelService: PapelService ) { }
+    constructor( private papelService: PapelService, private cotacaoService: CotacaoService ) { }
 
     /*Métodos*/
     public ngOnInit(): void {
         this.recuperarBalancoHoje();
-        this.criarGrafico();
+        //        this.criarGrafico();
+        this.recuperarBalancoCarteira();
     }
     public recuperarBalancoHoje(): void {
         this.papelService.recuperarBalancoHoje()
@@ -79,7 +85,27 @@ export class HomeComponent implements OnInit {
         });
 
     }
-    
+    public recuperarBalancoCarteira(): void {
+        this.cotacaoService.recuperarBalancoCarteira()
+            .subscribe(
+            data => {
+                this.balancosCarteira = data.objeto;
+
+                this.balancoArray = [];
+                for ( let obj of this.balancosCarteira ) {
+                    if ( obj.lucroPrejuizo < this.menorCotacao ) {
+                        this.menorCotacao = obj.lucroPrejuizo;
+                    }
+                    this.balancoArray.push( [obj.data, obj.lucroPrejuizo] );
+                }
+
+                this.criarGrafico();
+            },
+            error => {
+                this.handleMessage( 'danger', error );
+            }
+            );
+    }
     public criarGrafico(): void {
         var snowDepth: any = $( '#snow-depth' );
         snowDepth.highcharts( {
@@ -87,7 +113,7 @@ export class HomeComponent implements OnInit {
                 type: 'spline'
             },
             title: {
-                text: 'Cotação do papel: ' ,
+                text: 'Desempenho Carteira: ',
             },
             subtitle: {
                 text: 'período entre'
@@ -106,11 +132,11 @@ export class HomeComponent implements OnInit {
                 title: {
                     text: 'Valores'
                 },
-                min: -5
+                min: this.menorCotacao
             },
             tooltip: {
                 headerFormat: '<b>{series.name}</b><br>',
-                pointFormat: '{point.x:%e. %b}: R$ {point.y:.2f}'
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f}%'
             },
 
             plotOptions: {
@@ -122,46 +148,11 @@ export class HomeComponent implements OnInit {
             },
 
             series: [{
-                name: 'Winter 2012-2013',
+                name: 'Carteira',
                 // Define the data points. All series have a dummy year
                 // of 2016/71 in order to be compared on the same x axis. Note
                 // that in JavaScript, months start at 0 for January, 1 for February etc.
-                data: [
-                    [Date.UTC(2016, 9, 21), 0],
-                    [Date.UTC(2016, 10, 4), -0.28],
-                    [Date.UTC(2016, 10, 9), 0.25],
-                    [Date.UTC(2016, 10, 27), 0.2],
-                    [Date.UTC(2016, 11, 2), 0.28],
-                    [Date.UTC(2016, 11, 26), 0.28],
-                    [Date.UTC(2016, 11, 29), 0.47],
-                    [Date.UTC(2017, 0, 11), 0.79],
-                    [Date.UTC(2017, 0, 26), 0.72],
-                    [Date.UTC(2017, 1, 3), -1.02],
-                    [Date.UTC(2017, 1, 11), 1.12],
-                    [Date.UTC(2017, 1, 25), 1.2],
-                    [Date.UTC(2017, 2, 11), 1.18],
-                    [Date.UTC(2017, 3, 11), 1.19],
-                    [Date.UTC(2017, 4, 1), 1.85],
-                    [Date.UTC(2017, 4, 5), -2.22],
-                    [Date.UTC(2017, 4, 19), 1.15],
-                    [Date.UTC(2017, 5, 3), 0]
-                ]
-            }, {
-                name: 'Winter 2013-2014',
-                data: [
-                    [Date.UTC(2016, 9, 29), 0],
-                    [Date.UTC(2016, 10, 9), 0.4],
-                    [Date.UTC(2016, 11, 1), 0.25],
-                    [Date.UTC(2017, 0, 1), -1.66],
-                    [Date.UTC(2017, 0, 10), 1.8],
-                    [Date.UTC(2017, 1, 19), 1.76],
-                    [Date.UTC(2017, 2, 25), 2.62],
-                    [Date.UTC(2017, 3, 19), -2.41],
-                    [Date.UTC(2017, 3, 30), -2.05],
-                    [Date.UTC(2017, 4, 14), 1.7],
-                    [Date.UTC(2017, 4, 24), 1.1],
-                    [Date.UTC(2017, 5, 10), 0]
-                ]
+                data: this.balancoArray
             }
             ]
         });

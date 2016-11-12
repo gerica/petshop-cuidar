@@ -1,4 +1,4 @@
-import { Operacao } from './operacao';
+import { Operacao } from '../../shared/entity/operacao';
 
 export class BalancoHoje {
     papel: string;
