@@ -75,6 +75,7 @@ export class HomeComponent implements OnInit {
         this.homeSaldo.saldoLucroPrejuizo = tempTotalSaldo;
 
         this.homeSaldo.saldoTotal = tempTotalSaldo - this.homeSaldo.totalInvestido;
+        this.homeSaldo.porcentagem = (this.homeSaldo.saldoTotal *1)/this.homeSaldo.totalInvestido;
 
     }
     private handleMessage( tipo: string, message: string ) {
@@ -116,7 +117,7 @@ export class HomeComponent implements OnInit {
                 text: 'Desempenho Carteira: ',
             },
             subtitle: {
-                text: 'período entre'
+                text: ''
             },
             xAxis: {
                 type: 'datetime',

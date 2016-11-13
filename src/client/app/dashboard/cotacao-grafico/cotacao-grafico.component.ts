@@ -20,6 +20,7 @@ export class CotacaoGraficoComponent implements OnInit {
     papel: Papel;
     dataCotacoes: CotacaoGrafico[];
     cotacoesArray: any[];
+    cotacaoMinimo: number;
 
     /*Construtor*/
     constructor( private cotacaoService: CotacaoService, private papelService: PapelService ) {
@@ -50,12 +51,18 @@ export class CotacaoGraficoComponent implements OnInit {
 
     public pesquisarGraficoPorCotacao( event: any ): void {
         event.preventDefault();
+        this.cotacaoMinimo = undefined;
         this.cotacaoService.recuperarCotacoesPorPapel( this.papel.id )
             .subscribe(
             data => {
                 this.dataCotacoes = data.objeto;
                 this.cotacoesArray = [];
                 for ( let cotacao of this.dataCotacoes ) {
+                    if ( this.cotacaoMinimo === undefined ) {
+                        this.cotacaoMinimo = cotacao.fechamento;
+                    } else if ( cotacao.fechamento < this.cotacaoMinimo ) {
+                        this.cotacaoMinimo = cotacao.fechamento;
+                    }
                     this.cotacoesArray.push( [cotacao.data, cotacao.fechamento] );
                 }
 
@@ -111,7 +118,7 @@ export class CotacaoGraficoComponent implements OnInit {
                 title: {
                     text: 'Valores'
                 },
-                min: 0
+                min: this.cotacaoMinimo
             },
             tooltip: {
                 headerFormat: '<b>{series.name}</b><br>',

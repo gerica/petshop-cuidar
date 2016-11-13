@@ -36,6 +36,8 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 - Refectory
 
+	+ Alterar a forma que é atualizada as cotações.
+
 7	
 ## REALIZADA
 - Usuário

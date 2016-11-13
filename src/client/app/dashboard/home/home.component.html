@@ -34,6 +34,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-3">
+            <div class="card card-inverse" [class.card-danger]="homeSaldo.porcentagem <0" [class.card-success]="homeSaldo.porcentagem >0">
+                <div class="card-header" [class.card-danger]="homeSaldo.porcentagem <0" [class.card-success]="homeSaldo.porcentagem >0">
+                    Porcentagem
+                </div>
+                <div class="card-block bg-white">
+                    {{homeSaldo.porcentagem | percent:'3.4-4'}}
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
