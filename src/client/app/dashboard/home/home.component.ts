@@ -61,31 +61,8 @@ export class HomeComponent implements OnInit {
         }
         this.notifyAbriModal = null;
     }
-    private calcularTotais(): void {
-        this.homeSaldo = new Home();
-        let tempTotalInvesrimento: number = 0;
-        let tempTotalSaldo: number = 0;
 
 
-        for ( var i = 0; i < this.balancos.length; i++ ) {
-            tempTotalInvesrimento += this.balancos[i].totalInvestimento;
-            tempTotalSaldo += this.balancos[i].saldoLucroPrejuizo;
-        }
-        this.homeSaldo.totalInvestido = tempTotalInvesrimento;
-        this.homeSaldo.saldoLucroPrejuizo = tempTotalSaldo;
-
-        this.homeSaldo.saldoTotal = tempTotalSaldo - this.homeSaldo.totalInvestido;
-        this.homeSaldo.porcentagem = (this.homeSaldo.saldoTotal *1)/this.homeSaldo.totalInvestido;
-
-    }
-    private handleMessage( tipo: string, message: string ) {
-        this.alertaUtil.addMessage( {
-            type: tipo,
-            closable: true,
-            msg: message
-        });
-
-    }
     public recuperarBalancoCarteira(): void {
         this.cotacaoService.recuperarBalancoCarteira()
             .subscribe(
@@ -157,6 +134,32 @@ export class HomeComponent implements OnInit {
             }
             ]
         });
+    }
+
+    private handleMessage( tipo: string, message: string ) {
+        this.alertaUtil.addMessage( {
+            type: tipo,
+            closable: true,
+            msg: message
+        });
+
+    }
+    private calcularTotais(): void {
+        this.homeSaldo = new Home();
+        let tempTotalInvesrimento: number = 0;
+        let tempTotalSaldo: number = 0;
+
+
+        for ( var i = 0; i < this.balancos.length; i++ ) {
+            tempTotalInvesrimento += this.balancos[i].totalInvestimento;
+            tempTotalSaldo += this.balancos[i].saldoLucroPrejuizo;
+        }
+        this.homeSaldo.totalInvestido = tempTotalInvesrimento;
+        this.homeSaldo.saldoLucroPrejuizo = tempTotalSaldo;
+
+        this.homeSaldo.saldoTotal = tempTotalSaldo - this.homeSaldo.totalInvestido;
+        this.homeSaldo.porcentagem = ( this.homeSaldo.saldoTotal * 1 ) / this.homeSaldo.totalInvestido;
+
     }
 
 }

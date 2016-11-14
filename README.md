@@ -21,7 +21,6 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 - Home
 
-	Adicionra gráfico para acompanhar a carteira.
 
 - Cotação
 	
@@ -35,8 +34,7 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 	
 
 - Refectory
-
-	+ Alterar a forma que é atualizada as cotações.
+	
 
 7	
 ## REALIZADA
@@ -85,3 +83,6 @@ Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 	+ Adicionar tabela com informações de operações.
 	
+- Home
+
+	+ Adicionra gráfico para acompanhar a carteira.
