@@ -5,7 +5,7 @@
                 {{ alert?.msg }}
             </alert>
             <img src="assets/img/SB-admin.png" width="150px" class="user-avatar" />
-            <h1>Investimento</h1>
+            <h1>PetShop - Cuidar</h1>
             <form role="form" #loginForm="ngForm" (submit)="login($event)">
                 <div class="form-content">
                     <div class="form-group">
@@ -21,16 +21,9 @@
                         A Senha é obrigatório.
                     </div>
                 </div>
-                <button type="submit" class="btn rounded-btn">Login</button>
-                <!--
-                <a class="btn rounded-btn"> Log in </a>
-                routerLink="/dashboard/home"
-                (click)="login()"
-                 -->
-                &nbsp;
+                <button type="submit" class="btn rounded-btn">Login</button>                
                 <a type="submit" class="btn rounded-btn" routerLink="/signup">Register</a>
-            </form>
-            <!-- {{diagnostic}} -->
+            </form>            
         </div>
     </div>
 </div>

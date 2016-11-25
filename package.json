@@ -1,9 +1,9 @@
 {
   "name": "InvestimentoCliente",
   "version": "0.0.1",
-  "description": "Sistema para carteira de investimentos.",
+  "description": "PetShop Cuidar do seu pet.",
   "repository": {
-    "url": "https://github.com/gerica/InvestimentoCliente"
+    "url": "https://github.com/gerica/petshop-cuidar"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color --config-env dev",
