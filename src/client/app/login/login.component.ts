@@ -43,6 +43,9 @@ export class LoginComponent {
                     closable: true,
                     msg: err
                 });
+                
+                //desenvovimento
+                this.router.navigate( ['/dashboard/home'] );
             });
 
         // DESENVOLVER SEM O SERVIDOR
