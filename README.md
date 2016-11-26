@@ -1,88 +1,51 @@
-# Sistama de controle de operação em ações
+# Sistama de Gestão de PetShop
 
 Utilizando o tamplate: **SB Admin rewritten in Angular2 and Bootstrap 4**
 
 ## Funcionalidades
-
-- Configurar qual ação será atualizada.
-- Configurar o stop loss e stop gain.
-- Apresntar como esta a carteira de investimentos.
-- Realizar operação de entrada e saída.
-- Relatório de acompanhamento.
+- Financeiro
+- Estoque
+- Relacionamento
+- Venda
+- Administrativo
+- Consultas
 
 # Tarefas 
 ## A FAZER
-- Usuário
-
-- Operação	
 	
-	+ Funcionalidade de apresentar o saldo das operações individuais.		
-	+ Relatório se a saída do papel obedeceu as metas.
+### Financeiro
 
-- Home
+- Contas a pagar e a receber 
+- Fluxo de caixa 
+- Fechamento de caixa 
+- Centro de custos 
+- Plano de contas 
+- Inadimplências
+
+### Estoque 
+
+- Produtos e insumos 
+- Estoque mínimo 
+- Projeções de estoque 
+- Entrada por NF-e (xml)
 
 
-- Cotação
-	
-	+ Funcionalidade de atualizar a cotação com a BOVESPA, automaticamente.
+###Relacionamento
+- Remarcação de serviços 
+- Estimativa de produtos 
+- Sistema de fidelidade 
+- Particularidades dos animais 
 
-- Configuração
+### Vendas
+- Leitor de código de barras 
+- Crediário e vale compras 
+- NFC-e, NF-e, SAT e cupom fiscal 
+- Tele busca e tele entrega
 
-	+ Adicionar barra de progresso nas telas.
+### Administrativo
+- *Funcionários* 
+- Perfil de usuários 
+- Vales e comissões 
+- Relatórios 
 
-- Dashboard
-	
-
-- Refectory
-	
-
-7	
 ## REALIZADA
-- Usuário
-
-	+   Criar funcionalidade de registrar usuário.
-	+	Funcionalidade de verificar a duplicidade.
-	+	Alterar a forma que é feita a autenticação, para utilizar o email, e retornar o usuário.
-	+	Criar funcionalidade de ROLES.
-	+	Validar email
-	+	Validar quantidade de letras para a senha.
-	+	Funcionalidade para poder alterar nome e senha.
-	+   Funcionalidade de apresentar todas as operações abertas e os totais.
-
-- Configuração
-
-	+ Funcionalidade de selecionar quais papeis serão utilizado pelo sistema, isto é quais papeis serão atualizados,cotação atualizada, automaticamente pela BOVESTA.
-	+ Funcionalidade de filtar por nome do papel.
-	+ Funcionalidade de informar qual será a meta de saída. STOP GAIN e STOP LOST
-
-- Cotação
-
-	+ Funcionalidade de atualizar a cotação com a BOVESPA, manualmente.
-	+ Adicionar chart para acompanhar rentabilidade.
-
-- Operação
-
-	+ Funcionalidade de operação de entrada CRUD.
-	+ Funcionalidade de operação de saída.
-	+ Funcionalidade de apresentar o saldo das operações fechadas. 
-	+ Funcionalidade de excluir somente poderá ser realizada se não houver nenhuma operação de saída.
-	+ Funcionalidade de apresentar o saldo das operações abertas.
-	* Adicionar saldo na tela de home.
-	+ Funcionalidade de apresentar o saldo das operações consolidadas.
-	+ Funcionalidade de relatório de ganhos/percas por período.
-
-- Refectory
-
-	+ Adicionar componentes para as tabs da funcionalidade de operações.
-	+ Na tela de operações, aba de operações fechadas, adicionar funcionalidade de abrir e fechar um item da tabela.
-	+ A data esta sendo convertida para string e com isso ficando incorreta.
-	+ Alterar a tabela da página home para adicionar o saldo. 
-	+ Refatorando os serviços para adicionar métodos padrão de tratamento de retorno.
-
-- Dashboard
-
-	+ Adicionar tabela com informações de operações.
-	
-- Home
-
-	+ Adicionra gráfico para acompanhar a carteira.

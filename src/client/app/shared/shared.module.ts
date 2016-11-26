@@ -15,25 +15,23 @@ import {
     // TypeaheadModule
 } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { NameListService } from './name-list/index';
-import { OperacaoSaidaModalComponent } from '../shared/components/operacao-saida-modal.component';
 import { InputMaskCurrentDirective } from '../shared/directive/input-mask-current.directive';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
-@NgModule( {
+@NgModule({
     imports: [CommonModule, RouterModule, ModalModule, FormsModule],
-    declarations: [OperacaoSaidaModalComponent, InputMaskCurrentDirective],
-    exports: [CommonModule, FormsModule, RouterModule, OperacaoSaidaModalComponent, InputMaskCurrentDirective]
+    declarations: [InputMaskCurrentDirective],
+    exports: [CommonModule, FormsModule, RouterModule, InputMaskCurrentDirective]
 })
 
 export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [NameListService]
+            providers: []
         };
     }
 }

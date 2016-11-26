@@ -1,5 +1,5 @@
 // BACK - END, SERVIÇOS
-const URL_BACK_END: string = 'http://localhost:8180/investimentoRestFul/';
+const URL_BACK_END: string = 'http://localhost:8180/petshopCuidarRest/';
 
 // SERVIÇO DE AUTENTICAÇÃO
 export const URL_AUTH: string = URL_BACK_END + 'auth';

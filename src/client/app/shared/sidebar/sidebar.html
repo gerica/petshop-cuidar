@@ -5,37 +5,39 @@
     <ul class="list-group">
         <a routerLink="/dashboard/home" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i> Dashboard
-        </a>        
+        </a>
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages1')">
-                <span><i class="fa fa-plus"></i> &nbsp; Carteira</span>
+                <span><i class="fa fa-desktop"></i> &nbsp; Administrativo</span>
             </a>
             <li class="nested" [ngClass]="{'expand' : showMenu === 'pages1' }" *ngIf="showMenu === 'pages1'">
                 <ul class="submenu">
                     <li>
-                        <a [routerLink]="['operacao-investimento']" [routerLinkActive]="['router-link-active']" href><span>Operação</span></a>
+                        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span><i class="fa fa-user-circle-o"></i>&nbsp;Funcionário</span></a>
                     </li>
                     <li>
-                        <a  [routerLink]="['cotacao-grafico']" [routerLinkActive]="['router-link-active']" href><span>Cotações</span></a>
+                        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span><i class="fa fa-eye"></i>&nbsp;Perfíl</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span><i class="fa fa-file-pdf-o"></i>&nbsp;Relatório</span></a>
                     </li>
                 </ul>
             </li>
         </div>
-        
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages2')">
-                <span><i class="fa fa-file-pdf-o"></i> &nbsp; Relatórios</span>
+                <span><i class="fa fa-shopping-cart"></i> &nbsp; Vendas</span>
             </a>
             <li class="nested" [ngClass]="{'expand' : showMenu === 'pages2' }" *ngIf="showMenu === 'pages2'">
                 <ul class="submenu">
                     <li>
                         <a [routerLink]="['relatorio-saida']" [routerLinkActive]="['router-link-active']" href><span>Saídas</span></a>
-                    </li>                    
+                    </li>
                 </ul>
             </li>
-        </div>        
+        </div>
         <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i> &nbsp;Página em Branco
-        </a>        
+        </a>
     </ul>
 </nav>
