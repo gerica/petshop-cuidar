@@ -10,7 +10,7 @@ import { Usuario } from '../../shared/entity/usuario';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './cadastrar-usuario.component.html',
-    providers: [UsuarioService]
+    providers: [UsuarioService, RoleService]
 })
 
 export class CadastrarUsuarioComponent implements OnInit {
