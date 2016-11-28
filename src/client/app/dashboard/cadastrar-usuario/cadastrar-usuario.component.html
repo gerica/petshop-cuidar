@@ -1,0 +1,57 @@
+<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+    {{ alert?.msg }}
+</alert>
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Funcionário
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Funcionário
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="col-lg-12">
+        <div class="card card-block">
+            <tabset>
+                <tab heading="Cadastro">
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header card-default">
+                                    Novo Funcionário
+                                </div>
+                                <div class="card-block bg-white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Lista">
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header card-default">
+                                    Lista de Funcionários
+                                </div>
+                                <div class="card-block bg-white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>

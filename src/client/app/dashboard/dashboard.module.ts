@@ -10,6 +10,7 @@ import { TopNavComponent } from '../shared/index';
 import { SidebarComponent } from '../shared/index';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from '../common/auth.guard';
+import { CadastrarUsuarioModule } from './cadastrar-usuario/cadastrar-usuario.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AuthGuard } from '../common/auth.guard';
         ModalModule,
         HomeModule,
         BlankPageModule,
+        CadastrarUsuarioModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],

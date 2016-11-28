@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 import { HomeRoutes } from './home/index';
 import { BlankPageRoutes } from './blank-page/index';
 import { DashboardComponent } from './index';
+import { CadastrarUsuarioRoutes } from './cadastrar-usuario/index';
 
 export const DashboardRoutes: Route[] = [{
     path: 'dashboard',
@@ -10,5 +11,6 @@ export const DashboardRoutes: Route[] = [{
     children: [
         ...HomeRoutes,
         ...BlankPageRoutes,
+        ...CadastrarUsuarioRoutes
     ]
 }];
