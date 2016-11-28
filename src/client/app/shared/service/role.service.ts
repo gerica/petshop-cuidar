@@ -1,3 +1,4 @@
+import { URL_RECUPERAR_ROLES } from './../../common/url_const';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
@@ -5,17 +6,8 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-//import {Operacao} from '../../shared/entity/operacao';
-
-import { Usuario } from '../../shared/entity/usuario';
-import { URL_INCLUIR_USUARIO } from '../../common/url_const';
-import { URL_ALTERAR_USUARIO } from '../../common/url_const';
-import { URL_RECUPERAR_USUARIOS_ATIVO } from '../../common/url_const';
-
-
-
 @Injectable()
-export class UsuarioService {
+export class RoleService {
 
     constructor(private http: Http) { }
 
@@ -25,35 +17,11 @@ export class UsuarioService {
         contentHeaders.append('X-Auth-Token', localStorage.getItem('id_token'));
     }
 
-    public incluirUsuario(usuario: Usuario): Observable<any> {
-        let contentHeaders = new Headers();
-        this.createAuthorizationHeader(contentHeaders);
-        let body = JSON.stringify(usuario);
-
-        return this.http.post(URL_INCLUIR_USUARIO, body, { headers: contentHeaders })
-            // ...and calling .json() on the response to return data
-            .map(this.extractData)
-            //...errors if any
-            .catch(this.handleError);
-    }
-
-    public alterarUsuario(usuario: Usuario): Observable<any> {
-        let contentHeaders = new Headers();
-        this.createAuthorizationHeader(contentHeaders);
-        let body = JSON.stringify(usuario);
-
-        return this.http.post(URL_ALTERAR_USUARIO, body, { headers: contentHeaders })
-            // ...and calling .json() on the response to return data
-            .map(this.extractData)
-            //...errors if any
-            .catch(this.handleError);
-    }
-
-    public recuperarUsuariosAtivo(): Observable<any> {
+    public recuperarRoles(): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader(contentHeaders);
 
-        return this.http.get(URL_RECUPERAR_USUARIOS_ATIVO, { headers: contentHeaders })
+        return this.http.get(URL_RECUPERAR_ROLES, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.extractData)
             //...errors if any

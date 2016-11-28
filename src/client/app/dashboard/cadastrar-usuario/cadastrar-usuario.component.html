@@ -62,13 +62,9 @@
 												<div class="form-group">
 													<fieldset class="form-group">
 														<label>Perfil</label>
-														<select multiple="" class="form-control">
-															<option>ADMIN</option>
-															<option>VENDA</option>
-															<option>FINANCEIRO</option>
-															<option>ESTOQUE</option>
-															<option>RELACIONAMENTO</option>
-														</select>
+														<select multiple="" class="form-control" id="roleTexto" name="roleTexto" [(ngModel)]="rolesSelected" #roleTexto="ngModel" required>
+                                                        	<option *ngFor="let r of roles" [ngValue]="r">{{r.nome}}</option>
+                                                    	</select>														
 													</fieldset>
 													<div [hidden]="username.valid || username.pristine" class="alert alert-danger">
 														A nome é obrigatório.
@@ -99,6 +95,35 @@
 									Lista de Funcionários
 								</div>
 								<div class="card-block bg-white">
+									<div class="row">
+										<div class="col-xl-12 col-lg-12">
+											<div class="table-responsive">
+												<table class="table table-hover table-sm">
+													<thead>
+														<tr>
+															<th>Ações</th>
+															<th>Nome</th>
+															<th>Email</th>
+															<th>Perfil</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let usuarioList of usuarios" (dblclick)="showModalOperacaoSaida(operacao)">
+															<td>
+																<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="showModalOperacaoEditar(operacao)"></i>
+																<i class="fa fa-times" aria-hidden="true" title="Excluir" style="cursor:pointer" (click)="showModalOperacaoExcluir(operacao)"></i>
+																<i class="fa fa-sign-out" aria-hidden="true" title="Operação de saída" style="cursor:pointer" (click)="showModalOperacaoSaida(operacao)"></i>
+															</td>
+															<!--<td>{{operacao.data | date: 'dd/MM/yyyy'}}</td>-->
+															<td>{{usuarioList.username}}</td>
+															<td>{{usuarioList.email}}</td>
+															<td></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
