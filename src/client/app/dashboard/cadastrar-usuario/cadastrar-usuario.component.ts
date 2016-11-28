@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../shared/service/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
 import { Usuario } from '../../shared/entity/usuario';
@@ -6,62 +7,44 @@ import { Usuario } from '../../shared/entity/usuario';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './cadastrar-usuario.component.html',
-    providers: []
+    providers: [UsuarioService]
 })
 
 export class CadastrarUsuarioComponent implements OnInit {
     /*Variaveis*/
     alertaUtil: AlertaUtil = new AlertaUtil();
-
+    usuario: Usuario;
 
     /*Construtor*/
-    constructor() {
+    constructor(private usuarioService: UsuarioService) {
 
     }
 
     /*Métodos*/
     public ngOnInit(): void {
-
+        this.usuario = new Usuario();
     }
 
-    // public recuperarTodosPapeis(): void {
-    //     this.papelService.recuperarTodosPapeis()
-    //         .subscribe(
-    //             data => {
-    //                 this.papeis = data;
-    //                 console.log('Sucesso recuperarTodosPapeis().');
-    //             },
-    //             error => {
-    //                 this.alertaUtil.addMessage({
-    //                     type: 'danger',
-    //                     closable: true,
-    //                     msg: error
-    //                 });
-    //             }
-    //         );
-    // }
+    public gravar(event: any): void {
+        event.preventDefault();
 
-    // public ativarDesativarPapel(papel: Papel): void {
-    //         this.papelService.ativarDesativarPapel(papel)
-    //             .subscribe(
-    //                 result => {
-    //                     // this.recuperarTodosPapeis();
-    //                     papel.ativo = !papel.ativo;
-    //                     this.alertaUtil.addMessage({
-    //                         type: 'success',
-    //                         closable: true,
-    //                         msg: result.message
-    //                     });
-    //                     console.log('Sucesso ativarDesativarPapel().' + papel.papel);
-    //                 },
-    //                 error => {
-    //                     this.alertaUtil.addMessage({
-    //                         type: 'danger',
-    //                         closable: true,
-    //                         msg: error.message
-    //                     });
-    //                 }
-    //             );
-    //     }
+        this.usuarioService.incluirUsuario(this.usuario)
+            .subscribe(
+            result => {
+                this.alertaUtil.addMessage({
+                    type: 'success',
+                    closable: true,
+                    msg: result.message
+                });
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message === undefined ? err : err.message
+                });
+            });
+    }
 
 }
