@@ -12,7 +12,7 @@ import { Usuario } from '../../shared/entity/usuario';
 import { URL_INCLUIR_USUARIO } from '../../common/url_const';
 import { URL_ALTERAR_USUARIO } from '../../common/url_const';
 import { URL_RECUPERAR_USUARIOS_ATIVO } from '../../common/url_const';
-import { URL_INATIVAR_USUARIO, URL_RECUPERAR_USUARIOS_INATIVO } from './../../common/url_const';
+import { URL_INATIVAR_USUARIO, URL_RECUPERAR_USUARIOS_INATIVO, URL_ATIVAR_USUARIO, URL_RESET_PASSWORD } from './../../common/url_const';
 
 @Injectable()
 export class UsuarioService {
@@ -30,8 +30,8 @@ export class UsuarioService {
         this.createAuthorizationHeader(contentHeaders);
         let objBody: any = {
             usuario: usuario,
-            roles : roles
-        };        
+            roles: roles
+        };
         let body = JSON.stringify(objBody);
 
         return this.http.post(URL_INCLUIR_USUARIO, body, { headers: contentHeaders })
@@ -59,6 +59,30 @@ export class UsuarioService {
         let body = JSON.stringify(usuario);
 
         return this.http.post(URL_INATIVAR_USUARIO, body, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.extractData)
+            //...errors if any
+            .catch(this.handleError);
+    }
+
+    public ativarUsuario(usuario: Usuario): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+        let body = JSON.stringify(usuario);
+
+        return this.http.post(URL_ATIVAR_USUARIO, body, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.extractData)
+            //...errors if any
+            .catch(this.handleError);
+    }
+
+    public resetPassword(usuario: Usuario): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+        let body = JSON.stringify(usuario);
+
+        return this.http.post(URL_RESET_PASSWORD, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.extractData)
             //...errors if any

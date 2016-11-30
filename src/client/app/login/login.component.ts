@@ -53,8 +53,8 @@ export class LoginComponent implements OnInit {
             },
             err => {
                 // Log errors if any
-                if (err.objeto === "locked") {
-                    this.router.navigate(['/primeiro-login']);
+                if (err.objeto &&  err.objeto.lock === true) {
+                    this.router.navigate(['/primeiro-login', err.objeto.usuarioEmail]);
                 }
                 this.alertaUtil.addMessage({
                     type: 'danger',

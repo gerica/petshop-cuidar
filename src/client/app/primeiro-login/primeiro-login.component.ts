@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertaUtil } from '../shared/utils/alerta-util';
 import { PrimeiroLoginService } from './primeiro-login.service';
-
+import { ActivatedRoute } from '@angular/router';
 import { Usuario } from '../shared/entity/usuario';
 
 /**
@@ -16,14 +16,23 @@ import { Usuario } from '../shared/entity/usuario';
     providers: [PrimeiroLoginService]
 })
 
-export class PrimeiroLoginComponent {
+export class PrimeiroLoginComponent implements OnInit {
     alertaUtil: AlertaUtil;
     usuario: Usuario;
 
     /*Construtor*/
-    constructor(private router: Router, private primeiroLoginService: PrimeiroLoginService) {
+    constructor(private router: Router, private primeiroLoginService: PrimeiroLoginService, private route: ActivatedRoute) {
         this.alertaUtil = new AlertaUtil();
         this.usuario = new Usuario();
+    }
+    ngOnInit() {
+        this.route.params.subscribe(params => {
+            if (params && params['email']) {
+                this.usuario.email = params['email'];
+            }
+
+            // In a real app: dispatch action to load the details here.
+        });
     }
 
     salvar(event: any): void {

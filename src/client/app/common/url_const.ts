@@ -13,6 +13,8 @@ export const URL_RECUPERAR_USUARIOS_ATIVO: string = URL_USUARIO + 'recuperarUsua
 export const URL_RECUPERAR_USUARIOS_INATIVO: string = URL_USUARIO + 'recuperarUsuariosInativo';
 export const URL_ALTERAR_SENHA: string = URL_USUARIO + 'primeiroLogin';
 export const URL_INATIVAR_USUARIO: string = URL_USUARIO + 'inativarUsuario';
+export const URL_ATIVAR_USUARIO: string = URL_USUARIO + 'ativarUsuario';
+export const URL_RESET_PASSWORD: string = URL_USUARIO + 'resetPassword';
 
 // SERVIÇOS DE ROLE
 export const URL_ROLE = URL_BACK_END + 'role/';

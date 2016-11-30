@@ -1,4 +1,3 @@
-import { UsuarioRole } from './../../shared/entity/usuarioRole';
 import { RoleService } from './../../shared/service/role.service';
 import { Role } from './../../shared/entity/role';
 import { UsuarioService } from './../../shared/service/usuario.service';
@@ -16,7 +15,9 @@ import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 
 export class CadastrarUsuarioComponent implements OnInit {
     /*Variaveis*/
-    @ViewChild('modalDisabilitar') public modalDisabilitar: ModalDirective;
+    @ViewChild('modalDesativar') public modalDesativar: ModalDirective;
+    @ViewChild('modalAtivar') public modalAtivar: ModalDirective;
+    @ViewChild('modalResetPassword') public modalResetPassword: ModalDirective;
     alertaUtil: AlertaUtil = new AlertaUtil();
     usuario: Usuario;
     usuarioModal: Usuario;
@@ -58,6 +59,7 @@ export class CadastrarUsuarioComponent implements OnInit {
         this.usuarioService.incluirUsuario(this.usuario, this.rolesSelected)
             .subscribe(
             result => {
+                this.recuperarUsuariosAtivo();
                 this.alertaUtil.addMessage({
                     type: 'success',
                     closable: true,
@@ -147,18 +149,76 @@ export class CadastrarUsuarioComponent implements OnInit {
         return result;
     }
 
-    public showModalDisabilitar(usuario: Usuario): void {
-        this.usuarioModal = usuario;        
-        this.modalDisabilitar.show();
+    public showModalDesativar(usuario: Usuario): void {
+        this.usuarioModal = usuario;
+        this.modalDesativar.show();
     }
 
-    public inativarusuario( event: any ): void {
+    public inativarUsuario(event: any): void {
         event.preventDefault();
-        this.usuarioService.inativarUsuario( this.usuarioModal )
+        this.usuarioService.inativarUsuario(this.usuarioModal)
             .subscribe(
             result => {
                 this.recuperarUsuariosAtivo();
-                this.modalDisabilitar.hide();               
+                this.recuperarUsuariosInativo();
+                this.modalDesativar.hide();
+                this.alertaUtil.addMessage({
+                    type: 'success',
+                    closable: true,
+                    msg: result.message
+                });
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message
+                });
+            });
+    }
+
+    public showModalAtivar(usuario: Usuario): void {
+        this.usuarioModal = usuario;
+        this.modalAtivar.show();
+    }
+
+    public ativarUsuario(event: any): void {
+        event.preventDefault();
+        this.usuarioService.ativarUsuario(this.usuarioModal)
+            .subscribe(
+            result => {
+                this.recuperarUsuariosAtivo();
+                this.recuperarUsuariosInativo();
+                this.modalAtivar.hide();
+                this.alertaUtil.addMessage({
+                    type: 'success',
+                    closable: true,
+                    msg: result.message
+                });
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message
+                });
+            });
+    }
+
+    public showModalResetPassword(usuario: Usuario): void {
+        this.usuarioModal = usuario;
+        this.modalResetPassword.show();
+    }
+
+    public resetPassword(event: any): void {
+        event.preventDefault();
+        this.usuarioService.resetPassword(this.usuarioModal)
+            .subscribe(
+            result => {
+                this.recuperarUsuariosAtivo();
+                this.modalResetPassword.hide();
                 this.alertaUtil.addMessage({
                     type: 'success',
                     closable: true,

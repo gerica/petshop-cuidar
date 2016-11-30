@@ -5,5 +5,4 @@ export enum RoleEnum {
     ESTOQUE,
     RELACIONAMENTO,
     VENDA
-
 }

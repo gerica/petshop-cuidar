@@ -3,7 +3,7 @@ import { PrimeiroLoginComponent } from './index';
 
 export const PrimeiroLoginRoutes: Route[] = [
   	{
-    	path: 'primeiro-login',
+    	path: 'primeiro-login/:email',
     	component: PrimeiroLoginComponent
   	}
 ];
