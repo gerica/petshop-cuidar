@@ -20,13 +20,13 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.alertaUtil.addMessage({
+            if (params && params['desc']) {
+                this.alertaUtil.addMessage({
                     type: 'success',
                     closable: true,
                     msg: params['desc']
                 });
-
-            // In a real app: dispatch action to load the details here.
+            }
         });
     }
 }

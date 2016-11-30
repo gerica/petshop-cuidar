@@ -26,8 +26,6 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            // this.id = +params['id']; // (+) converts string 'id' to a number
-            console.log(params);
             if (params && params['desc']) {
                 this.alertaUtil.addMessage({
                     type: 'success',
@@ -50,8 +48,8 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('id_token', result.token);
                 let usuarioLocal = result.usuario;
                 usuarioLocal.password = '';
-                localStorage.setItem('usuario_petshop', JSON.stringify(usuarioLocal));
-                this.router.navigate(['/dashboard/home', 'teste para ver']);
+                localStorage.setItem('usuario_', JSON.stringify(usuarioLocal));
+                this.router.navigate(['/dashboard/home']);
             },
             err => {
                 // Log errors if any

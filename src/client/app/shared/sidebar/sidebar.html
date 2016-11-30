@@ -6,7 +6,7 @@
         <a routerLink="/dashboard/home" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i> Dashboard
         </a>
-        <div class="nested-menu">
+        <div class="nested-menu" *ngIf="isAdmin">
             <a class="list-group-item" (click)="addExpandClass('pages1')">
                 <span><i class="fa fa-desktop"></i> &nbsp; Administrativo</span>
             </a>
@@ -24,14 +24,26 @@
                 </ul>
             </li>
         </div>
-        <div class="nested-menu">
+        <div class="nested-menu" *ngIf="isVenda || isAdmin">
             <a class="list-group-item" (click)="addExpandClass('pages2')">
                 <span><i class="fa fa-shopping-cart"></i> &nbsp; Vendas</span>
             </a>
             <li class="nested" [ngClass]="{'expand' : showMenu === 'pages2' }" *ngIf="showMenu === 'pages2'">
                 <ul class="submenu">
                     <li>
-                        <a [routerLink]="['relatorio-saida']" [routerLinkActive]="['router-link-active']" href><span>Saídas</span></a>
+                        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span>Venda</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu"*ngIf="isFinanceiro || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages2')">
+                <span><i class="fa fa-money"></i> &nbsp; Financeiro</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages2' }" *ngIf="showMenu === 'pages2'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span>Financeiro</span></a>
                     </li>
                 </ul>
             </li>

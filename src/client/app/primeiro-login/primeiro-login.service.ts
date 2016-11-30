@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { Http, Response } from '@angular/http';
-import { contentHeaders } from '../common/headers';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 // Import RxJs required methods
@@ -11,19 +9,26 @@ import 'rxjs/add/operator/catch';
 import { Usuario } from '../shared/entity/usuario';
 
 // URL BACK END
-import { URL_REGISTRAR } from '../common/url_const';
+import { URL_ALTERAR_SENHA } from '../common/url_const';
 
 
 @Injectable()
 export class PrimeiroLoginService {
-  private _url = URL_REGISTRAR;
 
   constructor(private http: Http) { }
 
+  createAuthorizationHeader(contentHeaders: Headers) {
+    contentHeaders.append('Accept', 'application/json');
+    contentHeaders.append('Content-Type', 'application/json');
+    contentHeaders.append('X-Auth-Token', localStorage.getItem('id_token'));
+  }
+
   public salvar(usuario: Usuario): Observable<any> {
+    let contentHeaders = new Headers();
+    this.createAuthorizationHeader(contentHeaders);
     let body = JSON.stringify(usuario);
 
-    return this.http.post(this._url, body, { headers: contentHeaders })
+    return this.http.post(URL_ALTERAR_SENHA, body, { headers: contentHeaders })
       // ...and calling .json() on the response to return data
       .map(this.extractData)
       //...errors if any

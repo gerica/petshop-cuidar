@@ -5,14 +5,14 @@
 			    {{ alert?.msg }}
 			</alert>
         	<img src="assets/img/SB-admin.png" width="150px;" class="user-avatar" />
-			<h1>Primeiro Login. Alterar Senha</h1>
+			<h1>Primeiro Login.<br> Alterar Senha</h1>
 			<form role="form" #registrarForm="ngForm" (submit)="salvar($event)">
 				<div class="form-content">				
 
 					<div class="form-group">
-						<input type="password" class="form-control input-underline input-lg" id="oldPassword" name="oldPassword" [(ngModel)]="usuario.oldPassword" placeholder="Senha Antiga" required #oldPassword=ngModel>
+						<input type="password" class="form-control input-underline input-lg" id="tempPassword" name="tempPassword" [(ngModel)]="usuario.tempPassword" placeholder="Senha Antiga" required #tempPassword=ngModel>
 					</div>
-					 <div [hidden]="oldPassword.valid || oldPassword.pristine" class="alert alert-danger">
+					 <div [hidden]="tempPassword.valid || tempPassword.pristine" class="alert alert-danger">
                         Senha antiga.
                     </div>
 

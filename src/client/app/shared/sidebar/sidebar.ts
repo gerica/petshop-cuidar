@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Usuario } from './../entity/usuario';
+import { RoleEnum } from './../entity/roleEnum';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
 	moduleId: module.id,
@@ -6,9 +8,25 @@ import { Component } from '@angular/core';
 	templateUrl: 'sidebar.html'
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 	isActive = false;
+	usuario: Usuario;
 	showMenu: string = '';
+	// Roles
+	isAdmin = false;// ADMIN
+	isConvidado = false;//"CONVIDADO"
+	isFinanceiro = false;//"FINANCEIRO"
+	isEstoque = false;//"ESTOQUE"
+	isRelacionamento = false;//"RELACIONAMENTO"
+	isVenda = false;//"VENDA"
+
+
+
+	ngOnInit() {
+		this.usuario = JSON.parse(localStorage.getItem('usuario_'));
+		this.checkRole();
+	}
+
 	eventCalled() {
 		this.isActive = !this.isActive;
 	}
@@ -17,6 +35,26 @@ export class SidebarComponent {
 			this.showMenu = '0';
 		} else {
 			this.showMenu = element;
+		}
+	}
+
+	private checkRole(): void {
+		if (this.usuario) {
+			this.usuario.authorities.forEach((element) => {
+				if (element.authority === RoleEnum[RoleEnum.ADMIN]) {
+					this.isAdmin = true;
+				} else if (element.authority === RoleEnum[RoleEnum.CONVIDADO]) {
+					this.isConvidado = true;
+				} else if (element.authority === RoleEnum[RoleEnum.FINANCEIRO]) {
+					this.isFinanceiro = true;
+				} else if (element.authority === RoleEnum[RoleEnum.ESTOQUE]) {
+					this.isEstoque = true;
+				} else if (element.authority === RoleEnum[RoleEnum.RELACIONAMENTO]) {
+					this.isRelacionamento = true;
+				} else if (element.authority === RoleEnum[RoleEnum.VENDA]) {
+					this.isVenda = true;
+				}
+			});
 		}
 	}
 }

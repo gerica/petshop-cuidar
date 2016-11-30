@@ -12,8 +12,7 @@ import { Usuario } from '../../shared/entity/usuario';
 import { URL_INCLUIR_USUARIO } from '../../common/url_const';
 import { URL_ALTERAR_USUARIO } from '../../common/url_const';
 import { URL_RECUPERAR_USUARIOS_ATIVO } from '../../common/url_const';
-
-
+import { URL_INATIVAR_USUARIO, URL_RECUPERAR_USUARIOS_INATIVO } from './../../common/url_const';
 
 @Injectable()
 export class UsuarioService {
@@ -54,11 +53,34 @@ export class UsuarioService {
             .catch(this.handleError);
     }
 
+    public inativarUsuario(usuario: Usuario): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+        let body = JSON.stringify(usuario);
+
+        return this.http.post(URL_INATIVAR_USUARIO, body, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.extractData)
+            //...errors if any
+            .catch(this.handleError);
+    }
+
     public recuperarUsuariosAtivo(): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader(contentHeaders);
 
         return this.http.get(URL_RECUPERAR_USUARIOS_ATIVO, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.extractData)
+            //...errors if any
+            .catch(this.handleError);
+    }
+
+    public recuperarUsuariosInativo(): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URL_RECUPERAR_USUARIOS_INATIVO, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.extractData)
             //...errors if any
