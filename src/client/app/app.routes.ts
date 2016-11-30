@@ -1,3 +1,4 @@
+import { PrimeiroLoginRoutes } from './primeiro-login/primeiro-login.routes';
 import { Routes } from '@angular/router';
 
 import { LoginRoutes } from './login/index';
@@ -10,5 +11,6 @@ export const routes: Routes = [
 	...LoginRoutes,
 	...SignupRoutes,
 	...DashboardRoutes,
+	...PrimeiroLoginRoutes,
 	{ path: '**', component: LoginComponent }
 ];

@@ -4,5 +4,6 @@ export class Usuario {
 	username : string;
 	password : string;
 	passwordrp : string;
+	oldPassword: string;
 	authorities: UsuarioRole[];
 }

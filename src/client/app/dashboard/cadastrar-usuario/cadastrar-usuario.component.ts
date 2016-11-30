@@ -42,8 +42,8 @@ export class CadastrarUsuarioComponent implements OnInit {
      */
     public gravar(event: any): void {
         event.preventDefault();
-        this.associarRoleToUsuario();
-        this.usuarioService.incluirUsuario(this.usuario)
+        // this.associarRoleToUsuario();
+        this.usuarioService.incluirUsuario(this.usuario, this.rolesSelected)
             .subscribe(
             result => {
                 this.alertaUtil.addMessage({
@@ -101,12 +101,12 @@ export class CadastrarUsuarioComponent implements OnInit {
     }
 
     private associarRoleToUsuario(): void {
-        let usuarioRoles: UsuarioRole[];
+        let usuarioRoles: UsuarioRole[] = [];
 
         this.rolesSelected.forEach((r) => {
             let ur: UsuarioRole = new UsuarioRole();
             ur.role = r;
-            ur.usuario = this.usuario;
+            // ur.usuario = this.usuario;            
             usuarioRoles.push(ur);
         });
 

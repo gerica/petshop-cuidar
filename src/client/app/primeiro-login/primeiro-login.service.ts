@@ -11,16 +11,16 @@ import 'rxjs/add/operator/catch';
 import { Usuario } from '../shared/entity/usuario';
 
 // URL BACK END
-import { URL_AUTH } from '../common/url_const';
+import { URL_REGISTRAR } from '../common/url_const';
 
 
 @Injectable()
-export class LoginService {
-  private _url = URL_AUTH;
+export class PrimeiroLoginService {
+  private _url = URL_REGISTRAR;
 
   constructor(private http: Http) { }
 
-  public login(usuario: Usuario): Observable<any> {
+  public salvar(usuario: Usuario): Observable<any> {
     let body = JSON.stringify(usuario);
 
     return this.http.post(this._url, body, { headers: contentHeaders })
@@ -46,4 +46,5 @@ export class LoginService {
     console.error(errMsg);
     return Observable.throw(error.json());
   }
+
 }

@@ -1,3 +1,4 @@
+import { PrimeiroLoginModule } from './primeiro-login/primeiro-login.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
@@ -19,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
         LoginModule,
         SignupModule,
         DashboardModule,
+        PrimeiroLoginModule,
         SharedModule.forRoot()
     ],
     declarations: [AppComponent],

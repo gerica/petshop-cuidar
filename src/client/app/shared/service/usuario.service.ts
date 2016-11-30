@@ -1,3 +1,4 @@
+import { Role } from './../entity/role';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
@@ -25,10 +26,14 @@ export class UsuarioService {
         contentHeaders.append('X-Auth-Token', localStorage.getItem('id_token'));
     }
 
-    public incluirUsuario(usuario: Usuario): Observable<any> {
+    public incluirUsuario(usuario: Usuario, roles: Role[]): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader(contentHeaders);
-        let body = JSON.stringify(usuario);
+        let objBody: any = {
+            usuario: usuario,
+            roles : roles
+        };        
+        let body = JSON.stringify(objBody);
 
         return this.http.post(URL_INCLUIR_USUARIO, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
