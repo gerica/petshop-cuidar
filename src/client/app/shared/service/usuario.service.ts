@@ -41,10 +41,14 @@ export class UsuarioService {
             .catch(this.handleError);
     }
 
-    public alterarUsuario(usuario: Usuario): Observable<any> {
+    public alterarUsuario(usuario: Usuario, roles: Role[]): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader(contentHeaders);
-        let body = JSON.stringify(usuario);
+        let objBody: any = {
+            usuario: usuario,
+            roles: roles
+        };
+        let body = JSON.stringify(objBody);
 
         return this.http.post(URL_ALTERAR_USUARIO, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data

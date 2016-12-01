@@ -18,6 +18,7 @@ export class CadastrarUsuarioComponent implements OnInit {
     @ViewChild('modalDesativar') public modalDesativar: ModalDirective;
     @ViewChild('modalAtivar') public modalAtivar: ModalDirective;
     @ViewChild('modalResetPassword') public modalResetPassword: ModalDirective;
+    @ViewChild('modalEditarUsuario') public modalEditarUsuario: ModalDirective;
     alertaUtil: AlertaUtil = new AlertaUtil();
     usuario: Usuario;
     usuarioModal: Usuario;
@@ -25,6 +26,7 @@ export class CadastrarUsuarioComponent implements OnInit {
     usuariosDisabilitados: Usuario[];
     roles: Role[];
     rolesSelected: Role[];
+    rolesSelectedModal: Role[];
     activeForm: boolean = true;
 
     /**
@@ -123,6 +125,16 @@ export class CadastrarUsuarioComponent implements OnInit {
             .subscribe(
             data => {
                 this.roles = data.objeto;
+                // let role: Role;
+                // this.roles = [];
+                // for (var i = 0; i < data.objeto.length; i++) {
+                //     role = new Role();
+                //     role.id = data.objeto[i].id;
+                //     role.nome = data.objeto[i].nome;
+                //     this.roles.push(role);
+                // }
+                // console.log(this.roles);
+
             },
             error => {
                 this.alertaUtil.addMessage({
@@ -235,4 +247,47 @@ export class CadastrarUsuarioComponent implements OnInit {
             });
     }
 
+    public showModalEditarUsuario(usuario: Usuario): void {
+        // this.recuperarRoles();
+        this.usuarioModal = new Usuario();
+        this.usuarioModal.username = usuario.username;
+        this.usuarioModal.email = usuario.email;
+        this.rolesSelectedModal = [];
+        usuario.authorities.forEach((authroty) => {
+            this.roles.forEach((role) => {
+                if (role.nome === authroty.authority) {
+                    this.rolesSelectedModal.push(role);
+                }
+            });
+        });
+        this.modalEditarUsuario.show();
+    }
+
+    /**
+    * alterarUsuario
+    */
+    public alterarUsuario(event: any): void {
+        event.preventDefault();
+        console.log(this.rolesSelectedModal);
+
+        this.usuarioService.alterarUsuario(this.usuarioModal, this.rolesSelectedModal)
+            .subscribe(
+            result => {
+                this.recuperarUsuariosAtivo();
+                this.modalEditarUsuario.hide();
+                this.alertaUtil.addMessage({
+                    type: 'success',
+                    closable: true,
+                    msg: result.message
+                });
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message === undefined ? err : err.message
+                });
+            });
+    }
 }
