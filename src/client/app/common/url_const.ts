@@ -7,8 +7,8 @@ export const URL_REGISTRAR: string = URL_AUTH + 'registrarUsuario';
 
 // SERVIÇOS DE USUAŔIO
 export const URL_USUARIO: string = URL_BACK_END + 'usuario/';
-export const URL_INCLUIR_USUARIO: string = URL_USUARIO + 'incluirUsuario';
-export const URL_ALTERAR_USUARIO: string = URL_USUARIO + 'alterarUsuario';
+export const URL_INCLUIR_USUARIO: string = URL_USUARIO + 'incluir';
+export const URL_ALTERAR_USUARIO: string = URL_USUARIO + 'alterar';
 export const URL_RECUPERAR_USUARIOS_ATIVO: string = URL_USUARIO + 'recuperarUsuariosAtivo';
 export const URL_RECUPERAR_USUARIOS_INATIVO: string = URL_USUARIO + 'recuperarUsuariosInativo';
 export const URL_ALTERAR_SENHA: string = URL_USUARIO + 'primeiroLogin';
