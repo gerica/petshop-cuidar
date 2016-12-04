@@ -11,7 +11,7 @@ import { SidebarComponent } from '../shared/index';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from '../common/auth.guard';
 import { CadastrarUsuarioModule } from './cadastrar-usuario/cadastrar-usuario.module';
-
+import { CadastrarClienteModule } from './cadastrar-cliente/cadastrar-cliente.module';
 
 @NgModule({
     imports: [
@@ -21,7 +21,8 @@ import { CadastrarUsuarioModule } from './cadastrar-usuario/cadastrar-usuario.mo
         ModalModule,
         HomeModule,
         BlankPageModule,
-        CadastrarUsuarioModule
+        CadastrarUsuarioModule,
+        CadastrarClienteModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
