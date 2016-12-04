@@ -125,16 +125,6 @@ export class CadastrarUsuarioComponent implements OnInit {
             .subscribe(
             data => {
                 this.roles = data.objeto;
-                // let role: Role;
-                // this.roles = [];
-                // for (var i = 0; i < data.objeto.length; i++) {
-                //     role = new Role();
-                //     role.id = data.objeto[i].id;
-                //     role.nome = data.objeto[i].nome;
-                //     this.roles.push(role);
-                // }
-                // console.log(this.roles);
-
             },
             error => {
                 this.alertaUtil.addMessage({

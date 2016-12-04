@@ -19,3 +19,9 @@ export const URL_RESET_PASSWORD: string = URL_USUARIO + 'resetPassword';
 // SERVIÇOS DE ROLE
 export const URL_ROLE = URL_BACK_END + 'role/';
 export const URL_RECUPERAR_ROLES: string = URL_ROLE + 'recuperarTodos';
+
+// SERVIÇOS UTILS
+export const URL_UTILS = URL_BACK_END + 'utils/';
+
+export const URL_RECUPERAR_ESTADOS: string = URL_UTILS + 'estado';
+export const URL_RECUPERAR_CIDADE_POR_ESTADO: string = URL_UTILS + 'cidade';

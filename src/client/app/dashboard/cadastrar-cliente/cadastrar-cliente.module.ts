@@ -7,7 +7,8 @@ import {
     AlertModule,
     TabsModule,
     ModalModule,
-    ProgressbarModule
+    AccordionModule,
+    TypeaheadModule
 } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { CadastrarClienteComponent } from './cadastrar-cliente.component';
@@ -20,10 +21,11 @@ import { CadastrarClienteComponent } from './cadastrar-cliente.component';
         AlertModule,
         TabsModule,
         ModalModule,
-        ProgressbarModule
+        AccordionModule,
+        TypeaheadModule
     ],
     declarations: [CadastrarClienteComponent],
     exports: [CadastrarClienteComponent]
 })
 
-export class CadastrarClienteModule {}
+export class CadastrarClienteModule { }
