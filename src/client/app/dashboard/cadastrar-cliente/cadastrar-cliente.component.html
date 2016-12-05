@@ -66,19 +66,27 @@
 								</accordion-group>
 								<accordion-group #accordionEndereco heading="Endereço" [isOpen]="status.open">
 									<div class="row">
-										<div class="col-lg-6">											
-											<fieldset class="form-group">												
-												<label>Estado:</label>												
-												<input [(ngModel)]="selectedEstado" id="selectedEstado" name="selectedEstado" [typeahead]="estados"
-													[typeaheadOptionField]="'descricao'" (typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control">
+										<div class="col-lg-6">
+											<fieldset class="form-group">
+												<label>Estado:</label>
+												<input [(ngModel)]="selectedEstado" id="selectedEstado" name="selectedEstado" [typeahead]="estados" [typeaheadOptionField]="'descricao'"
+													(typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control">
 											</fieldset>
+											<fieldset class="form-group">
+												<label>Cidade:</label>
+												<input [(ngModel)]="selectedCidade" id="selectedCidade" name="selectedCidade" [typeahead]="cidades" [typeaheadOptionField]="'descricao'"
+													(typeaheadOnSelect)="typeaheadOnSelectCidade($event)" class="form-control">
+											</fieldset>
+											<fieldset class="form-group">
+												<label>CEP:</label>
+												<input type="text" class="form-control" id="cep" name="cep" [(ngModel)]="pessoa.cep" #cep="ngModel" required>
+											</fieldset>
+											<div [hidden]="cep.valid || cep.pristine" class="alert alert-danger">
+												A cep é obrigatório.
+											</div>
 										</div>
-										<div class="col-lg-6">											
-											<fieldset class="form-group">												
-												<label>Cidade:</label>												
-												<input [(ngModel)]="selectedCidade" id="selectedCidade" name="selectedCidade" [typeahead]="cidades"
-													[typeaheadOptionField]="'descricao'" (typeaheadOnSelect)="typeaheadOnSelectCidade($event)" class="form-control">
-											</fieldset>
+										<div class="col-lg-6">
+
 										</div>
 									</div>
 								</accordion-group>
