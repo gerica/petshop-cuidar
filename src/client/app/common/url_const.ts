@@ -22,6 +22,9 @@ export const URL_RECUPERAR_ROLES: string = URL_ROLE + 'recuperarTodos';
 
 // SERVIÇOS UTILS
 export const URL_UTILS = URL_BACK_END + 'utils/';
-
 export const URL_RECUPERAR_ESTADOS: string = URL_UTILS + 'estado';
 export const URL_RECUPERAR_CIDADE_POR_ESTADO: string = URL_UTILS + 'cidade';
+
+// SERVIÇOS DE PESSOA
+export const URL_PESSOA = URL_BACK_END + 'pessoa/';
+export const URL_GRAVAR_PESSOA: string = URL_PESSOA + 'gravar';

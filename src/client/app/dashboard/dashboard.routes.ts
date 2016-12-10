@@ -1,3 +1,4 @@
+import { VenderProdutoRoutes } from './vender-produto/vender-produto.routes';
 import { Route } from '@angular/router';
 import { HomeRoutes } from './home/index';
 import { BlankPageRoutes } from './blank-page/index';
@@ -13,5 +14,6 @@ export const DashboardRoutes: Route[] = [{
         ...BlankPageRoutes,
         ...CadastrarUsuarioRoutes,
         ...CadastrarClienteRoutes,
+        ...VenderProdutoRoutes
     ]
 }];

@@ -31,19 +31,34 @@
             <li class="nested" [ngClass]="{'expand' : showMenu === 'pages2' }" *ngIf="showMenu === 'pages2'">
                 <ul class="submenu">
                     <li>
-                        <a [routerLink]="['cadastrar-cliente']" [routerLinkActive]="['router-link-active']" href><span>Cliente</span></a>
+                        <a [routerLink]="['vender-produto']" [routerLinkActive]="['router-link-active']" href><span>Produto</span></a>
                     </li>
                 </ul>
             </li>
         </div>
-        <div class="nested-menu"*ngIf="isFinanceiro || isAdmin">
-            <a class="list-group-item" (click)="addExpandClass('pages2')">
+        <div class="nested-menu" *ngIf="isFinanceiro || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages3')">
                 <span><i class="fa fa-money"></i> &nbsp; Financeiro</span>
             </a>
-            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages2' }" *ngIf="showMenu === 'pages2'">
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages3' }" *ngIf="showMenu === 'pages3'">
                 <ul class="submenu">
                     <li>
                         <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" href><span>Financeiro</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" *ngIf="isVenda || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages4')">
+                <span><i class="fa fa-user-circle"></i> &nbsp; Cliente</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages4' }" *ngIf="showMenu === 'pages4'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['cadastrar-cliente']" [routerLinkActive]="['router-link-active']" href><span>Cadastro</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['lista-cliente']" [routerLinkActive]="['router-link-active']" href><span>Lista</span></a>
                     </li>
                 </ul>
             </li>

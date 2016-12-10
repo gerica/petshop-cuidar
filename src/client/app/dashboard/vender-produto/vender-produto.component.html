@@ -1,0 +1,86 @@
+<alert *ngFor="let alert of alertaUtil.alerts; let i = index" [type]="alert.type" dismissible="true" (close)="alertaUtil.closeAlert(i)">
+    {{ alert?.msg }}
+</alert>
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                Vendas
+            </h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Dashboard</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-edit"></i> Vendas
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="col-lg-12">
+        <div class="card card-block">
+            <tabset>
+                <tab heading="Vendas">
+                    <form role="form" #vendaForm="ngForm" (submit)="gravar($event)" *ngIf="activeForm">
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header card-default">
+                                        Cliente
+                                        <!--<button type="button" class="btn btn-lg btn-secondary">Cadastrar</button>-->
+                                        <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
+                                            <li class="dropdown nav-item" dropdown>
+                                                <a [routerLink]="['../cadastrar-cliente']" [routerLinkActive]="['router-link-active']" href tooltipPlacement="left" 
+                                                    tooltip="Cadastrar novo Cliente.">
+                                                    <i class="fa fa-user"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-block bg-white">
+                                        <input class="form-control">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-header card-default">
+                                        Produto
+                                    </div>
+                                    <div class="card-block bg-white">
+                                        <input class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-header card-default">
+                                        Lista de Produtos
+                                    </div>
+                                    <div class="card-block bg-white">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Gravar</button>
+                                    <button type="reset" class="btn btn-danger">Limpar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>

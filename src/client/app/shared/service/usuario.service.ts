@@ -5,9 +5,6 @@ import { Observable } from 'rxjs/Rx';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
-//import {Operacao} from '../../shared/entity/operacao';
-
 import { Usuario } from '../../shared/entity/usuario';
 import { URL_INCLUIR_USUARIO } from '../../common/url_const';
 import { URL_ALTERAR_USUARIO } from '../../common/url_const';

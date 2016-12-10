@@ -21,128 +21,143 @@
 	<!-- /.row -->
 	<div class="col-lg-12">
 		<div class="card card-block">
-			<tabset>
-				<tab heading="Cadastro">
-					<form role="form" #clienteForm="ngForm" (submit)="gravar($event)" *ngIf="activeForm">
+			<form role="form" #clienteForm="ngForm" (submit)="gravar($event)" *ngIf="activeForm">
+				<tabset>
+					<tab heading="Cadastro">
+
 						<hr>
 						<div class="row">
-							<accordion [closeOthers]="oneAtATime">
-								<accordion-group #accordionCliente heading="Cliente" [isOpen]="status.isFirstOpen" [isDisabled]="status.isFirstDisabled">
-									<div class="row">
-										<div class="col-lg-6">
-											<fieldset class="form-group">
-												<label>Tipo de Pessoa:</label>
-												<select class="form-control" id="tipoPessoa" name="tipoPessoa" [(ngModel)]="pessoa.tipoPessoa" #tipoPessoa="ngModel" required>
-															<option value="Comprar">Física</option>
-															<option value="Vender">Jurídica</option>
-                                                    	</select>
-											</fieldset>
-											<fieldset class="form-group">
-												<label>Nome:</label>
-												<input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="pessoa.nome" #nome="ngModel" required>
-											</fieldset>
-											<div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
-												A nome é obrigatório.
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<fieldset class="form-group">
-												<label>Sexo:</label>
-												<select class="form-control" id="sexo" name="sexo" [(ngModel)]="pessoa.sexo" #sexo="ngModel" required>
-															<option value="Comprar">Homen</option>
-															<option value="Vender">Mulher</option>
-                                                    	</select>
-											</fieldset>
-											<fieldset class="form-group">
-												<label>Data Nascimento:</label>
-												<input type="date" class="form-control" id="dtNascimento" name="dtNascimento" [(ngModel)]="pessoa.dtNascimento" #dtNascimento="ngModel"
-													required>
-											</fieldset>
-											<div [hidden]="dtNascimento.valid || dtNascimento.pristine" class="alert alert-danger">
-												A data é obrigatório.
-											</div>
-										</div>
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Estado
 									</div>
-								</accordion-group>
-								<accordion-group #accordionEndereco heading="Endereço" [isOpen]="status.open">
-									<div class="row">
-										<div class="col-lg-6">
-											<fieldset class="form-group">
-												<label>Estado:</label>
-												<input [(ngModel)]="selectedEstado" id="selectedEstado" name="selectedEstado" [typeahead]="estados" [typeaheadOptionField]="'descricao'"
-													(typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control">
-											</fieldset>
-											<fieldset class="form-group">
-												<label>Cidade:</label>
-												<input [(ngModel)]="selectedCidade" id="selectedCidade" name="selectedCidade" [typeahead]="cidades" [typeaheadOptionField]="'descricao'"
-													(typeaheadOnSelect)="typeaheadOnSelectCidade($event)" class="form-control">
-											</fieldset>
-											<fieldset class="form-group">
-												<label>CEP:</label>
-												<input type="text" class="form-control" id="cep" name="cep" [(ngModel)]="pessoa.cep" #cep="ngModel" required>
-											</fieldset>
-											<div [hidden]="cep.valid || cep.pristine" class="alert alert-danger">
-												A cep é obrigatório.
-											</div>
-										</div>
-										<div class="col-lg-6">
+									<div class="card-block bg-white">
 
+										<div class="row">
+
+											<div class="col-lg-6">
+												<fieldset class="form-group">
+													<label>Tipo de Pessoa:</label>
+													<select class="form-control" id="tipoPessoa" name="tipoPessoa" [(ngModel)]="pessoa.tipoPessoa" #tipoPessoa="ngModel" required>
+															<option value="FÍSICA">Física</option>
+															<option value="JURÍDICA">Jurídica</option>
+                                                    	</select>
+												</fieldset>
+												<fieldset class="form-group">
+													<label>Nome:</label>
+													<input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="pessoa.nome" #nome="ngModel" required>
+												</fieldset>
+												<div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
+													A nome é obrigatório.
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<fieldset class="form-group">
+													<label>Sexo:</label>
+													<select class="form-control" id="sexo" name="sexo" [(ngModel)]="pessoa.sexo" #sexo="ngModel" required>
+															<option value="HOMEN">Homen</option>
+															<option value="MULHER">Mulher</option>
+                                                    	</select>
+												</fieldset>
+												<fieldset class="form-group">
+													<label>Data Nascimento:</label>
+													<input type="date" class="form-control" id="dtNascimento" name="dtNascimento" [(ngModel)]="pessoa.dtNascimento" #dtNascimento="ngModel"
+														required>
+												</fieldset>
+												<div [hidden]="dtNascimento.valid || dtNascimento.pristine" class="alert alert-danger">
+													A data é obrigatório.
+												</div>
+											</div>
 										</div>
 									</div>
-								</accordion-group>
-								<accordion-group #accordionTelefone heading="Telefone" [isOpen]="status.open">
-									This is just some content to illustrate fancy headings.
-								</accordion-group>
-								<accordion-group #accordionDocumento heading="Documento" [isOpen]="status.open">
-									This is just some content to illustrate fancy headings.
-								</accordion-group>
-							</accordion>
+								</div>
+							</div>
 						</div>
+
+					</tab>
+					<tab heading="Endereço" *ngIf="pessoa.id">
+						<hr>
 						<div class="row">
-							<div class="col-lg-12">
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary">Gravar</button>
-									<button type="reset" class="btn btn-danger">Limpar</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</tab>
-				<tab heading="Clientes">
-					<hr>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-header card-default">
-									Lista de Clientes
-								</div>
-								<div class="card-block bg-white">
-									<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Estado
+									</div>
+									<div class="card-block bg-white">
+										<div class="row">
+											<div class="col-lg-6">
+												<fieldset class="form-group">
+													<label>Estado:</label>
+													<input [(ngModel)]="selectedEstado" id="selectedEstado" name="selectedEstado" [typeahead]="estados" [typeaheadOptionField]="'descricao'"
+														(typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control">
+												</fieldset>
+												<fieldset class="form-group">
+													<label>Cidade:</label>
+													<input [(ngModel)]="selectedCidade" id="selectedCidade" name="selectedCidade" [typeahead]="cidades" [typeaheadOptionField]="'descricao'"
+														(typeaheadOnSelect)="typeaheadOnSelectCidade($event)" class="form-control">
+												</fieldset>
+												<fieldset class="form-group">
+													<label>CEP:</label>
+													<input type="text" class="form-control" id="cep" name="cep" [(ngModel)]="pessoa.cep" #cep="ngModel">
+												</fieldset>
+												<div [hidden]="cep.valid || cep.pristine" class="alert alert-danger">
+													A cep é obrigatório.
+												</div>
+											</div>
+											<div class="col-lg-6">
 
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</tab>
-				<tab heading="ESPERAR">
-					<hr>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-header card-default">
-									Lista de usuário inabilitados
-								</div>
-								<div class="card-block bg-white">
-									<div class="row">
+					</tab>
+					<tab heading="Telefones" *ngIf="pessoa.id">
+						<hr>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Lista de usuário inabilitados
+									</div>
+									<div class="card-block bg-white">
+										<div class="row">
 
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+					</tab>
+					<tab heading="Documentos" *ngIf="pessoa.id">
+						<hr>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Lista de usuário inabilitados
+									</div>
+									<div class="card-block bg-white">
+										<div class="row">
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</tab>
+				</tabset>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Gravar</button>
+							<button *ngIf="!!pessoa.id" type="button" class="btn rounded-btn" (click)="novo()">Novo</button>
+						</div>
 					</div>
-				</tab>
-			</tabset>
+				</div>
+			</form>
 		</div>
 	</div>
 	<!-- /.row -->

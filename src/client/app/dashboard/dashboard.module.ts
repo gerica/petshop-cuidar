@@ -1,3 +1,4 @@
+import { VenderProdutoModule } from './vender-produto/vender-produto.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -22,11 +23,12 @@ import { CadastrarClienteModule } from './cadastrar-cliente/cadastrar-cliente.mo
         HomeModule,
         BlankPageModule,
         CadastrarUsuarioModule,
-        CadastrarClienteModule
+        CadastrarClienteModule,
+        VenderProdutoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
     providers: [AuthGuard, ...AUTH_PROVIDERS]
 })
 
-export class DashboardModule {}
+export class DashboardModule { }

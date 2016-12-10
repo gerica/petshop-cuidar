@@ -1,3 +1,4 @@
+import { PessoaService } from './../../shared/service/pessoa/pessoa.service';
 import { Cidade } from './../../shared/entity/cidade';
 import { UtilsService } from './../../shared/service/utils.service';
 import { Estado } from './../../shared/entity/estado';
@@ -10,7 +11,7 @@ import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './cadastrar-cliente.component.html',
-    providers: [UtilsService]
+    providers: [UtilsService, PessoaService]
 })
 
 export class CadastrarClienteComponent implements OnInit {
@@ -33,7 +34,8 @@ export class CadastrarClienteComponent implements OnInit {
     /**
      * Construtor
      */
-    constructor(private utilsService: UtilsService) {
+    constructor(private utilsService: UtilsService,//
+        private pessoaService: PessoaService) {
 
     }
 
@@ -58,25 +60,25 @@ export class CadastrarClienteComponent implements OnInit {
     public gravar(event: any): void {
         event.preventDefault();
 
-        // this.usuarioService.incluirUsuario(this.usuario, this.rolesSelected)
-        //     .subscribe(
-        //     result => {
-        //         this.recuperarUsuariosAtivo();
-        //         this.alertaUtil.addMessage({
-        //             type: 'success',
-        //             closable: true,
-        //             msg: result.message
-        //         });
-        //         this.novo();
-        //     },
-        //     err => {
-        //         // Log errors if any
-        //         this.alertaUtil.addMessage({
-        //             type: 'danger',
-        //             closable: true,
-        //             msg: err.message === undefined ? err : err.message
-        //         });
-        //     });
+        this.pessoaService.gravar(this.pessoa)
+            .subscribe(
+            result => {
+                this.alertaUtil.addMessage({
+                    type: 'success',
+                    closable: true,
+                    msg: result.message
+                });
+                this.pessoa = result.objeto;
+                // this.novo();
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message === undefined ? err : err.message
+                });
+            });
     }
 
     public recuperarEstados(): void {
