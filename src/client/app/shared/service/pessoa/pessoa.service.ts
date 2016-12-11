@@ -1,4 +1,4 @@
-import { URL_GRAVAR_PESSOA } from './../../../common/url_const';
+import { URL_GRAVAR_PESSOA, URL_RECUPERAR_PESSOAS } from './../../../common/url_const';
 import { Pessoa } from './../../entity/pessoa';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -26,6 +26,17 @@ export class PessoaService {
         let body = JSON.stringify(pessoa);
 
         return this.http.post(URL_GRAVAR_PESSOA, body, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.extractData)
+            //...errors if any
+            .catch(this.handleError);
+    }
+
+    public recuperarPessoas(): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URL_RECUPERAR_PESSOAS, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.extractData)
             //...errors if any

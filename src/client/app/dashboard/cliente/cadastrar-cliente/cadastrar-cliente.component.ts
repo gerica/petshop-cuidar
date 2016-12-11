@@ -1,10 +1,10 @@
-import { PessoaService } from './../../shared/service/pessoa/pessoa.service';
-import { Cidade } from './../../shared/entity/cidade';
-import { UtilsService } from './../../shared/service/utils.service';
-import { Estado } from './../../shared/entity/estado';
-import { Pessoa } from './../../shared/entity/pessoa';
+import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';
+import { Cidade } from './../../../shared/entity/cidade';
+import { UtilsService } from './../../../shared/service/utils.service';
+import { Estado } from './../../../shared/entity/estado';
+import { Pessoa } from './../../../shared/entity/pessoa';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertaUtil } from '../../shared/utils/alerta-util';
+import { AlertaUtil } from './../../../shared/utils/alerta-util';
 import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 
 @Component({
@@ -25,11 +25,6 @@ export class CadastrarClienteComponent implements OnInit {
     cidades: Cidade[];
     cidade: Cidade;
     selectedCidade: Cidade;
-    oneAtATime: boolean = false;
-    status: Object = {
-        isFirstOpen: true,
-        isFirstDisabled: false
-    };
 
     /**
      * Construtor

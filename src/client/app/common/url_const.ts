@@ -28,3 +28,4 @@ export const URL_RECUPERAR_CIDADE_POR_ESTADO: string = URL_UTILS + 'cidade';
 // SERVIÇOS DE PESSOA
 export const URL_PESSOA = URL_BACK_END + 'pessoa/';
 export const URL_GRAVAR_PESSOA: string = URL_PESSOA + 'gravar';
+export const URL_RECUPERAR_PESSOAS: string = URL_PESSOA + 'recuperarTodos';
