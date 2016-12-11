@@ -89,21 +89,48 @@
 													<input [(ngModel)]="selectedEstado" id="selectedEstado" name="selectedEstado" [typeahead]="estados" [typeaheadOptionField]="'descricao'"
 														(typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control">
 												</fieldset>
+											</div>
+											<div class="col-lg-6">
+
 												<fieldset class="form-group">
 													<label>Cidade:</label>
 													<input [(ngModel)]="selectedCidade" id="selectedCidade" name="selectedCidade" [typeahead]="cidades" [typeaheadOptionField]="'descricao'"
 														(typeaheadOnSelect)="typeaheadOnSelectCidade($event)" class="form-control">
 												</fieldset>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-6">
 												<fieldset class="form-group">
-													<label>CEP:</label>
-													<input type="text" class="form-control" id="cep" name="cep" [(ngModel)]="pessoa.cep" #cep="ngModel">
+													<label>Bairro:</label>
+													<input type="text" class="form-control" id="bairro" name="bairro" [(ngModel)]="endereco.bairro">
 												</fieldset>
-												<div [hidden]="cep.valid || cep.pristine" class="alert alert-danger">
-													A cep é obrigatório.
-												</div>
 											</div>
 											<div class="col-lg-6">
-
+												<fieldset class="form-group">
+													<label>CEP:</label>
+													<input type="text" class="form-control" id="cep" name="cep" [(ngModel)]="endereco.cep" #cep="ngModel">
+												</fieldset>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-6">
+												<fieldset class="form-group">
+													<label>Logradouro:</label>
+													<input type="text" class="form-control" id="logradouro" name="logradouro" [(ngModel)]="endereco.logradouro">
+												</fieldset>
+											</div>
+											<div class="col-xl-3">
+												<fieldset class="form-group">
+													<label>Número:</label>
+													<input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="endereco.numero">
+												</fieldset>
+											</div>
+											<div class="col-xl-3">
+												<fieldset class="form-group">
+													<label>Complemento:</label>
+													<input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="endereco.complemento">
+												</fieldset>
 											</div>
 										</div>
 									</div>

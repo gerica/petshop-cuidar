@@ -1,3 +1,4 @@
+import { Endereco } from './../../../shared/entity/pessoa/endereco';
 import { Cidade } from './../../../shared/entity/utils/cidade';
 import { Estado } from './../../../shared/entity/utils/estado';
 import { ActivatedRoute } from '@angular/router';
@@ -19,12 +20,17 @@ export class CadastrarClienteComponent implements OnInit {
     alertaUtil: AlertaUtil = new AlertaUtil();
     activeForm: boolean = true;
     pessoa: Pessoa;
+
+    // Dados para a aba CADASTRO
     estados: Estado[];
     estado: Estado;
     selectedEstado: string;
     cidades: Cidade[];
     cidade: Cidade;
     selectedCidade: Cidade;
+
+    // Dados para a aba ENDEREÇO
+    endereco: Endereco;
 
     /**
      * Construtor
@@ -40,6 +46,7 @@ export class CadastrarClienteComponent implements OnInit {
      */
     public ngOnInit(): void {
         this.pessoa = new Pessoa();
+        this.endereco = new Endereco();
         this.recuperarEstados();
         this.route.params.subscribe(params => {
             if (params && params['pessoa']) {
