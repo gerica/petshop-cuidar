@@ -6,4 +6,8 @@ export const CadastrarClienteRoutes: Route[] = [{
     path: 'cadastrar-cliente',
     component: CadastrarClienteComponent,
     canActivate: [AuthGuard]
-}, ];
+}, {
+    path: 'cadastrar-cliente/:pessoa',
+    component: CadastrarClienteComponent,
+    canActivate: [AuthGuard]
+}];

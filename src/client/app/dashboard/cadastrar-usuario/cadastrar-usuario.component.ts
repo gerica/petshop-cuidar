@@ -1,9 +1,9 @@
+import { Role } from './../../shared/entity/authority/role';
+import { Usuario } from './../../shared/entity/authority/usuario';
 import { RoleService } from './../../shared/service/role.service';
-import { Role } from './../../shared/entity/role';
 import { UsuarioService } from './../../shared/service/usuario.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
-import { Usuario } from '../../shared/entity/usuario';
 import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 
 @Component({

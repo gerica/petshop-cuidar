@@ -1,10 +1,9 @@
+import { Usuario } from './../shared/entity/authority/usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertaUtil } from '../shared/utils/alerta-util';
 import { PrimeiroLoginService } from './primeiro-login.service';
 import { ActivatedRoute } from '@angular/router';
-import { Usuario } from '../shared/entity/usuario';
-
 /**
 *	This class represents the lazy loaded PrimeiroLoginComponent.
 */

@@ -24,13 +24,11 @@
 			<form role="form" #clienteForm="ngForm" (submit)="gravar($event)" *ngIf="activeForm">
 				<tabset>
 					<tab heading="Cadastro">
-
-						<hr>
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="card">
 									<div class="card-header card-default">
-										Estado
+										Cliente: {{pessoa?.nome}}
 									</div>
 									<div class="card-block bg-white">
 
@@ -77,12 +75,11 @@
 
 					</tab>
 					<tab heading="Endereço" *ngIf="pessoa.id">
-						<hr>
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="card">
 									<div class="card-header card-default">
-										Estado
+										Cliente: {{pessoa?.nome}}
 									</div>
 									<div class="card-block bg-white">
 										<div class="row">
@@ -115,12 +112,11 @@
 						</div>
 					</tab>
 					<tab heading="Telefones" *ngIf="pessoa.id">
-						<hr>
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="card">
 									<div class="card-header card-default">
-										Lista de usuário inabilitados
+										Cliente: {{pessoa?.nome}}
 									</div>
 									<div class="card-block bg-white">
 										<div class="row">
@@ -132,12 +128,11 @@
 						</div>
 					</tab>
 					<tab heading="Documentos" *ngIf="pessoa.id">
-						<hr>
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="card">
 									<div class="card-header card-default">
-										Lista de usuário inabilitados
+										Cliente: {{pessoa?.nome}}
 									</div>
 									<div class="card-block bg-white">
 										<div class="row">

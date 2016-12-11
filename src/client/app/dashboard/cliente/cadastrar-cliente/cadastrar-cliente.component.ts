@@ -1,11 +1,11 @@
+import { Cidade } from './../../../shared/entity/utils/cidade';
+import { Estado } from './../../../shared/entity/utils/estado';
+import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';
-import { Cidade } from './../../../shared/entity/cidade';
 import { UtilsService } from './../../../shared/service/utils.service';
-import { Estado } from './../../../shared/entity/estado';
-import { Pessoa } from './../../../shared/entity/pessoa';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
+import { Component, OnInit } from '@angular/core';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
-import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 
 @Component({
     moduleId: module.id,
@@ -30,7 +30,8 @@ export class CadastrarClienteComponent implements OnInit {
      * Construtor
      */
     constructor(private utilsService: UtilsService,//
-        private pessoaService: PessoaService) {
+        private pessoaService: PessoaService,
+        private route: ActivatedRoute) {
 
     }
 
@@ -40,6 +41,15 @@ export class CadastrarClienteComponent implements OnInit {
     public ngOnInit(): void {
         this.pessoa = new Pessoa();
         this.recuperarEstados();
+        this.route.params.subscribe(params => {
+            if (params && params['pessoa']) {
+                console.log(params['pessoa']);
+                this.pessoa = JSON.parse(params['pessoa']);
+
+            }
+
+            // In a real app: dispatch action to load the details here.
+        });
 
     }
 

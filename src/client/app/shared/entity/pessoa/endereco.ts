@@ -1,4 +1,6 @@
-import { Cidade } from './cidade';
+import { Pessoa } from './pessoa';
+import { Cidade } from './../utils/cidade';
+
 export class Endereco {
     id: number;
     cep: string;
@@ -7,4 +9,5 @@ export class Endereco {
     complemento: number;
     bairro: number;
     cidade: Cidade;
+    pessoa: Pessoa;
 }

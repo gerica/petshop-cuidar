@@ -1,5 +1,5 @@
-import { Pessoa } from './../../../shared/entity/pessoa';
-import { Pipe, PipeTransform } from '@angular/core'
+import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'filtroPorCliente'

@@ -1,11 +1,11 @@
-import { Role } from './../entity/role';
+import { Usuario } from './../entity/authority/usuario';
+import { Role } from './../entity/authority/role';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Usuario } from '../../shared/entity/usuario';
 import { URL_INCLUIR_USUARIO } from '../../common/url_const';
 import { URL_ALTERAR_USUARIO } from '../../common/url_const';
 import { URL_RECUPERAR_USUARIOS_ATIVO } from '../../common/url_const';

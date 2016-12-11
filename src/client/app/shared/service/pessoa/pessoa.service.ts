@@ -1,5 +1,5 @@
 import { URL_GRAVAR_PESSOA, URL_RECUPERAR_PESSOAS } from './../../../common/url_const';
-import { Pessoa } from './../../entity/pessoa';
+import { Pessoa } from './../../entity/pessoa/pessoa';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';

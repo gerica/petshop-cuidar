@@ -1,7 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { UtilsService } from './../../shared/service/utils.service';
-import { Pessoa } from './../../shared/entity/pessoa';
+import { Pessoa } from './../../shared/entity/pessoa/pessoa';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
 import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';

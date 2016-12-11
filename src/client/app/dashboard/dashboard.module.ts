@@ -25,7 +25,7 @@ import { CadastrarClienteModule } from './cliente/cadastrar-cliente/cadastrar-cl
         BlankPageModule,
         CadastrarUsuarioModule,
         CadastrarClienteModule,
-        VenderProdutoModule, 
+        VenderProdutoModule,
         ListarClienteModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],

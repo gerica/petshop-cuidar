@@ -1,5 +1,5 @@
-import { Usuario } from './../entity/usuario';
-import { RoleEnum } from './../entity/roleEnum';
+import { Usuario } from './../entity/authority/usuario';
+import { RoleEnum } from './../entity/authority/roleEnum';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

@@ -1,15 +1,11 @@
+import { Usuario } from './../shared/entity/authority/usuario';
 import { Injectable } from '@angular/core';
-
 import { Http, Response } from '@angular/http';
 import { contentHeaders } from '../common/headers';
 import { Observable } from 'rxjs/Rx';
-
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
-import { Usuario} from '../shared/entity/usuario';
-
 // URL BACK END
 import { URL_REGISTRAR } from '../common/url_const';
 

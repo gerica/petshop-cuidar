@@ -1,8 +1,8 @@
+import { Usuario } from './../shared/entity/authority/usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertaUtil } from '../shared/utils/alerta-util';
 import { LoginService } from './login.service';
-import { Usuario } from '../shared/entity/usuario';
 import { ActivatedRoute } from '@angular/router';
 
 /**
