@@ -21,50 +21,59 @@
 	<!-- /.row -->
 	<div class="col-lg-12">
 		<div class="card card-block">
-			<form role="form" #clienteForm="ngForm" (submit)="gravar($event)" *ngIf="activeForm">
-				<tabset>
-					<tab heading="Lista">
-						<hr>
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="card">
-									<div class="card-header card-default">
-										Clientes
-									</div>
-									<div class="card-block bg-white">
-										<div class="row">
-											<div class="col-xl-12 col-lg-12">
-												<div class="table-responsive">
-													<table class="table table-hover table-sm">
-														<thead>
-															<tr>
-																<th>Ações</th>
-																<th>Nome</th>
-																<th>Tipo Pessoa</th>
-																<th>Data Nascimento</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr *ngFor="let p of pessoas" (dblclick)="showModalOperacaoSaida(operacao)">
-																<td>
-																	<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="showModalEditarUsuario(p)"></i>
-																</td>
-																<td>{{p.nome}}</td>
-																<td>{{p.tipoPessoa}}</td>
-																<td>{{p.dtNascimento | date: 'dd/MM/yyyy'}}</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
+			<tabset>
+				<tab heading="Lista">
+					<hr>
+					<div class="row">
+						<div class="col-sm-12">
+							<input type="text" name="textoProcurado" class="form-control" placeholder="Filtrar Cliente pelo nome" #textoProcurado (keyup)="0">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header card-default">
+									Clientes
+								</div>
+								<div class="card-block bg-white">
+									<div class="row">
+										<div class="col-xl-12 col-lg-12">
+											<div class="table-responsive">
+												<table class="table table-hover table-sm">
+													<thead>
+														<tr>
+															<th>Ações</th>
+															<th>Nome</th>
+															<th>Tipo Pessoa</th>
+															<th>Data Nascimento</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let item of pessoas | paginate: { itemsPerPage: 10, currentPage: p } | filtroPorCliente: textoProcurado.value" (dblclick)="showModalOperacaoSaida(operacao)">
+															<td>
+																<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="showModalEditarUsuario(p)"></i>
+															</td>
+															<td>{{item.nome}}</td>
+															<td>{{item.tipoPessoa}}</td>
+															<td>{{item.dtNascimento | date: 'dd/MM/yyyy'}}</td>
+														</tr>
+													</tbody>
+													<tfoot>
+														<tr>
+															<td colspan="4">
+																<pagination-controls (pageChange)="p = $event" #api directionLinks="true" maxSize="9" autoHide="true"></pagination-controls>
+															</td>
+														</tr>
+												</table>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</tab>
-				</tabset>
-			</form>
+					</div>
+				</tab>
+			</tabset>
 		</div>
 	</div>
 	<!-- /.row -->
