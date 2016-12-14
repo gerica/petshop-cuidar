@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import {
     AlertModule,
     TabsModule,
     ModalModule,
     AccordionModule,
-    TypeaheadModule
+    TypeaheadModule,
 } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { CadastrarClienteComponent } from './cadastrar-cliente.component';
@@ -22,7 +23,8 @@ import { CadastrarClienteComponent } from './cadastrar-cliente.component';
         TabsModule,
         ModalModule,
         AccordionModule,
-        TypeaheadModule
+        TypeaheadModule,
+        TextMaskModule
     ],
     declarations: [CadastrarClienteComponent],
     exports: [CadastrarClienteComponent]

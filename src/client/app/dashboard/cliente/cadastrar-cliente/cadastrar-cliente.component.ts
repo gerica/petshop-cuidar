@@ -20,6 +20,8 @@ export class CadastrarClienteComponent implements OnInit {
     alertaUtil: AlertaUtil = new AlertaUtil();
     activeForm: boolean = true;
     pessoa: Pessoa;
+    maskCEP = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]
+
 
     // Dados para a aba CADASTRO
     estados: Estado[];
@@ -49,13 +51,9 @@ export class CadastrarClienteComponent implements OnInit {
         this.endereco = new Endereco();
         this.recuperarEstados();
         this.route.params.subscribe(params => {
-            if (params && params['pessoa']) {
-                console.log(params['pessoa']);
-                this.pessoa = JSON.parse(params['pessoa']);
-
+            if (params && params['idPessoa']) {
+                this.recuperarPessoaPorId(params['idPessoa']);
             }
-
-            // In a real app: dispatch action to load the details here.
         });
 
     }
@@ -70,6 +68,7 @@ export class CadastrarClienteComponent implements OnInit {
      * Grava novo usuário
      */
     public gravar(event: any): void {
+        // if (event !== undefined)
         event.preventDefault();
 
         this.pessoaService.gravar(this.pessoa)
@@ -138,6 +137,38 @@ export class CadastrarClienteComponent implements OnInit {
         this.cidade = e.item;
         console.log('Estado selecionado: ', this.estado);
         console.log('Cidade selecionada: ', this.cidade);
+    }
+
+    recuperarPessoaPorId(idPessoa: number): void {
+        this.pessoaService.recuperarPessoaPorId(idPessoa)
+            .subscribe(
+            data => {
+                this.pessoa = data.objeto;
+            },
+            error => {
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: error.message === undefined ? error : error.message
+                });
+            }
+            );
+    }
+
+    set pessoaDtNascimento(e: any) {
+        e = e.split('-');
+        let d = new Date(Date.UTC(e[0], e[1] - 1, e[2]));
+        let dataLocal = new Date();
+        dataLocal.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+        this.pessoa.dtNascimento = dataLocal;
+    }
+
+    get pessoaDtNascimento() {
+        let dataLocal = new Date(this.pessoa.dtNascimento);
+        let ano = dataLocal.toLocaleDateString().substring(6, 10);
+        let mes = dataLocal.toLocaleDateString().substring(3, 5);
+        let dia = dataLocal.toLocaleDateString().substring(0, 2);
+        return ano + '-' + mes + '-' + dia;
     }
 
 }

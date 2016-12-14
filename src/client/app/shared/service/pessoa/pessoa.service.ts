@@ -1,4 +1,4 @@
-import { URL_GRAVAR_PESSOA, URL_RECUPERAR_PESSOAS } from './../../../common/url_const';
+import { URL_GRAVAR_PESSOA, URL_RECUPERAR_PESSOAS, URL_RECUPERAR_PESSOA_POR_ID } from './../../../common/url_const';
 import { Pessoa } from './../../entity/pessoa/pessoa';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -22,6 +22,7 @@ export class PessoaService {
     public gravar(pessoa: Pessoa): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader(contentHeaders);
+        this.prepararDados(pessoa);
 
         let body = JSON.stringify(pessoa);
 
@@ -37,6 +38,17 @@ export class PessoaService {
         this.createAuthorizationHeader(contentHeaders);
 
         return this.http.get(URL_RECUPERAR_PESSOAS, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.extractData)
+            //...errors if any
+            .catch(this.handleError);
+    }
+
+    public recuperarPessoaPorId(idPessoa: number): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URL_RECUPERAR_PESSOA_POR_ID + '/' + idPessoa, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.extractData)
             //...errors if any
@@ -59,6 +71,17 @@ export class PessoaService {
         }
         console.error(errMsg);
         return Observable.throw(error.json());
+    }
+
+     private prepararDados(pessoa: Pessoa): void {
+        if (typeof pessoa.dtNascimento === 'string') {
+            let temp: string = '' + pessoa.dtNascimento;
+
+            let ano: number = parseInt(temp.substring(0, 4));
+            let mes: number = parseInt(temp.substring(5, 7)) - 1;
+            let dia: number = parseInt(temp.substring(8, 10));
+            pessoa.dtNascimento = new Date(ano, mes, dia);
+        }
     }
 
 }

@@ -63,8 +63,7 @@ export class ListarClienteComponent implements OnInit {
             this.pessoaVisualizar = pessoa;
         }
 
-        let body = JSON.stringify(this.pessoaVisualizar);
-        this.router.navigate(['/dashboard/cadastrar-cliente', body]);
+        this.router.navigate(['/dashboard/cadastrar-cliente', this.pessoaVisualizar.id]);
     }
 
 }
