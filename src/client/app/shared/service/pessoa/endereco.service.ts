@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 // SERVIÇO DE AUTENTICAÇÃO
 export const URL_ENDERECO: string = URL_BACK_END + 'pessoa/';
 export const URL_GRAVAR: string = URL_ENDERECO + 'gravarEndereco';
+export const URL_EXCUIR: string = URL_ENDERECO + 'excluirEndereco';
 export const URL_POR_PESSOA_ID: string = URL_ENDERECO + 'recuperarEnderecoPorPessoaId';
 
 
@@ -36,6 +37,19 @@ export class EnderecoService {
         let body = JSON.stringify(objBody);
         console.log('valores', body);
         return this.http.post(URL_GRAVAR, body, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.extractData)
+            //...errors if any
+            .catch(this.handleError);
+    }
+
+    public excluir(idEndereco: number): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+
+        let body = JSON.stringify(idEndereco);
+        console.log('valores', body);
+        return this.http.post(URL_EXCUIR, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.extractData)
             //...errors if any

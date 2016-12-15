@@ -1,3 +1,4 @@
+import { EnderecoClienteComponent } from './endereco-cliente.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +27,7 @@ import { CadastrarClienteComponent } from './cadastrar-cliente.component';
         TypeaheadModule,
         TextMaskModule
     ],
-    declarations: [CadastrarClienteComponent],
+    declarations: [CadastrarClienteComponent, EnderecoClienteComponent],
     exports: [CadastrarClienteComponent]
 })
 
