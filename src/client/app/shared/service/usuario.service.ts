@@ -1,3 +1,4 @@
+import { URL_BACK_END } from './../../common/url_const';
 import { Usuario } from './../entity/authority/usuario';
 import { Role } from './../entity/authority/role';
 import { Injectable } from '@angular/core';
@@ -6,10 +7,18 @@ import { Observable } from 'rxjs/Rx';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { URL_INCLUIR_USUARIO } from '../../common/url_const';
-import { URL_ALTERAR_USUARIO } from '../../common/url_const';
-import { URL_RECUPERAR_USUARIOS_ATIVO } from '../../common/url_const';
-import { URL_INATIVAR_USUARIO, URL_RECUPERAR_USUARIOS_INATIVO, URL_ATIVAR_USUARIO, URL_RESET_PASSWORD } from './../../common/url_const';
+
+
+// SERVIÇOS DE USUAŔIO
+export const URL_USUARIO: string = URL_BACK_END + 'usuario/';
+export const URL_INCLUIR_USUARIO: string = URL_USUARIO + 'incluir';
+export const URL_ALTERAR_USUARIO: string = URL_USUARIO + 'alterar';
+export const URL_RECUPERAR_USUARIOS_ATIVO: string = URL_USUARIO + 'recuperarUsuariosAtivo';
+export const URL_RECUPERAR_USUARIOS_INATIVO: string = URL_USUARIO + 'recuperarUsuariosInativo';
+export const URL_ALTERAR_SENHA: string = URL_USUARIO + 'primeiroLogin';
+export const URL_INATIVAR_USUARIO: string = URL_USUARIO + 'inativarUsuario';
+export const URL_ATIVAR_USUARIO: string = URL_USUARIO + 'ativarUsuario';
+export const URL_RESET_PASSWORD: string = URL_USUARIO + 'resetPassword';
 
 @Injectable()
 export class UsuarioService {

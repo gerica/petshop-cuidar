@@ -1,4 +1,5 @@
-import { URL_BACK_END } from './../../common/url_const';
+import { URL_BACK_END } from './../../../common/url_const';
+import { Endereco } from './../../entity/pessoa/endereco';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
@@ -6,12 +7,14 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-// SERVIÇOS DE ROLE
-export const URL_ROLE = URL_BACK_END + 'role/';
-export const URL_RECUPERAR_ROLES: string = URL_ROLE + 'recuperarTodos';
+// SERVIÇO DE AUTENTICAÇÃO
+export const URL_ENDERECO: string = URL_BACK_END + 'pessoa/';
+export const URL_GRAVAR: string = URL_ENDERECO + 'gravarEndereco';
+export const URL_POR_PESSOA_ID: string = URL_ENDERECO + 'recuperarEnderecoPorPessoaId';
+
 
 @Injectable()
-export class RoleService {
+export class EnderecoService {
 
     constructor(private http: Http) { }
 
@@ -21,11 +24,29 @@ export class RoleService {
         contentHeaders.append('X-Auth-Token', localStorage.getItem('id_token'));
     }
 
-    public recuperarRoles(): Observable<any> {
+    public gravar(endereco: Endereco, idPessoa: number): Observable<any> {
         let contentHeaders = new Headers();
         this.createAuthorizationHeader(contentHeaders);
 
-        return this.http.get(URL_RECUPERAR_ROLES, { headers: contentHeaders })
+        let objBody: any = {
+            endereco: endereco,
+            // cidade: endereco.cidade,
+            idPessoa: idPessoa
+        };
+        let body = JSON.stringify(objBody);
+        console.log('valores', body);
+        return this.http.post(URL_GRAVAR, body, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.extractData)
+            //...errors if any
+            .catch(this.handleError);
+    }
+
+    public recuperarEnderecoPorPessoaId(idPessoa: number): Observable<any> {
+        let contentHeaders = new Headers();
+        this.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URL_POR_PESSOA_ID + '/' + idPessoa, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.extractData)
             //...errors if any
@@ -35,6 +56,7 @@ export class RoleService {
     private extractData(res: Response) {
         return res.json();
     }
+
     private handleError(error: Response | any) {
         // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;
@@ -48,5 +70,4 @@ export class RoleService {
         console.error(errMsg);
         return Observable.throw(error.json());
     }
-
 }

@@ -1,4 +1,3 @@
-import { Pessoa } from './pessoa';
 import { Cidade } from './../utils/cidade';
 
 export class Endereco {
@@ -9,5 +8,5 @@ export class Endereco {
     complemento: number;
     bairro: number;
     cidade: Cidade;
-    pessoa: Pessoa;
+    // pessoa: Pessoa;
 }

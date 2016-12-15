@@ -1,3 +1,4 @@
+import { EnderecoService } from './../../../shared/service/pessoa/endereco.service';
 import { Endereco } from './../../../shared/entity/pessoa/endereco';
 import { Cidade } from './../../../shared/entity/utils/cidade';
 import { Estado } from './../../../shared/entity/utils/estado';
@@ -12,34 +13,37 @@ import { AlertaUtil } from './../../../shared/utils/alerta-util';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './cadastrar-cliente.component.html',
-    providers: [UtilsService, PessoaService]
+    providers: [UtilsService, PessoaService, EnderecoService]
 })
 
 export class CadastrarClienteComponent implements OnInit {
     /*Variaveis*/
     alertaUtil: AlertaUtil = new AlertaUtil();
-    activeForm: boolean = true;
+    activeClienteForm: boolean = true;
+    activeEnderecoForm: boolean = true;
     pessoa: Pessoa;
-    maskCEP = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]
-
 
     // Dados para a aba CADASTRO
     estados: Estado[];
-    estado: Estado;
+    // estado: Estado;
     selectedEstado: string;
     cidades: Cidade[];
-    cidade: Cidade;
-    selectedCidade: Cidade;
+    // cidade: Cidade;
+    selectedCidade: string;
 
     // Dados para a aba ENDEREÇO
     endereco: Endereco;
+    enderecos: Endereco[];
+    maskCEP = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+
 
     /**
      * Construtor
      */
     constructor(private utilsService: UtilsService,//
-        private pessoaService: PessoaService,
-        private route: ActivatedRoute) {
+        private pessoaService: PessoaService,//
+        private route: ActivatedRoute,//
+        private enderecoService: EnderecoService) {
 
     }
 
@@ -53,19 +57,29 @@ export class CadastrarClienteComponent implements OnInit {
         this.route.params.subscribe(params => {
             if (params && params['idPessoa']) {
                 this.recuperarPessoaPorId(params['idPessoa']);
+                this.recuperarEnderecoPorPessoaId(params['idPessoa']);
             }
         });
 
     }
 
     public novo() {
-        this.activeForm = false;
-        setTimeout(() => this.activeForm = true, 0);
+        this.activeClienteForm = false;
+        setTimeout(() => this.activeClienteForm = true, 0);
         this.pessoa = new Pessoa();
     }
 
+    public novoEndereco() {
+        this.activeEnderecoForm = false;
+        setTimeout(() => this.activeEnderecoForm = true, 0);
+        this.endereco = new Endereco();
+        this.selectedEstado = null;
+        this.selectedCidade = null;
+
+    }
+
     /**
-     * Grava novo usuário
+     * Grava novo cliente
      */
     public gravar(event: any): void {
         // if (event !== undefined)
@@ -91,6 +105,31 @@ export class CadastrarClienteComponent implements OnInit {
                 });
             });
     }
+
+    public gravarEndereco(event: any): void {
+        event.preventDefault();
+        this.enderecoService.gravar(this.endereco, this.pessoa.id)
+            .subscribe(
+            result => {
+                this.alertaUtil.addMessage({
+                    type: 'success',
+                    closable: true,
+                    msg: result.message
+                });
+                this.recuperarEnderecoPorPessoaId(this.pessoa.id);
+                this.novoEndereco();
+
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message === undefined ? err : err.message
+                });
+            });
+    }
+
 
     public recuperarEstados(): void {
         this.utilsService.recuperarEstados()
@@ -127,19 +166,20 @@ export class CadastrarClienteComponent implements OnInit {
     }
 
     public typeaheadOnSelect(e: any): void {
-        this.estado = e.item;
-        this.recuperarCidadePorEstado(this.estado.id);
+        // this.estado = e.item;
+        this.recuperarCidadePorEstado(e.item.id);
         this.selectedCidade = null;
 
     }
 
     public typeaheadOnSelectCidade(e: any): void {
-        this.cidade = e.item;
-        console.log('Estado selecionado: ', this.estado);
-        console.log('Cidade selecionada: ', this.cidade);
+        // this.cidade = e.item;
+        // console.log('Estado selecionado: ', this.estado);
+        // console.log('Cidade selecionada: ', this.cidade);
+        this.endereco.cidade = e.item;
     }
 
-    recuperarPessoaPorId(idPessoa: number): void {
+    public recuperarPessoaPorId(idPessoa: number): void {
         this.pessoaService.recuperarPessoaPorId(idPessoa)
             .subscribe(
             data => {
@@ -153,6 +193,28 @@ export class CadastrarClienteComponent implements OnInit {
                 });
             }
             );
+    }
+
+    public recuperarEnderecoPorPessoaId(idPessoa: number): void {
+        this.enderecoService.recuperarEnderecoPorPessoaId(idPessoa)
+            .subscribe(
+            data => {
+                this.enderecos = data.objeto;
+            },
+            error => {
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: error.message === undefined ? error : error.message
+                });
+            }
+            );
+    }
+
+    public carregarParaEdicaoEndereco(endereco: Endereco): void {
+        this.endereco = endereco;
+        this.selectedEstado = this.endereco.cidade.estado.descricao;
+        this.selectedCidade = this.endereco.cidade.descricao;
     }
 
     set pessoaDtNascimento(e: any) {

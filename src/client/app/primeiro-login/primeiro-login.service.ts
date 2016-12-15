@@ -1,3 +1,4 @@
+import { URL_BACK_END } from './../common/url_const';
 import { Usuario } from './../shared/entity/authority/usuario';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
@@ -7,8 +8,9 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 // URL BACK END
-import { URL_ALTERAR_SENHA } from '../common/url_const';
 
+export const URL_USUARIO: string = URL_BACK_END + 'usuario/';
+export const URL_ALTERAR_SENHA: string = URL_USUARIO + 'primeiroLogin';
 
 @Injectable()
 export class PrimeiroLoginService {

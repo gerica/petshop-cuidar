@@ -1,10 +1,15 @@
-import { URL_RECUPERAR_ESTADOS, URL_RECUPERAR_CIDADE_POR_ESTADO } from './../../common/url_const';
+import { URL_BACK_END } from './../../common/url_const';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
+// SERVIÇOS UTILS
+export const URL_UTILS = URL_BACK_END + 'utils/';
+export const URL_RECUPERAR_ESTADOS: string = URL_UTILS + 'estado';
+export const URL_RECUPERAR_CIDADE_POR_ESTADO: string = URL_UTILS + 'cidade';
 
 @Injectable()
 export class UtilsService {

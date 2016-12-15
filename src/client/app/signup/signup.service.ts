@@ -1,3 +1,4 @@
+import { URL_BACK_END } from './../common/url_const';
 import { Usuario } from './../shared/entity/authority/usuario';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
@@ -7,7 +8,9 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 // URL BACK END
-import { URL_REGISTRAR } from '../common/url_const';
+
+export const URL_AUTH: string = URL_BACK_END + 'auth';
+export const URL_REGISTRAR: string = URL_AUTH + 'registrarUsuario';
 
 
 @Injectable()

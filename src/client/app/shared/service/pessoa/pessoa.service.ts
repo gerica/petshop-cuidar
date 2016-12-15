@@ -1,4 +1,4 @@
-import { URL_GRAVAR_PESSOA, URL_RECUPERAR_PESSOAS, URL_RECUPERAR_PESSOA_POR_ID } from './../../../common/url_const';
+import { URL_BACK_END } from './../../../common/url_const';
 import { Pessoa } from './../../entity/pessoa/pessoa';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
@@ -6,6 +6,12 @@ import { Observable } from 'rxjs/Rx';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
+// SERVIÇOS DE PESSOA
+const URL_PESSOA = URL_BACK_END + 'pessoa/';
+const URL_GRAVAR_PESSOA: string = URL_PESSOA + 'gravar';
+const URL_RECUPERAR_PESSOAS: string = URL_PESSOA + 'recuperarTodos';
+const URL_RECUPERAR_PESSOA_POR_ID: string = URL_PESSOA + 'recuperarPorId';
 
 
 @Injectable()
@@ -73,7 +79,7 @@ export class PessoaService {
         return Observable.throw(error.json());
     }
 
-     private prepararDados(pessoa: Pessoa): void {
+    private prepararDados(pessoa: Pessoa): void {
         if (typeof pessoa.dtNascimento === 'string') {
             let temp: string = '' + pessoa.dtNascimento;
 
