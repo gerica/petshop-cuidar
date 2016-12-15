@@ -1,3 +1,5 @@
+import { EnderecoService } from './../../../shared/service/pessoa/endereco.service';
+import { Endereco } from './../../../shared/entity/pessoa/endereco';
 import { Router } from '@angular/router';
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';
@@ -9,7 +11,7 @@ import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './listar-cliente.component.html',
-    providers: [PessoaService]
+    providers: [PessoaService, EnderecoService]
 })
 
 export class ListarClienteComponent implements OnInit {
@@ -19,12 +21,14 @@ export class ListarClienteComponent implements OnInit {
     activeForm: boolean = true;
     pessoas: Pessoa[];
     pessoaVisualizar: Pessoa;
+    enderecos: Endereco[];
 
     /**
      * Construtor
      */
     constructor(private pessoaService: PessoaService,//
-        private router: Router) {
+        private router: Router,
+        private enderecoService: EnderecoService) {
 
     }
 
@@ -33,7 +37,6 @@ export class ListarClienteComponent implements OnInit {
      */
     public ngOnInit(): void {
         this.recuperarPessoas();
-
     }
 
     public recuperarPessoas(): void {
@@ -54,6 +57,7 @@ export class ListarClienteComponent implements OnInit {
 
     public showModalVisualizar(pessoa: Pessoa): void {
         this.pessoaVisualizar = pessoa;
+        this.recuperarEnderecoPorPessoaId(pessoa.id);
         this.modalVisualizar.show();
     }
 
@@ -64,6 +68,22 @@ export class ListarClienteComponent implements OnInit {
         }
 
         this.router.navigate(['/dashboard/cadastrar-cliente', this.pessoaVisualizar.id]);
+    }
+
+    public recuperarEnderecoPorPessoaId(idPessoa: number): void {
+        this.enderecoService.recuperarEnderecoPorPessoaId(idPessoa)
+            .subscribe(
+            data => {
+                this.enderecos = data.objeto;
+            },
+            error => {
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: error.message === undefined ? error : error.message
+                });
+            }
+            );
     }
 
 }

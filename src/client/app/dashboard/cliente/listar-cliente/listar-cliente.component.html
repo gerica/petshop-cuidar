@@ -53,144 +53,160 @@
 															(dblclick)="showModalVisualizar(item)">
 															<td>
 																<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="getPaginaEditar(item)"></i>
-																<i class="fa fa-eye" aria-hidden="true" title="Visualizar" style="cursor:pointer" (click)="showModalVisualizar(item)"></i>
+<i class="fa fa-eye" aria-hidden="true" title="Visualizar" style="cursor:pointer" (click)="showModalVisualizar(item)"></i>
 
-															</td>
-															<td>{{item.nome}}</td>
-															<td>{{item.tipoPessoa}}</td>
-															<td>{{item.dtNascimento | date: 'dd/MM/yyyy'}}</td>
-														</tr>
-													</tbody>
-													<tfoot>
-														<tr>
-															<td colspan="4">
-																<pagination-controls (pageChange)="p = $event" #api directionLinks="true" maxSize="9" autoHide="true"></pagination-controls>
-															</td>
-														</tr>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</tab>
-			</tabset>
-		</div>
+</td>
+<td>{{item.nome}}</td>
+<td>{{item.tipoPessoa}}</td>
+<td>{{item.dtNascimento | date: 'dd/MM/yyyy'}}</td>
+</tr>
+</tbody>
+<tfoot>
+	<tr>
+		<td colspan="4">
+			<pagination-controls (pageChange)="p = $event" #api directionLinks="true" maxSize="9" autoHide="true"></pagination-controls>
+		</td>
+	</tr>
+	</table>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</tab>
+	</tabset>
+	</div>
 	</div>
 	<!-- /.row -->
-</div>
+	</div>
 
 
-<!-- Modal visualizar -->
-<div bsModal #modalVisualizar="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-	aria-hidden="true">
-	<div class="modal-dialog ">
-		<div class="modal-content" *ngIf="pessoaVisualizar">
-			<div class="modal-body">
-				<tabset>
-					<tab heading="Dados">
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="card">
-									<div class="card-header card-default">
-										Cliente: {{pessoaVisualizar.nome}}
-										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+	<!-- Modal visualizar -->
+	<div bsModal #modalVisualizar="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog ">
+			<div class="modal-content" *ngIf="pessoaVisualizar">
+				<div class="modal-body">
+					<tabset>
+						<tab heading="Dados">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="card">
+										<div class="card-header card-default">
+											Cliente: {{pessoaVisualizar.nome}}
+											<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-									</div>
-									<div class="card-block bg-white">
-										<div class="row">
-											<div class="col-lg-6">
-												<fieldset class="form-group">
-													<label>Tipo de Pessoa:</label>
-													<p class="form-control-static">{{pessoaVisualizar.tipoPessoa}}</p>
-												</fieldset>
-												<fieldset class="form-group">
-													<label>Nome:</label>
-													<p class="form-control-static">{{pessoaVisualizar.nome}}</p>
-												</fieldset>
+										</div>
+										<div class="card-block bg-white">
+											<div class="row">
+												<div class="col-lg-6">
+													<fieldset class="form-group">
+														<label>Tipo de Pessoa:</label>
+														<p class="form-control-static">{{pessoaVisualizar.tipoPessoa}}</p>
+													</fieldset>
+													<fieldset class="form-group">
+														<label>Nome:</label>
+														<p class="form-control-static">{{pessoaVisualizar.nome}}</p>
+													</fieldset>
+												</div>
+												<div class="col-lg-6">
+													<fieldset class="form-group">
+														<label>Sexo:</label>
+														<p class="form-control-static">{{pessoaVisualizar.sexo}}</p>
+													</fieldset>
+													<fieldset class="form-group">
+														<label>Data Nascimento:</label>
+														<p class="form-control-static">{{pessoaVisualizar.dtNascimento | date: 'dd/MM/yyyy'}}</p>
+													</fieldset>
+												</div>
 											</div>
-											<div class="col-lg-6">
-												<fieldset class="form-group">
-													<label>Sexo:</label>
-													<p class="form-control-static">{{pessoaVisualizar.sexo}}</p>
-												</fieldset>
-												<fieldset class="form-group">
-													<label>Data Nascimento:</label>
-													<p class="form-control-static">{{pessoaVisualizar.dtNascimento | date: 'dd/MM/yyyy'}}</p>
-												</fieldset>
+										</div>
+									</div>
+								</div>
+							</div>
+						</tab>
+						<tab heading="Endereço">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="card">
+										<div class="card-header card-default">
+											Cliente: {{pessoaVisualizar.nome}}
+											<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+										</div>
+										<div class="card-block bg-white">
+											<div class="row" *ngFor="let item of enderecos; let i = index">
+												<div class="col-sm-10">
+													<div class="list-group">
+														<!--<a href="javascript:;" class="list-group-item active">
+														<h4 class="list-group-item-heading">List group item heading</h4>
+														<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+													</a>-->
+														<a href="javascript:;" class="list-group-item" (click)="carregarParaEdicaoEndereco(item)">
+															<h4 class="list-group-item-heading">{{item.logradouro}}</h4>
+															<p class="list-group-item-text">
+																{{item.cidade.descricao}}-{{item.cidade.estado.sigla}}
+																<br> CEP: {{item.cep}}
+																<br> Bairro:{{item.bairro}} - Número:{{item.numero}} - Complemento:{{item.complemento}} {{i % 2}}
+															</p>
+														</a>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</tab>
-					<tab heading="Endereço">
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="card">
-									<div class="card-header card-default">
-										Cliente: {{pessoaVisualizar.nome}}
-										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+						</tab>
+						<tab heading="Telefone">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="card">
+										<div class="card-header card-default">
+											Cliente: {{pessoaVisualizar.nome}}
+											<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-									</div>
-									<div class="card-block bg-white">
-										<div class="row">
+										</div>
+										<div class="card-block bg-white">
+											<div class="row">
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</tab>
-					<tab heading="Telefone">
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="card">
-									<div class="card-header card-default">
-										Cliente: {{pessoaVisualizar.nome}}
-										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+						</tab>
+						<tab heading="Documento">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="card">
+										<div class="card-header card-default">
+											Cliente: {{pessoaVisualizar.nome}}
+											<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-									</div>
-									<div class="card-block bg-white">
-										<div class="row">
+										</div>
+										<div class="card-block bg-white">
+											<div class="row">
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</tab>
-					<tab heading="Documento">
-						<div class="row">
-							<div class="col-sm-12">
-								<div class="card">
-									<div class="card-header card-default">
-										Cliente: {{pessoaVisualizar.nome}}
-										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-									</div>
-									<div class="card-block bg-white">
-										<div class="row">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</tab>
-				</tabset>
+						</tab>
+					</tabset>
 
-				<div class="row">
-					<div class="col-lg-12">
-						<button type="button" class="btn btn-primary" (click)="getPaginaEditar()">Editar</button>
-						<button type="button" class="btn btn-warning" (click)="modalVisualizar.hide()">Fechar</button>
+					<div class="row">
+						<div class="col-lg-12">
+							<button type="button" class="btn btn-primary" (click)="getPaginaEditar()">Editar</button>
+							<button type="button" class="btn btn-warning" (click)="modalVisualizar.hide()">Fechar</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
