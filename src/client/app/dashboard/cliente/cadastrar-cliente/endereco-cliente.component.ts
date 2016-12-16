@@ -3,7 +3,6 @@ import { EnderecoService } from './../../../shared/service/pessoa/endereco.servi
 import { Endereco } from './../../../shared/entity/pessoa/endereco';
 import { Cidade } from './../../../shared/entity/utils/cidade';
 import { Estado } from './../../../shared/entity/utils/estado';
-import { ActivatedRoute } from '@angular/router';
 import { UtilsService } from './../../../shared/service/utils.service';
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
@@ -41,7 +40,6 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
      * Construtor
      */
     constructor(private utilsService: UtilsService,//
-        private route: ActivatedRoute,//
         private enderecoService: EnderecoService) {
 
     }
@@ -50,15 +48,14 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
      * Método chamado quando esse componente iniciar
      */
     public ngOnInit(): void {
-        this.pessoa = new Pessoa();
         this.endereco = new Endereco();
         this.recuperarEstados();
-        this.route.params.subscribe(params => {
-            if (params && params['idPessoa']) {
-                this.recuperarPessoaPorId(params['idPessoa']);
-                this.recuperarEnderecoPorPessoaId(params['idPessoa']);
-            }
-        });
+        // this.route.params.subscribe(params => {
+        //     if (params && params['idPessoa']) {
+        //         this.recuperarPessoaPorId(params['idPessoa']);
+        //         this.recuperarEnderecoPorPessoaId(params['idPessoa']);
+        //     }
+        // });
 
     }
 
@@ -71,9 +68,12 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
     }) {
         for (let propName in changes) {
             let changedProp = changes[propName];
-            let from = JSON.stringify(changedProp.previousValue);
             let to = JSON.stringify(changedProp.currentValue);
             this.pessoa = JSON.parse(to);
+            // console.log(this.pessoa);
+            if (this.pessoa) {
+                this.recuperarEnderecoPorPessoaId(this.pessoa.id);
+            }
 
         };
     }
@@ -99,6 +99,7 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
                 this.recuperarEnderecoPorPessoaId(this.pessoa.id);
                 this.novo();
 
+
             },
             err => {
                 // Log errors if any
@@ -107,12 +108,14 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
                     closable: true,
                     msg: err.message === undefined ? err : err.message
                 });
+                this.recuperarEnderecoPorPessoaId(this.pessoa.id);
             });
     }
 
     public excluir(event: any): void {
         event.preventDefault();
-        this.enderecoService.excluir(this.endereco.id)
+        // console.log(this.pessoa);
+        this.enderecoService.excluir(this.enderecoExcluir.id)
             .subscribe(
             result => {
                 this.notifyAlertaEmit({
@@ -122,6 +125,7 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
                 });
                 this.recuperarEnderecoPorPessoaId(this.pessoa.id);
                 this.novo();
+                this.modalExcluirEndereco.hide();
 
             },
             err => {
@@ -132,6 +136,7 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
                     msg: err.message === undefined ? err : err.message
                 });
             });
+        this.modalExcluirEndereco.hide();
     }
 
     public recuperarEstados(): void {
@@ -182,22 +187,6 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
         this.endereco.cidade = e.item;
     }
 
-    public recuperarPessoaPorId(idPessoa: number): void {
-        this.pessoaService.recuperarPessoaPorId(idPessoa)
-            .subscribe(
-            data => {
-                this.pessoa = data.objeto;
-            },
-            error => {
-                this.notifyAlertaEmit({
-                    type: 'danger',
-                    closable: true,
-                    msg: error.message === undefined ? error : error.message
-                });
-            }
-            );
-    }
-
     public recuperarEnderecoPorPessoaId(idPessoa: number): void {
         this.enderecoService.recuperarEnderecoPorPessoaId(idPessoa)
             .subscribe(
@@ -229,6 +218,7 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
     }
 
     public showModalExcluir(): void {
+        console.log(this.pessoa);
         this.enderecoExcluir = this.endereco;
         this.modalExcluirEndereco.show();
     }
