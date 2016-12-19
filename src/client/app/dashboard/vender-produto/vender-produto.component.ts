@@ -18,38 +18,16 @@ export class VenderProdutoComponent implements OnInit {
     /*Variaveis*/
     alertaUtil: AlertaUtil = new AlertaUtil();
     activeForm: boolean = true;
-    clientes: Pessoa[];
     clienteControl: FormControl = new FormControl();
     vendaForm: FormGroup = new FormGroup({
         clienteControl: this.clienteControl
-    })
-    asyncSelected: string = '';
-    dataSource: Observable<any>;
-    typeaheadLoading: boolean = false;
-    typeaheadNoResults: boolean = false;
+    });
 
     /**
      * Construtor
      */
     constructor(private utilsService: UtilsService,
         private pessoaService: PessoaService) {
-        this.dataSource = Observable.create((observer: any) => {
-            this.pessoaService.recuperarPessoaPorNome(this.asyncSelected)
-                .subscribe(
-                data => {
-                    this.clientes = data.objeto;
-                    observer.next();
-                },
-                error => {
-                    this.alertaUtil.addMessage({
-                        type: 'danger',
-                        closable: true,
-                        msg: error.message === undefined ? error : error.message
-                    });
-                }
-                );
-            // observer.next(this.asyncSelected);
-        }).mergeMap(() => this.getStatesAsObservable());
 
     }
 
@@ -92,21 +70,7 @@ export class VenderProdutoComponent implements OnInit {
         //     });
     }
 
-
-    public getStatesAsObservable(): Observable<any> {
-        return Observable.of(this.clientes);
+    public onSelectedCliene(cliente: Pessoa): void {
+        console.log('Cliente: ', cliente);
     }
-
-    public changeTypeaheadLoading(e: boolean): void {
-        this.typeaheadLoading = e;
-    }
-
-    public changeTypeaheadNoResults(e: boolean): void {
-        this.typeaheadNoResults = e;
-    }
-
-    public typeaheadOnSelect(e: any): void {
-        console.log('Selected value: ', e);
-    }
-
 }
