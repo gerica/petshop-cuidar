@@ -1,3 +1,4 @@
+import { DocumentoClienteComponent } from './documento-cliente.component';
 import { TelefoneClienteComponent } from './telefone-cliente.component';
 import { EnderecoClienteComponent } from './endereco-cliente.component';
 import { NgModule } from '@angular/core';
@@ -30,7 +31,8 @@ import { CadastrarClienteComponent } from './cadastrar-cliente.component';
     ],
     declarations: [CadastrarClienteComponent,
         EnderecoClienteComponent,
-        TelefoneClienteComponent],
+        TelefoneClienteComponent,
+        DocumentoClienteComponent],
     exports: [CadastrarClienteComponent]
 })
 

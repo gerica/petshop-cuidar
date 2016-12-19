@@ -1,3 +1,8 @@
+import { DocumentoService } from './../../../shared/service/pessoa/documento.service';
+import { Documento } from './../../../shared/entity/pessoa/documento';
+import { UtilsService } from './../../../shared/service/utils.service';
+import { Telefone } from './../../../shared/entity/pessoa/telefone';
+import { TelefoneService } from './../../../shared/service/pessoa/telefone.service';
 import { EnderecoService } from './../../../shared/service/pessoa/endereco.service';
 import { Endereco } from './../../../shared/entity/pessoa/endereco';
 import { Router } from '@angular/router';
@@ -11,7 +16,7 @@ import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './listar-cliente.component.html',
-    providers: [PessoaService, EnderecoService]
+    providers: [UtilsService, PessoaService, EnderecoService, TelefoneService, DocumentoService]
 })
 
 export class ListarClienteComponent implements OnInit {
@@ -22,13 +27,17 @@ export class ListarClienteComponent implements OnInit {
     pessoas: Pessoa[];
     pessoaVisualizar: Pessoa;
     enderecos: Endereco[];
+    telefones: Telefone[];
+    documentos: Documento[];
 
     /**
      * Construtor
      */
     constructor(private pessoaService: PessoaService,//
         private router: Router,
-        private enderecoService: EnderecoService) {
+        private enderecoService: EnderecoService,
+        private telefoneService: TelefoneService,
+        private documentoService: DocumentoService) {
 
     }
 
@@ -57,7 +66,9 @@ export class ListarClienteComponent implements OnInit {
 
     public showModalVisualizar(pessoa: Pessoa): void {
         this.pessoaVisualizar = pessoa;
-        this.recuperarEnderecoPorPessoaId(pessoa.id);
+        this.recuperarEnderecoPorPessoaId(this.pessoaVisualizar.id);
+        this.recuperarTelefonePorPessoaId(this.pessoaVisualizar.id);
+        this.recuperarDocumentoPorPessoaId(this.pessoaVisualizar.id);
         this.modalVisualizar.show();
     }
 
@@ -75,6 +86,38 @@ export class ListarClienteComponent implements OnInit {
             .subscribe(
             data => {
                 this.enderecos = data.objeto;
+            },
+            error => {
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: error.message === undefined ? error : error.message
+                });
+            }
+            );
+    }
+
+    public recuperarTelefonePorPessoaId(idPessoa: number): void {
+        this.telefoneService.recuperarTelefonePorPessoaId(idPessoa)
+            .subscribe(
+            data => {
+                this.telefones = data.objeto;
+            },
+            error => {
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: error.message === undefined ? error : error.message
+                });
+            }
+            );
+    }
+
+    public recuperarDocumentoPorPessoaId(idPessoa: number): void {
+        this.documentoService.recuperarDocumentoPorPessoaId(idPessoa)
+            .subscribe(
+            data => {
+                this.documentos = data.objeto;
             },
             error => {
                 this.alertaUtil.addMessage({

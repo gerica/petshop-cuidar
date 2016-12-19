@@ -16,7 +16,7 @@ export class UtilsService {
 
     constructor(private http: Http) { }
 
-    createAuthorizationHeader(contentHeaders: Headers) {
+    public createAuthorizationHeader(contentHeaders: Headers) {
         contentHeaders.append('Accept', 'application/json');
         contentHeaders.append('Content-Type', 'application/json');
         contentHeaders.append('X-Auth-Token', localStorage.getItem('id_token'));
@@ -43,11 +43,12 @@ export class UtilsService {
             //...errors if any
             .catch(this.handleError);
     }
-    private extractData(res: Response) {
+
+    public extractData(res: Response) {
         return res.json();
     }
 
-    private handleError(error: Response | any) {
+    public handleError(error: Response | any) {
         // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {

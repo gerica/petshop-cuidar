@@ -87,24 +87,10 @@
 					<tab-endereco-cliente [pessoa]="pessoa" (notifyAlerta)="onNotifyAlerta($event)" ></tab-endereco-cliente>
 				</tab>
 				<tab heading="Telefones" *ngIf="pessoa.id">
-					teste
 					<tab-telefone-cliente [pessoa]="pessoa" (notifyAlerta)="onNotifyAlerta($event)" ></tab-telefone-cliente>
 				</tab>
 				<tab heading="Documentos" *ngIf="pessoa.id">
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-header card-default">
-									Cliente: {{pessoa?.nome}}
-								</div>
-								<div class="card-block bg-white">
-									<div class="row">
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<tab-documento-cliente [pessoa]="pessoa" (notifyAlerta)="onNotifyAlerta($event)" ></tab-documento-cliente>
 				</tab>
 			</tabset>
 

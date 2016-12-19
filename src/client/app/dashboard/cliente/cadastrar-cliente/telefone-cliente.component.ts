@@ -15,15 +15,14 @@ export class TelefoneClienteComponent implements OnInit, OnChanges {
     /*Variaveis*/
     @Output() notifyAlerta: EventEmitter<any> = new EventEmitter<any>();
     @Input() pessoa: Pessoa;
-    @ViewChild('modalExcluirEndereco') public modalExcluirEndereco: ModalDirective;
+    @ViewChild('modalExcluirTelefone') public modalExcluirTelefone: ModalDirective;
     activeForm: boolean = true;
 
     // Dados para a aba ENDEREÇO
     telefone: Telefone;
     telefoneExcluir: Telefone;
     telefones: Telefone[];
-    maskTelefone = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
-
+    maskTelefone = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
     /**
      * Construtor
@@ -50,7 +49,6 @@ export class TelefoneClienteComponent implements OnInit, OnChanges {
             let changedProp = changes[propName];
             let to = JSON.stringify(changedProp.currentValue);
             this.pessoa = JSON.parse(to);
-            console.log(this.pessoa);
             if (this.pessoa) {
                 this.recuperarTelefonePorPessoaId(this.pessoa.id);
             }
@@ -89,7 +87,6 @@ export class TelefoneClienteComponent implements OnInit, OnChanges {
 
     public excluir(event: any): void {
         event.preventDefault();
-        // console.log(this.pessoa);
         this.telefoneService.excluir(this.telefoneExcluir.id)
             .subscribe(
             result => {
@@ -100,7 +97,7 @@ export class TelefoneClienteComponent implements OnInit, OnChanges {
                 });
                 this.recuperarTelefonePorPessoaId(this.pessoa.id);
                 this.novo();
-                this.modalExcluirEndereco.hide();
+                this.modalExcluirTelefone.hide();
             },
             err => {
                 // Log errors if any
@@ -110,28 +107,26 @@ export class TelefoneClienteComponent implements OnInit, OnChanges {
                     msg: err.message === undefined ? err : err.message
                 });
             });
-        this.modalExcluirEndereco.hide();
+        this.modalExcluirTelefone.hide();
     }
-
-
 
     public recuperarTelefonePorPessoaId(idPessoa: number): void {
-        // this.telefoneService.recuperarTelefonePorPessoaId(idPessoa)
-        //     .subscribe(
-        //     data => {
-        //         this.telefones = data.objeto;
-        //     },
-        //     error => {
-        //         this.notifyAlertaEmit({
-        //             type: 'danger',
-        //             closable: true,
-        //             msg: error.message === undefined ? error : error.message
-        //         });
-        //     }
-        //     );
+        this.telefoneService.recuperarTelefonePorPessoaId(idPessoa)
+            .subscribe(
+            data => {
+                this.telefones = data.objeto;
+            },
+            error => {
+                this.notifyAlertaEmit({
+                    type: 'danger',
+                    closable: true,
+                    msg: error.message === undefined ? error : error.message
+                });
+            }
+            );
     }
 
-    public carregarParaEdicaoEndereco(telefone: Telefone): void {
+    public carregarParaEdicaoTelefone(telefone: Telefone): void {
         this.telefone = telefone;
     }
 
@@ -145,8 +140,7 @@ export class TelefoneClienteComponent implements OnInit, OnChanges {
     }
 
     public showModalExcluir(): void {
-        console.log(this.pessoa);
         this.telefoneExcluir = this.telefone;
-        this.modalExcluirEndereco.show();
+        this.modalExcluirTelefone.show();
     }
 }

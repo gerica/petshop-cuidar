@@ -50,7 +50,7 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr *ngFor="let item of pessoas | paginate: { itemsPerPage: 10, currentPage: p } | filtroPorCliente: textoProcurado.value"
+														<tr *ngFor="let item of pessoas | filtroPorCliente: textoProcurado.value | paginate: { itemsPerPage: 10, currentPage: p }"
 															(dblclick)="showModalVisualizar(item)">
 															<td>
 																<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="getPaginaEditar(item)"></i>
@@ -67,6 +67,7 @@
 																<pagination-controls (pageChange)="p = $event" #api directionLinks="true" maxSize="9" autoHide="true"></pagination-controls>
 															</td>
 														</tr>
+													</tfoot>
 												</table>
 											</div>
 										</div>
@@ -142,7 +143,7 @@
 										<div class="row" *ngFor="let item of enderecos; let i = index">
 											<div class="col-sm-10">
 												<div class="list-group">
-													
+
 													<a href="javascript:;" class="list-group-item">
 														<h4 class="list-group-item-heading">{{item.logradouro}}</h4>
 														<p class="list-group-item-text">
@@ -170,7 +171,17 @@
                                     </button>
 									</div>
 									<div class="card-block bg-white">
-										<div class="row">
+										<div class="row" *ngFor="let item of telefones;">
+											<div class="col-sm-10">
+												<div class="list-group">
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">Telefone</h4>
+														<p class="list-group-item-text">
+															{{item.numero}}
+														</p>
+													</a>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -188,7 +199,18 @@
                                     </button>
 									</div>
 									<div class="card-block bg-white">
-										<div class="row">
+										<div class="row" *ngFor="let item of documentos;">
+											<div class="col-sm-10">
+												<div class="list-group">
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">{{item.tipoDocumento?.descricao}}</h4>
+														<p class="list-group-item-text">
+															{{item.numero}}
+															<span *ngIf="item.complemento">- {{item.complemento}}</span>
+														</p>
+													</a>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
