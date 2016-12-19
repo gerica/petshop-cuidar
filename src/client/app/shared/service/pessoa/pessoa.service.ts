@@ -13,6 +13,7 @@ const URL_PESSOA = URL_BACK_END + 'pessoa/';
 const URL_GRAVAR_PESSOA: string = URL_PESSOA + 'gravar';
 const URL_RECUPERAR_PESSOAS: string = URL_PESSOA + 'recuperarTodos';
 const URL_RECUPERAR_PESSOA_POR_ID: string = URL_PESSOA + 'recuperarPorId';
+const URL_RECUPERAR_PESSOA_POR_NOME: string = URL_PESSOA + 'recuperarPorNome';
 
 
 @Injectable()
@@ -45,6 +46,18 @@ export class PessoaService {
             //...errors if any
             .catch(this.utilsService.handleError);
     }
+
+    public recuperarPessoaPorNome(nomePessoa: string): Observable<any> {
+        let contentHeaders = new Headers();
+        this.utilsService.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URL_RECUPERAR_PESSOA_POR_NOME + '/' + nomePessoa, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.utilsService.extractData)
+            //...errors if any
+            .catch(this.utilsService.handleError);
+    }
+
 
     public recuperarPessoaPorId(idPessoa: number): Observable<any> {
         let contentHeaders = new Headers();

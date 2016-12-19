@@ -24,7 +24,6 @@
             <tabset>
                 <tab heading="Vendas">
                     <form role="form" [formGroup]="vendaForm" (submit)="gravar($event)" *ngIf="activeForm">
-                        <hr>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card">
@@ -40,22 +39,23 @@
                                         </ul>
                                     </div>
                                     <div class="card-block bg-white">
-                                        <input formControlName="state" 
+                                        <input formControlName="clienteControl" 
                                         [(ngModel)]="asyncSelected"
                                                 [typeahead]="dataSource"
                                                 (typeaheadLoading)="changeTypeaheadLoading($event)"
                                                 (typeaheadNoResults)="changeTypeaheadNoResults($event)"
                                                 (typeaheadOnSelect)="typeaheadOnSelect($event)"
                                                 [typeaheadOptionsLimit]="7"
-                                                [typeaheadOptionField]="'name'"
+                                                [typeaheadOptionField]="'nome'"
                                                 [typeaheadMinLength]="3"
                                                 placeholder="Informar o nome do cliente."
                                                 class="form-control">
+
                                         <div *ngIf="typeaheadLoading===true">
                                             <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
                                         </div>
                                         <div *ngIf="typeaheadNoResults===true" class="" style="">
-                                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                            <i class="glyphicon glyphicon-remove"></i> Nenhum resultado encontrado
                                         </div>
                                     </div>
                                 </div>
