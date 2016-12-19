@@ -9,7 +9,7 @@ import { AlertaUtil } from './../../../shared/utils/alerta-util';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './cadastrar-cliente.component.html',
-    providers: [UtilsService, PessoaService]
+    providers: [PessoaService]
 })
 
 export class CadastrarClienteComponent implements OnInit {

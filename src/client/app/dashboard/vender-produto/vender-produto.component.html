@@ -26,9 +26,7 @@
                     <form role="form" [formGroup]="vendaForm" (submit)="gravar($event)" *ngIf="activeForm">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="card">
-                                    <tyahead-cliente (notifyCliente)="onSelectedCliene($event)"></tyahead-cliente>
-                                </div>
+                                <tyahead-cliente (notifyCliente)="onSelectedCliene($event)"></tyahead-cliente>
                             </div>
                         </div>
                         <div class="row">

@@ -1,17 +1,15 @@
 import { PessoaService } from './../../shared/service/pessoa/pessoa.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
 import { UtilsService } from './../../shared/service/utils.service';
 import { Pessoa } from './../../shared/entity/pessoa/pessoa';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
-import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 
 @Component({
     moduleId: module.id,
     selector: 'form-vender-produto',
     templateUrl: './vender-produto.component.html',
-    providers: [UtilsService, PessoaService]
+    providers: [PessoaService]
 })
 
 export class VenderProdutoComponent implements OnInit {
@@ -22,6 +20,7 @@ export class VenderProdutoComponent implements OnInit {
     vendaForm: FormGroup = new FormGroup({
         clienteControl: this.clienteControl
     });
+    cliente: Pessoa;
 
     /**
      * Construtor
@@ -35,7 +34,7 @@ export class VenderProdutoComponent implements OnInit {
      * Método chamado quando esse componente iniciar
      */
     public ngOnInit(): void {
-
+        console.log('inicio');
     }
 
     public novo() {
@@ -71,6 +70,7 @@ export class VenderProdutoComponent implements OnInit {
     }
 
     public onSelectedCliene(cliente: Pessoa): void {
-        console.log('Cliente: ', cliente);
+        this.cliente = cliente;
+        console.log('Cliente: ', this.cliente);
     }
 }

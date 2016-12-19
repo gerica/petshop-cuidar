@@ -1,3 +1,4 @@
+import { UtilsService } from './service/utils.service';
 import { TypeAheadClienteComponent } from './component/typeahead-cliente.component';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -55,7 +56,7 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: []
+            providers: [UtilsService]
         };
     }
 }

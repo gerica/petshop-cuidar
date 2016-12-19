@@ -11,7 +11,7 @@ import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
     moduleId: module.id,
     selector: 'tab-endereco-cliente',
     templateUrl: './endereco-cliente.component.html',
-    providers: [UtilsService, EnderecoService]
+    providers: [EnderecoService]
 })
 
 export class EnderecoClienteComponent implements OnInit, OnChanges {
@@ -33,7 +33,7 @@ export class EnderecoClienteComponent implements OnInit, OnChanges {
     endereco: Endereco;
     enderecoExcluir: Endereco;
     enderecos: Endereco[];
-    maskCEP = [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
+    maskCEP = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
 
 
     /**

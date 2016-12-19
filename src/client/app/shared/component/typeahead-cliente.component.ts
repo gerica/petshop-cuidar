@@ -1,4 +1,3 @@
-import { existsSync } from 'fs';
 import { PessoaService } from './../../shared/service/pessoa/pessoa.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
@@ -14,11 +13,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 
 export class TypeAheadClienteComponent {
     @Output() notifyCliente: EventEmitter<any> = new EventEmitter<any>();
-    clientes: Pessoa[];
-    clienteControl: FormControl = new FormControl();
-    vendaForm: FormGroup = new FormGroup({
-        clienteControl: this.clienteControl
-    })
+    clientes: Pessoa[];    
     asyncSelected: string = '';
     dataSource: Observable<any>;
     typeaheadLoading: boolean = false;

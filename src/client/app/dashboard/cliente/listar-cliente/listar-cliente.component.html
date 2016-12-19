@@ -102,25 +102,16 @@
 									</div>
 									<div class="card-block bg-white">
 										<div class="row">
-											<div class="col-lg-6">
-												<fieldset class="form-group">
-													<label>Tipo de Pessoa:</label>
-													<p class="form-control-static">{{pessoaVisualizar.tipoPessoa}}</p>
-												</fieldset>
-												<fieldset class="form-group">
-													<label>Nome:</label>
-													<p class="form-control-static">{{pessoaVisualizar.nome}}</p>
-												</fieldset>
-											</div>
-											<div class="col-lg-6">
-												<fieldset class="form-group">
-													<label>Sexo:</label>
-													<p class="form-control-static">{{pessoaVisualizar.sexo}}</p>
-												</fieldset>
-												<fieldset class="form-group">
-													<label>Data Nascimento:</label>
-													<p class="form-control-static">{{pessoaVisualizar.dtNascimento | date: 'dd/MM/yyyy'}}</p>
-												</fieldset>
+											<div class="col-sm-10">
+												<div class="list-group">
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">{{pessoaVisualizar.nome}}</h4>
+														<p class="list-group-item-text">
+															Tipo de pessoa: {{pessoaVisualizar.tipoPessoa}}<br> Sexo: {{pessoaVisualizar.sexo}}<br> Data Nascimento: {{pessoaVisualizar.dtNascimento
+															| date: 'dd/MM/yyyy'}}
+														</p>
+													</a>
+												</div>
 											</div>
 										</div>
 									</div>
