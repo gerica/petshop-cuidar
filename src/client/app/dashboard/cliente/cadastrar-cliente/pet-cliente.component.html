@@ -8,18 +8,44 @@
                 <div class="card-block bg-white">
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <fieldset class="form-group">
-                                    <label>Tipo Pet</label>
-                                    <select class="form-control" id="tipoPet" name="tipoPet" [(ngModel)]="tipoPetObj" #tipoPet="ngModel" required (ngModelChange)="onChange($event)">
+                            <fieldset class="form-group">
+                                <label>Tipo Pet</label>
+                                <select class="form-control" id="tipoPet" name="tipoPet" [(ngModel)]="tipoPetObj" #tipoPet="ngModel" required (ngModelChange)="onChange($event)">
                                         <option *ngFor="let t of tiposPet" [ngValue]="t">{{t.dsNome}}</option>
                                     </select>
-                                </fieldset>
-                                <div [hidden]="tipoPet.valid || tipoPet.pristine" class="alert alert-danger">
-                                    A Tipo Pet é obrigatório.
-                                </div>
+                            </fieldset>
+                            <div [hidden]="tipoPet.valid || tipoPet.pristine" class="alert alert-danger">
+                                A Tipo Pet é obrigatório.
+                            </div>
+                            <fieldset class="form-group">
+                                <label>Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="pet.dsNome" #nome="ngModel" required>
+                            </fieldset>
+                            <div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
+                                A nome é obrigatório.
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <fieldset class="form-group">
+                                <label>Raça:</label>
+                                <input [(ngModel)]="selectedRaca" id="raca" name="raca" [typeahead]="racas" [typeaheadOptionField]="'dsNome'" (typeaheadOnSelect)="typeaheadOnSelectRaca($event)"
+                                    [typeaheadOptionsLimit]="4" class="form-control" #raca="ngModel" required>
+                            </fieldset>
+                            <div [hidden]="raca.valid || raca.pristine" class="alert alert-danger">
+                                A raça é obrigatório.
+                            </div>
+                            <fieldset class="form-group">
+                                <label>Data Nascimento:</label>
+                                <input type="date" class="form-control" id="dtNascimento" name="dtNascimento" [(ngModel)]="pet.dtNacimento" #dtNascimento="ngModel"
+                                    required>
+                            </fieldset>
+                            <div [hidden]="dtNascimento.valid || dtNascimento.pristine" class="alert alert-danger">
+                                A data é obrigatório.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
                     </div>
                 </div>
             </div>
@@ -45,10 +71,10 @@
                         <div class="col-sm-6" *ngFor="let item of pets; let i = index">
                             <div class="list-group">
                                 <a href="javascript:;" class="list-group-item" (click)="carregarParaEdicao(item)">
-                                    <h4 class="list-group-item-heading">{{item.dsNome}}</h4>
+                                    <h4 class="list-group-item-heading">{{item?.dsNome}}</h4>
                                     <p class="list-group-item-text">
-                                        Tipo: {{item.tipoPet?.dsNome}}<br> Raça: {{item.raca?.dsNome}}<br> Data Nascimento:
-                                        {{item.dtNacimento | date: 'dd/MM/yyyy'}}
+                                        Tipo: {{item?.raca?.tipoPet?.dsNome}}<br> Raça: {{item?.raca?.dsNome}}<br> Data Nascimento:
+                                        {{item?.dtNacimento | date: 'dd/MM/yyyy'}}
                                     </p>
                                 </a>
                             </div>
@@ -79,16 +105,11 @@
                                 </div>
                                 <div class="card-block bg-white">
                                     <div class="row">
-                                        <h4 class="list-group-item-heading">{{petExcluir.tipoPet?.descricao}}</h4>
-                                        <p class="list-group-item-text">
-                                            {{petExcluir.numero}}
-                                            <span *ngIf="petExcluir.complemento">- {{petExcluir.complemento}}</span>
-                                        </p>
                                         <div class="col-lg-12">
-                                            <h4 class="list-group-item-heading">{{item.dsNome}}</h4>
+                                            <h4 class="list-group-item-heading">{{petExcluir?.dsNome}}</h4>                                            
                                             <p class="list-group-item-text">
-                                                Tipo: {{item.tipoPet?.dsNome}}<br> Raça: {{item.raca?.dsNome}}<br> Data Nascimento:
-                                                {{item.dtNacimento | date: 'dd/MM/yyyy'}}
+                                                Tipo: {{petExcluir?.raca?.tipoPet?.dsNome}}<br> Raça: {{petExcluir?.raca?.dsNome}}<br> Data Nascimento:
+                                                {{petExcluir?.dtNacimento | date: 'dd/MM/yyyy'}}
                                             </p>
                                         </div>
                                     </div>

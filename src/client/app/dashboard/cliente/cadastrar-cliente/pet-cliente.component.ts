@@ -1,3 +1,4 @@
+import { Raca } from './../../../shared/entity/pet/raca';
 import { TipoPet } from './../../../shared/entity/pet/tipoPet';
 import { Pet } from './../../../shared/entity/pet/pet';
 import { PetService } from './../../../shared/service/pet/pet.service';
@@ -26,6 +27,8 @@ export class PetClienteComponent implements OnInit, OnChanges {
     pets: Pet[];
     tipoPetObj: TipoPet;
     tiposPet: TipoPet[];
+    racas: Raca[];
+    selectedRaca: string;
 
     /**
      * Construtor
@@ -66,6 +69,8 @@ export class PetClienteComponent implements OnInit, OnChanges {
         this.activeForm = false;
         setTimeout(() => this.activeForm = true, 0);
         this.pet = new Pet();
+        this.tipoPetObj = new TipoPet();
+        this.selectedRaca = null;
     }
 
     public gravar(event: any): void {
@@ -150,6 +155,13 @@ export class PetClienteComponent implements OnInit, OnChanges {
 
     public carregarParaEdicao(pet: Pet): void {
         this.pet = pet;
+        this.tiposPet.forEach((e) => {
+            if (e.id === this.pet.raca.tipoPet.id) {
+                this.tipoPetObj = e;
+            }
+        });
+        this.selectedRaca = this.pet.raca.dsNome;
+        this.recuperarRacaTipo(this.pet.raca.tipoPet.id);
     }
 
     /**
@@ -168,6 +180,29 @@ export class PetClienteComponent implements OnInit, OnChanges {
 
     public onChange(td: TipoPet) {
         this.pet.raca = null;
+        this.selectedRaca = null;
+        this.recuperarRacaTipo(td.id);
+    }
+
+    public recuperarRacaTipo(idTipoPet: number): void {
+        this.racaService.recuperarRacaTipo(idTipoPet)
+            .subscribe(
+            data => {
+                this.racas = data.objeto;
+            },
+            error => {
+                this.notifyAlertaEmit({
+                    type: 'danger',
+                    closable: true,
+                    msg: error.message === undefined ? error : error.message
+                });
+            }
+            );
+
+    }
+
+    public typeaheadOnSelectRaca(e: any): void {
+        this.pet.raca = e.item;
     }
 
 }

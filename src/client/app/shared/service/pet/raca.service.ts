@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 
 // SERVIÇO DE AUTENTICAÇÃO
 export const URL_UTILS: string = URL_BACK_END + 'pet/utils/';
-export const URI_RECUPERAR_RACA_POR_TIPO: string = URL_UTILS + 'recuperarTodosTipoPet';
+export const URI_RECUPERAR_RACA_POR_TIPO: string = URL_UTILS + 'recuperarRacaTipo';
 
 
 @Injectable()
