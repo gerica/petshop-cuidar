@@ -1,3 +1,4 @@
+import { PetClienteComponent } from './pet-cliente.component';
 import { SharedModule } from './../../../shared/shared.module';
 import { DocumentoClienteComponent } from './documento-cliente.component';
 import { TelefoneClienteComponent } from './telefone-cliente.component';
@@ -14,7 +15,8 @@ import { CadastrarClienteComponent } from './cadastrar-cliente.component';
     declarations: [CadastrarClienteComponent,
         EnderecoClienteComponent,
         TelefoneClienteComponent,
-        DocumentoClienteComponent],
+        DocumentoClienteComponent,
+        PetClienteComponent],
     exports: [CadastrarClienteComponent]
 })
 

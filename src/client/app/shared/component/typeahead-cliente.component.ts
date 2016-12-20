@@ -1,5 +1,4 @@
 import { PessoaService } from './../../shared/service/pessoa/pessoa.service';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { Pessoa } from './../../shared/entity/pessoa/pessoa';
 import { Component, Output, EventEmitter } from '@angular/core';
@@ -13,7 +12,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 
 export class TypeAheadClienteComponent {
     @Output() notifyCliente: EventEmitter<any> = new EventEmitter<any>();
-    clientes: Pessoa[];    
+    clientes: Pessoa[];
     asyncSelected: string = '';
     dataSource: Observable<any>;
     typeaheadLoading: boolean = false;
@@ -55,7 +54,7 @@ export class TypeAheadClienteComponent {
      * Nesse caso chamará
      * onSelectedCliene()
      */
-    public notifyClienteEmit(e : any) {
+    public notifyClienteEmit(e: any) {
         this.notifyCliente.emit(e.item);
     }
 

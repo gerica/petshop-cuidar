@@ -7,21 +7,21 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 // SERVIÇO DE AUTENTICAÇÃO
-export const URL_UTILS: string = URL_BACK_END + 'utils/';
-export const URL_RECUPERAR_TODOS: string = URL_UTILS + 'recuperarTodosTipoDocumento';
+export const URL_UTILS: string = URL_BACK_END + 'pet/utils/';
+export const URI_RECUPERAR_RACA_POR_TIPO: string = URL_UTILS + 'recuperarTodosTipoPet';
 
 
 @Injectable()
-export class TipoDocumentoService {
+export class RacaService {
 
     constructor(private http: Http,
         private utilsService: UtilsService) { }
 
-    public recuperarTodosTipoDocumento(): Observable<any> {
+    public recuperarRacaTipo(idTipoPet: number): Observable<any> {
         let contentHeaders = new Headers();
         this.utilsService.createAuthorizationHeader(contentHeaders);
 
-        return this.http.get(URL_RECUPERAR_TODOS, { headers: contentHeaders })
+        return this.http.get(URI_RECUPERAR_RACA_POR_TIPO + '/' + idTipoPet, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.utilsService.extractData)
             //...errors if any
