@@ -52,7 +52,7 @@
 												</div>
 											</div>
 											<div class="col-lg-6">
-												<fieldset class="form-group">
+												<fieldset class="form-group" *ngIf="pessoa.tipoPessoa === 'FÍSICA'">
 													<label>Sexo:</label>
 													<select class="form-control" id="sexo" name="sexo" [(ngModel)]="pessoa.sexo" #sexo="ngModel" required>
 															<option value="HOMEN">Homen</option>

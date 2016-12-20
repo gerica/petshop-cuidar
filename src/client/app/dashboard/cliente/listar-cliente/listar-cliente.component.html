@@ -107,8 +107,9 @@
 													<a href="javascript:;" class="list-group-item">
 														<h4 class="list-group-item-heading">{{pessoaVisualizar.nome}}</h4>
 														<p class="list-group-item-text">
-															Tipo de pessoa: {{pessoaVisualizar.tipoPessoa}}<br> Sexo: {{pessoaVisualizar.sexo}}<br> Data Nascimento: {{pessoaVisualizar.dtNascimento
-															| date: 'dd/MM/yyyy'}}
+															<span> Tipo de pessoa: {{pessoaVisualizar.tipoPessoa}}<br> </span>
+															<span *ngIf="pessoaVisualizar.tipoPessoa === 'FÍSICA'"> Sexo: {{pessoaVisualizar.sexo}}<br></span>
+															<span>Data Nascimento: {{pessoaVisualizar.dtNascimento | date: 'dd/MM/yyyy'}}</span>
 														</p>
 													</a>
 												</div>
@@ -197,6 +198,36 @@
 														<p class="list-group-item-text">
 															{{item.numero}}
 															<span *ngIf="item.complemento">- {{item.complemento}}</span>
+														</p>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</tab>
+					<tab heading="Pets">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header card-default">
+										Cliente: {{pessoaVisualizar.nome}}
+										<button type="button" class="close" (click)="modalVisualizar.hide()" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+									</div>
+									<div class="card-block bg-white">
+										<div class="row" *ngFor="let item of pets;">
+											<div class="col-sm-10">
+												<div class="list-group">
+													<a href="javascript:;" class="list-group-item">
+														<h4 class="list-group-item-heading">{{item?.dsNome}}</h4>
+														<p class="list-group-item-text">
+															<span> Tipo: {{item?.raca?.tipoPet?.dsNome}}<br></span>
+															<span> Raça: {{item?.raca?.dsNome}}<br></span>
+															<span> Data Nascimento: {{item?.dtNacimento | date: 'dd/MM/yyyy'}}</span>
 														</p>
 													</a>
 												</div>

@@ -1,3 +1,5 @@
+import { PetService } from './../../../shared/service/pet/pet.service';
+import { Pet } from './../../../shared/entity/pet/pet';
 import { DocumentoService } from './../../../shared/service/pessoa/documento.service';
 import { Documento } from './../../../shared/entity/pessoa/documento';
 import { UtilsService } from './../../../shared/service/utils.service';
@@ -16,7 +18,12 @@ import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
     moduleId: module.id,
     selector: 'form-operacao',
     templateUrl: './listar-cliente.component.html',
-    providers: [UtilsService, PessoaService, EnderecoService, TelefoneService, DocumentoService]
+    providers: [UtilsService,
+        PessoaService,
+        EnderecoService,
+        TelefoneService,
+        DocumentoService,
+        PetService]
 })
 
 export class ListarClienteComponent implements OnInit {
@@ -29,6 +36,7 @@ export class ListarClienteComponent implements OnInit {
     enderecos: Endereco[];
     telefones: Telefone[];
     documentos: Documento[];
+    pets: Pet[];
 
     /**
      * Construtor
@@ -37,7 +45,8 @@ export class ListarClienteComponent implements OnInit {
         private router: Router,
         private enderecoService: EnderecoService,
         private telefoneService: TelefoneService,
-        private documentoService: DocumentoService) {
+        private documentoService: DocumentoService,
+        private petService: PetService) {
 
     }
 
@@ -69,6 +78,7 @@ export class ListarClienteComponent implements OnInit {
         this.recuperarEnderecoPorPessoaId(this.pessoaVisualizar.id);
         this.recuperarTelefonePorPessoaId(this.pessoaVisualizar.id);
         this.recuperarDocumentoPorPessoaId(this.pessoaVisualizar.id);
+        this.recuperarPetPorPessoaId(this.pessoaVisualizar.id);
         this.modalVisualizar.show();
     }
 
@@ -118,6 +128,22 @@ export class ListarClienteComponent implements OnInit {
             .subscribe(
             data => {
                 this.documentos = data.objeto;
+            },
+            error => {
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: error.message === undefined ? error : error.message
+                });
+            }
+            );
+    }
+
+    public recuperarPetPorPessoaId(idPessoa: number): void {
+        this.petService.recuperarPorPessoaId(idPessoa)
+            .subscribe(
+            data => {
+                this.pets = data.objeto;
             },
             error => {
                 this.alertaUtil.addMessage({

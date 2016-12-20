@@ -5,6 +5,7 @@ import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { Component, OnInit } from '@angular/core';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
 
+
 @Component({
     moduleId: module.id,
     selector: 'form-operacao',
@@ -18,6 +19,7 @@ export class CadastrarClienteComponent implements OnInit {
     activeClienteForm: boolean = true;
     activeEnderecoForm: boolean = true;
     pessoa: Pessoa;
+    pessoaDtNascimento: string;
 
     /**
      * Construtor
@@ -52,8 +54,8 @@ export class CadastrarClienteComponent implements OnInit {
      * Grava novo cliente
      */
     public gravar(event: any): void {
-        // if (event !== undefined)
         event.preventDefault();
+        this.atribuirDtNascimento();
 
         this.pessoaService.gravar(this.pessoa)
             .subscribe(
@@ -80,6 +82,7 @@ export class CadastrarClienteComponent implements OnInit {
             .subscribe(
             data => {
                 this.pessoa = data.objeto;
+                this.parseDtNascimento();                
             },
             error => {
                 this.alertaUtil.addMessage({
@@ -91,24 +94,24 @@ export class CadastrarClienteComponent implements OnInit {
             );
     }
 
-    set pessoaDtNascimento(e: any) {
-        e = e.split('-');
-        let d = new Date(Date.UTC(e[0], e[1] - 1, e[2]));
-        let dataLocal = new Date();
-        dataLocal.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
-        this.pessoa.dtNascimento = dataLocal;
-    }
-
-    get pessoaDtNascimento() {
+    public parseDtNascimento() : void{
         let dataLocal = new Date(this.pessoa.dtNascimento);
         let ano = dataLocal.toLocaleDateString().substring(6, 10);
         let mes = dataLocal.toLocaleDateString().substring(3, 5);
         let dia = dataLocal.toLocaleDateString().substring(0, 2);
-        return ano + '-' + mes + '-' + dia;
+        this.pessoaDtNascimento = ano + '-' + mes + '-' + dia;
     }
 
     public onNotifyAlerta(message: any): void {
         this.alertaUtil.addMessage(message);
+    }
+
+    private atribuirDtNascimento() {        
+        let e: any[] = this.pessoaDtNascimento.split('-');        
+        let d = new Date(Date.UTC(e[0], e[1] - 1, e[2]));
+        let dataLocal = new Date();
+        dataLocal.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+        this.pessoa.dtNascimento = dataLocal;
     }
 
 }
