@@ -63,6 +63,21 @@
                 </ul>
             </li>
         </div>
+        <div class="nested-menu" *ngIf="isEstoque || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages5')">
+                <span><i class="fa fa-inbox"></i> &nbsp; Estoque</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages5' }" *ngIf="showMenu === 'pages5'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['cadastrar-produto']" [routerLinkActive]="['router-link-active']" href><span>Cadastro</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['listar-produto']" [routerLinkActive]="['router-link-active']" href><span>Lista</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
         <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i> &nbsp;Página em Branco
         </a>

@@ -1,5 +1,6 @@
-import { ListarClienteModule } from './cliente/listar-cliente/listar-cliente.module';
-import { VenderProdutoModule } from './vender-produto/vender-produto.module';
+import { CadastrarProdutoModule } from './produto/cadastro/cadastrar-produto.module';
+import { ListarClienteModule } from './cliente/lista/listar-cliente.module';
+import { VenderProdutoModule } from './produto/venda/vender-produto.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -13,7 +14,7 @@ import { SidebarComponent } from '../shared/index';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 import { AuthGuard } from '../common/auth.guard';
 import { CadastrarUsuarioModule } from './cadastrar-usuario/cadastrar-usuario.module';
-import { CadastrarClienteModule } from './cliente/cadastrar-cliente/cadastrar-cliente.module';
+import { CadastrarClienteModule } from './cliente/cadastro/cadastrar-cliente.module';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { CadastrarClienteModule } from './cliente/cadastrar-cliente/cadastrar-cl
         CadastrarUsuarioModule,
         CadastrarClienteModule,
         VenderProdutoModule,
-        ListarClienteModule
+        ListarClienteModule,
+        CadastrarProdutoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],

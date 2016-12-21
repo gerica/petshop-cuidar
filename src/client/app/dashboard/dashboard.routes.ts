@@ -1,11 +1,12 @@
-import { ListarClienteRoutes } from './cliente/listar-cliente/listar-cliente.routes';
-import { VenderProdutoRoutes } from './vender-produto/vender-produto.routes';
+import { CadastrarProdutoRoutes } from './produto/cadastro/cadastrar-produto.routes';
+import { ListarClienteRoutes } from './cliente/lista/listar-cliente.routes';
+import { VenderProdutoRoutes } from './produto/venda/vender-produto.routes';
 import { Route } from '@angular/router';
 import { HomeRoutes } from './home/index';
 import { BlankPageRoutes } from './blank-page/index';
 import { DashboardComponent } from './index';
 import { CadastrarUsuarioRoutes } from './cadastrar-usuario/index';
-import { CadastrarClienteRoutes } from './cliente/cadastrar-cliente/cadastrar-cliente.routes';
+import { CadastrarClienteRoutes } from './cliente/cadastro/cadastrar-cliente.routes';
 
 export const DashboardRoutes: Route[] = [{
     path: 'dashboard',
@@ -16,6 +17,7 @@ export const DashboardRoutes: Route[] = [{
         ...CadastrarUsuarioRoutes,
         ...CadastrarClienteRoutes,
         ...VenderProdutoRoutes,
-        ...ListarClienteRoutes
+        ...ListarClienteRoutes,
+        ...CadastrarProdutoRoutes
     ]
 }];

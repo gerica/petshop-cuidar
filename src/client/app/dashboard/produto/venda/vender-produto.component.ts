@@ -1,9 +1,9 @@
-import { PessoaService } from './../../shared/service/pessoa/pessoa.service';
+import { UtilsService } from './../../../shared/service/utils.service';
+import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
+import { AlertaUtil } from './../../../shared/utils/alerta-util';
+import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UtilsService } from './../../shared/service/utils.service';
-import { Pessoa } from './../../shared/entity/pessoa/pessoa';
 import { Component, OnInit} from '@angular/core';
-import { AlertaUtil } from '../../shared/utils/alerta-util';
 
 @Component({
     moduleId: module.id,
@@ -25,8 +25,7 @@ export class VenderProdutoComponent implements OnInit {
     /**
      * Construtor
      */
-    constructor(private utilsService: UtilsService,
-        private pessoaService: PessoaService) {
+    constructor(private pessoaService: PessoaService) {
 
     }
 

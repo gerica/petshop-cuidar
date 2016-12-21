@@ -20,8 +20,6 @@ export class SidebarComponent implements OnInit {
 	isRelacionamento = false;//"RELACIONAMENTO"
 	isVenda = false;//"VENDA"
 
-
-
 	ngOnInit() {
 		this.usuario = JSON.parse(localStorage.getItem('usuario_'));
 		this.checkRole();
@@ -43,15 +41,20 @@ export class SidebarComponent implements OnInit {
 			this.usuario.authorities.forEach((element) => {
 				if (element.authority === RoleEnum[RoleEnum.ADMIN]) {
 					this.isAdmin = true;
-				} else if (element.authority === RoleEnum[RoleEnum.CONVIDADO]) {
+				}
+				if (element.authority === RoleEnum[RoleEnum.CONVIDADO]) {
 					this.isConvidado = true;
-				} else if (element.authority === RoleEnum[RoleEnum.FINANCEIRO]) {
+				}
+				if (element.authority === RoleEnum[RoleEnum.FINANCEIRO]) {
 					this.isFinanceiro = true;
-				} else if (element.authority === RoleEnum[RoleEnum.ESTOQUE]) {
+				}
+				if (element.authority === RoleEnum[RoleEnum.ESTOQUE]) {
 					this.isEstoque = true;
-				} else if (element.authority === RoleEnum[RoleEnum.RELACIONAMENTO]) {
+				}
+				if (element.authority === RoleEnum[RoleEnum.RELACIONAMENTO]) {
 					this.isRelacionamento = true;
-				} else if (element.authority === RoleEnum[RoleEnum.VENDA]) {
+				}
+				if (element.authority === RoleEnum[RoleEnum.VENDA]) {
 					this.isVenda = true;
 				}
 			});

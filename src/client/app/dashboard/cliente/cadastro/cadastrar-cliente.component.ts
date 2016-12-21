@@ -82,7 +82,7 @@ export class CadastrarClienteComponent implements OnInit {
             .subscribe(
             data => {
                 this.pessoa = data.objeto;
-                this.parseDtNascimento();                
+                this.parseDtNascimento();
             },
             error => {
                 this.alertaUtil.addMessage({
@@ -94,7 +94,7 @@ export class CadastrarClienteComponent implements OnInit {
             );
     }
 
-    public parseDtNascimento() : void{
+    public parseDtNascimento(): void {
         let dataLocal = new Date(this.pessoa.dtNascimento);
         let ano = dataLocal.toLocaleDateString().substring(6, 10);
         let mes = dataLocal.toLocaleDateString().substring(3, 5);
@@ -106,8 +106,8 @@ export class CadastrarClienteComponent implements OnInit {
         this.alertaUtil.addMessage(message);
     }
 
-    private atribuirDtNascimento() {        
-        let e: any[] = this.pessoaDtNascimento.split('-');        
+    private atribuirDtNascimento() {
+        let e: any[] = this.pessoaDtNascimento.split('-');
         let d = new Date(Date.UTC(e[0], e[1] - 1, e[2]));
         let dataLocal = new Date();
         dataLocal.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
