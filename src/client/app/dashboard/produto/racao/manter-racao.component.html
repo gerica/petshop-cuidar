@@ -113,10 +113,8 @@
 					</form>
 					<listar-racao [addRacao]="addRacao" (notifyAlerta)="onNotifyAlerta($event)" (notifyRacao)="onNotifyRacao($event)"></listar-racao>
 				</tab>
-				<tab heading="Lotes">
-					<div class="row">
-						
-					</div>
+				<tab heading="Lotes" *ngIf="racao.id">
+					<tab-racao-lote [racao]="racao" (notifyAlerta)="onNotifyAlerta($event)" ></tab-racao-lote>
 				</tab>
 			</tabset>
 		</div>
