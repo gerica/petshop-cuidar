@@ -161,7 +161,6 @@ export class PetClienteComponent implements OnInit, OnChanges {
             }
         });
 
-        console.log(typeof this.pet.dtNacimento);
         this.selectedRaca = this.pet.raca.dsNome;
         this.recuperarRacaTipo(this.pet.raca.tipoPet.id);
     }

@@ -1,4 +1,3 @@
-import { UtilsService } from './../../../shared/service/utils.service';
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
 import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';

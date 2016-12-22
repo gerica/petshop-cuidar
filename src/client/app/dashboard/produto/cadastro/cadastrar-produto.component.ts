@@ -1,7 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';
-import { UtilsService } from './../../../shared/service/utils.service';
-import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { Component, OnInit } from '@angular/core';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
 
@@ -29,7 +27,7 @@ export class CadastrarProdutoComponent implements OnInit {
      * Método chamado quando esse componente iniciar
      */
     public ngOnInit(): void {
-
+        console.warn('Apagar esse componente se não for utilizar');
     }
 
     public novo() {

@@ -1,4 +1,4 @@
-import { CadastrarProdutoRoutes } from './produto/cadastro/cadastrar-produto.routes';
+import { ManterRacaoRoutes } from './produto/racao/manter-racao.routes';
 import { ListarClienteRoutes } from './cliente/lista/listar-cliente.routes';
 import { VenderProdutoRoutes } from './produto/venda/vender-produto.routes';
 import { Route } from '@angular/router';
@@ -18,6 +18,6 @@ export const DashboardRoutes: Route[] = [{
         ...CadastrarClienteRoutes,
         ...VenderProdutoRoutes,
         ...ListarClienteRoutes,
-        ...CadastrarProdutoRoutes
+        ...ManterRacaoRoutes
     ]
 }];

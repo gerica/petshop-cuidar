@@ -1,4 +1,4 @@
-import { CadastrarProdutoModule } from './produto/cadastro/cadastrar-produto.module';
+import { ManterRacaoModule } from './produto/racao/manter-racao.module';
 import { ListarClienteModule } from './cliente/lista/listar-cliente.module';
 import { VenderProdutoModule } from './produto/venda/vender-produto.module';
 import { NgModule } from '@angular/core';
@@ -28,7 +28,7 @@ import { CadastrarClienteModule } from './cliente/cadastro/cadastrar-cliente.mod
         CadastrarClienteModule,
         VenderProdutoModule,
         ListarClienteModule,
-        CadastrarProdutoModule
+        ManterRacaoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
