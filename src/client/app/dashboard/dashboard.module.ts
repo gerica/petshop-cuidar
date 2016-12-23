@@ -1,3 +1,4 @@
+import { ManterMedicamentoModule } from './produto/medicamento/manter-medicamento.module';
 import { ManterRacaoModule } from './produto/racao/manter-racao.module';
 import { ListarClienteModule } from './cliente/lista/listar-cliente.module';
 import { VenderProdutoModule } from './produto/venda/vender-produto.module';
@@ -28,7 +29,8 @@ import { CadastrarClienteModule } from './cliente/cadastro/cadastrar-cliente.mod
         CadastrarClienteModule,
         VenderProdutoModule,
         ListarClienteModule,
-        ManterRacaoModule
+        ManterRacaoModule,
+        ManterMedicamentoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],

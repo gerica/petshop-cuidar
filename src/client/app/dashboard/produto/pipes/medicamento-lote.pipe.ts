@@ -1,23 +1,23 @@
-import { RacaoLote } from './../../../shared/entity/produto/racao-lote';
+import { MedicamentoLote } from './../../../shared/entity/produto/medicamento-lote';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'filtroPorRacaoLote'
+    name: 'filtroPorMedicamentoLote'
 })
 
-export class FiltroPorRacaoLote implements PipeTransform {
+export class FiltroPorMedicamentoLote implements PipeTransform {
 
-    transform(racaoLotes: RacaoLote[], digitado: string) {
-        if (!racaoLotes || !digitado) {
-            return racaoLotes;
+    transform(medicamentoLotes: MedicamentoLote[], digitado: string) {
+        if (!medicamentoLotes || !digitado) {
+            return medicamentoLotes;
         }
 
-        // return racaoLotes.filter((lote) => {
+        // return medicamentoLotes.filter((lote) => {
         //     return pessoa.nome.toLowerCase().includes(digitado) ||
         //         pessoa.tipoPessoa.toLowerCase().includes(digitado);
         // });
 
-        return racaoLotes.filter((item: any) => {
+        return medicamentoLotes.filter((item: any) => {
             for (let key in item) {
                 if ((typeof item[key] === 'string' || item[key] instanceof String) &&
                     (item[key].toUpperCase().indexOf(digitado.toUpperCase()) !== -1)) {
