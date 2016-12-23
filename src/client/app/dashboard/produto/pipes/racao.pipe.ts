@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FiltroPorRacao implements PipeTransform {
 
     transform(racoes: Racao[], digitado: string) {
-        if (!racoes) {
+        if (!racoes || !digitado) {
             return racoes;
         }
 
@@ -16,6 +16,8 @@ export class FiltroPorRacao implements PipeTransform {
             for (let key in item) {
                 if ((typeof item[key] === 'string' || item[key] instanceof String) &&
                     (item[key].toUpperCase().indexOf(digitado.toUpperCase()) !== -1)) {
+                    console.log(item[key]);
+                    console.log(item[key].toUpperCase().indexOf(digitado.toUpperCase()));
                     return true;
                 }
             }

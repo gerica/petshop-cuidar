@@ -125,7 +125,7 @@ export class RacaoLoteComponent implements OnInit, OnChanges {
             );
     }
 
-    public carregarParaEdicao(racaoLote: RacaoLote): void {
+    public carregarParaEdicao(racaoLote: RacaoLote): void {        
         this.racaoLote = racaoLote;
     }
 

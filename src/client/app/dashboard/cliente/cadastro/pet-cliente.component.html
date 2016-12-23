@@ -109,7 +109,9 @@
                                         <div class="col-lg-12">
                                             <h4 class="list-group-item-heading">{{petExcluir?.dsNome}}</h4>
                                             <p class="list-group-item-text">
-                                                Tipo: {{petExcluir?.raca?.tipoPet?.dsNome}}<br> Raça: {{petExcluir?.raca?.dsNome}}<br>                                                Data Nascimento: {{petExcluir?.dtNacimento | date: 'dd/MM/yyyy'}}
+                                                <span>Tipo: {{petExcluir?.raca?.tipoPet?.dsNome}}<br></span>
+                                                <span>Raça: {{petExcluir?.raca?.dsNome}}<br></span>
+                                                <span>Data Nascimento: {{petExcluir?.dtNacimento | date: 'dd/MM/yyyy'}}</span>
                                             </p>
                                         </div>
                                     </div>

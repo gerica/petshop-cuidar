@@ -41,7 +41,7 @@
                         <div class="col-lg-4">
                             <fieldset class="form-group">
                                 <label>Valor:</label>
-                                <input type="number" class="form-control" id="valor" name="valor" [(ngModel)]="racaoLote.valor" #valor="ngModel" required>
+                                <input type="number" min="1" step="any" class="form-control" id="valor" name="valor" [(ngModel)]="racaoLote.valor" #valor="ngModel" required>
                             </fieldset>
                             <div [hidden]="valor.valid || valor.pristine" class="alert alert-danger">
                                 O Valor é obrigatório.
@@ -50,7 +50,7 @@
                         <div class="col-lg-4">
                             <fieldset class="form-group">
                                 <label>Valor Venda:</label>
-                                <input type="number" class="form-control" id="valorVenda" name="valorVenda" [(ngModel)]="racaoLote.valorVenda" #valorVenda="ngModel"
+                                <input type="number" min="1" step="any" class="form-control" id="valorVenda" name="valorVenda" [(ngModel)]="racaoLote.valorVenda" #valorVenda="ngModel"
                                     required>
                             </fieldset>
                             <div [hidden]="valorVenda.valid || valorVenda.pristine" class="alert alert-danger">
@@ -85,7 +85,7 @@
 <div class="card card-block" *ngIf="racaoLotes && racaoLotes.length >0">
     <div class="row">
         <div class="col-lg-12">
-            <input type="text" name="textoProcurado" class="form-control" placeholder="Filtrar por Lote" #textoProcurado (keyup)="0">
+            <input type="text" name="textoProcuradoLote" class="form-control" placeholder="Filtrar por Lote" #textoProcuradoLote (keyup)="0">
         </div>
     </div>
     <div class="row">
@@ -111,7 +111,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of racaoLotes | filtroPorRacaoLote: textoProcurado.value | paginate: { itemsPerPage: 10, currentPage: p }"
+                                        <tr *ngFor="let item of racaoLotes | filtroPorRacaoLote: textoProcuradoLote.value | paginate: {id:'loteLista' , itemsPerPage: 10, currentPage: p1 }"
                                             (dblclick)="carregarParaEdicao(item)">
                                             <td>
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="carregarParaEdicao(item)"></i>
@@ -126,8 +126,8 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="4">
-                                                <pagination-controls (pageChange)="p = $event" #apiRacaoLote directionLinks="true" maxSize="9" autoHide="true"></pagination-controls>
+                                            <td colspan="7">
+                                                <pagination-controls id="loteLista" (pageChange)="p1 = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -146,7 +146,7 @@
     aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
-            <form role="form" (submit)="excluir($event)" *ngIf="petExcluir">
+            <form role="form" (submit)="excluir($event)" *ngIf="racaoLoteExcluir">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
@@ -160,11 +160,13 @@
                                 <div class="card-block bg-white">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <h4 class="list-group-item-heading">{{item?.numero | date: 'dd/MM/yyyy'}}</h4>
+                                            <h4 class="list-group-item-heading">Número: {{racaoLoteExcluir?.numero}}</h4>
                                             <p class="list-group-item-text">
-                                                <span> Data: {{item?.dataLote | date: 'dd/MM/yyyy'}}<br></span>
-                                                <!--<span> Raça: {{item?.raca?.dsNome}}<br></span>
-                                        <span> Data Nascimento: {{item?.dtNacimento | date: 'dd/MM/yyyy'}}</span>-->
+                                                <span>Data lote: {{racaoLoteExcluir?.dataLote | date: 'dd/MM/yyyy' }}<br></span>
+                                                <span>Data Valiade: {{racaoLoteExcluir?.dataValidade | date: 'dd/MM/yyyy'}}<br></span>
+                                                <span>Valor lote: {{racaoLoteExcluir?.valor}}<br></span>
+                                                <span>Valor venda: {{racaoLoteExcluir?.valorVenda}}<br></span>
+                                                <span>Quantidade: {{racaoLoteExcluir?.quantidade}}<br></span>
                                             </p>
                                         </div>
                                     </div>
