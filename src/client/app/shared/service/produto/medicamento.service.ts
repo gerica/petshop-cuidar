@@ -1,3 +1,4 @@
+import { TipoPet } from './../../entity/pet/tipoPet';
 import { Medicamento } from './../../entity/produto/medicamento';
 import { UtilsService } from './../utils.service';
 import { URL_BACK_END } from './../../../common/url_const';
@@ -23,11 +24,16 @@ export class MedicamentoService {
     public constructor(private http: Http,
         private utilsService: UtilsService) { }
 
-    public gravar(medicamento: Medicamento): Observable<any> {
+    public gravar(medicamento: Medicamento, tiposPet: TipoPet[]): Observable<any> {
         let contentHeaders = new Headers();
         this.utilsService.createAuthorizationHeader(contentHeaders);
 
-        let body = JSON.stringify(medicamento);
+        let objBody: any = {
+            medicamento: medicamento,
+            tiposPet: tiposPet
+        };
+        let body = JSON.stringify(objBody);
+
         return this.http.post(URL_GRAVAR, body, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.utilsService.extractData)

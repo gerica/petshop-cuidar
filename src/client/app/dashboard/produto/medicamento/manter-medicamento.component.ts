@@ -19,6 +19,7 @@ export class ManterMedicamentoComponent implements OnInit {
     activeForm: boolean = true;
     medicamento: Medicamento;
     tiposPet: TipoPet[];
+    tiposPetSelected: TipoPet[];
     categorias: string[];
     portes: string[];
     idades: string[];
@@ -58,10 +59,13 @@ export class ManterMedicamentoComponent implements OnInit {
 
     public onNotifyMedicamento(medicamento: Medicamento): void {
         this.medicamento = medicamento;
-        this.tiposPet.forEach((e) => {
-            if (e.id === this.medicamento.tipoPet.id) {
-                this.medicamento.tipoPet = e;
-            }
+        this.tiposPetSelected = [];
+        this.tiposPet.forEach((tipo) => {
+            this.medicamento.medicamentoTipoPet.forEach((medTipo) => {
+                if (tipo.dsNome === medTipo.tipoPet.dsNome) {
+                    this.tiposPetSelected.push(tipo);
+                }
+            });
         });
     }
 
@@ -70,7 +74,7 @@ export class ManterMedicamentoComponent implements OnInit {
      */
     public gravar(event: any): void {
         event.preventDefault();
-        this.medicamentoService.gravar(this.medicamento)
+        this.medicamentoService.gravar(this.medicamento, this.tiposPetSelected)
             .subscribe(
             result => {
                 this.alertaUtil.addMessage({

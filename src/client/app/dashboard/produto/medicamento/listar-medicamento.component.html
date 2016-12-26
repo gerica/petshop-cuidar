@@ -8,7 +8,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header card-default">
-                    Rações
+                    Medicamentos
                 </div>
                 <div class="card-block bg-white">
                     <div class="row">
@@ -20,29 +20,32 @@
                                             <th>Ações</th>
                                             <th>Marca</th>
                                             <th>Nome</th>
-                                            <th>Linha</th>
+                                            <th>Categoria</th>
                                             <th>Porte</th>
                                             <th>Idade</th>
                                             <th>Tipo</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of racoes | filtroPorMedicamento: textoProcurado.value | paginate: {id:'racaoLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyRacaoEmit(item)">
+                                        <tr *ngFor="let item of medicamentos | filtroPorMedicamento: textoProcurado.value | paginate: {id:'medicamentoLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyMedicamentoEmit(item)">
                                             <td>
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="notifyRacaoEmit(item)"></i>                                                
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="notifyMedicamentoEmit(item)"></i>                                                
                                             </td>
                                             <td>{{item.marca}}</td>
                                             <td>{{item.nome}}</td>
-                                            <td>{{item.linha}}</td>
+                                            <td>{{item.categoria}}</td>
                                             <td>{{item.porte}}</td>
                                             <td>{{item.faixaIdade}}</td>
-                                            <td>{{item.tipoPet.dsNome}}</td>
+                                            <td>
+                                                <span *ngFor="let tipo of item?.medicamentoTipoPet">
+                                                    {{tipo?.tipoPet?.dsNome}}<br></span>
+                                            </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="4">
-                                                <pagination-controls  id="racaoLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
+                                                <pagination-controls  id="medicamentoLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
                                             </td>
                                         </tr>
                                     </tfoot>

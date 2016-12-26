@@ -3,14 +3,14 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header card-default">
-                    Ração: {{racao?.nome}}
+                    Medicamento: {{medicamento?.nome}}
                 </div>
                 <div class="card-block bg-white">
                     <div class="row">
                         <div class="col-lg-4">
                             <fieldset class="form-group">
                                 <label>Número:</label>
-                                <input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="racaoLote.numero" #numero="ngModel" required>
+                                <input type="text" class="form-control" id="numero" name="numero" [(ngModel)]="medicamentoLote.numero" #numero="ngModel" required>
                             </fieldset>
                             <div [hidden]="numero.valid || numero.pristine" class="alert alert-danger">
                                 O Número é obrigatório.
@@ -19,7 +19,7 @@
                         <div class="col-lg-4">
                             <fieldset class="form-group">
                                 <label>Data Lote:</label>
-                                <input type="date" class="form-control" id="dataLote" name="dataLote" [(ngModel)]="racaoLote.dataLote" #dataLote="ngModel"
+                                <input type="date" class="form-control" id="dataLote" name="dataLote" [(ngModel)]="medicamentoLote.dataLote" #dataLote="ngModel"
                                     required>
                             </fieldset>
                             <div [hidden]="dataLote.valid || dataLote.pristine" class="alert alert-danger">
@@ -29,7 +29,7 @@
                         <div class="col-lg-4">
                             <fieldset class="form-group">
                                 <label>Data Validade:</label>
-                                <input type="date" class="form-control" id="dataValidade" name="dataValidade" [(ngModel)]="racaoLote.dataValidade" #dataValidade="ngModel"
+                                <input type="date" class="form-control" id="dataValidade" name="dataValidade" [(ngModel)]="medicamentoLote.dataValidade" #dataValidade="ngModel"
                                     required>
                             </fieldset>
                             <div [hidden]="dataValidade.valid || dataValidade.pristine" class="alert alert-danger">
@@ -41,7 +41,7 @@
                         <div class="col-lg-4">
                             <fieldset class="form-group">
                                 <label>Valor:</label>
-                                <input type="number" min="1" step="any" class="form-control" id="valor" name="valor" [(ngModel)]="racaoLote.valor" #valor="ngModel" required>
+                                <input type="number" min="1" step="any" class="form-control" id="valor" name="valor" [(ngModel)]="medicamentoLote.valor" #valor="ngModel" required>
                             </fieldset>
                             <div [hidden]="valor.valid || valor.pristine" class="alert alert-danger">
                                 O Valor é obrigatório.
@@ -50,7 +50,7 @@
                         <div class="col-lg-4">
                             <fieldset class="form-group">
                                 <label>Valor Venda:</label>
-                                <input type="number" min="1" step="any" class="form-control" id="valorVenda" name="valorVenda" [(ngModel)]="racaoLote.valorVenda" #valorVenda="ngModel"
+                                <input type="number" min="1" step="any" class="form-control" id="valorVenda" name="valorVenda" [(ngModel)]="medicamentoLote.valorVenda" #valorVenda="ngModel"
                                     required>
                             </fieldset>
                             <div [hidden]="valorVenda.valid || valorVenda.pristine" class="alert alert-danger">
@@ -60,7 +60,7 @@
                         <div class="col-lg-4">
                             <fieldset class="form-group">
                                 <label>Quantidade:</label>
-                                <input type="number" class="form-control" id="quantidade" name="quantidade" [(ngModel)]="racaoLote.quantidade" #quantidade="ngModel"
+                                <input type="number" class="form-control" id="quantidade" name="quantidade" [(ngModel)]="medicamentoLote.quantidade" #quantidade="ngModel"
                                     required>
                             </fieldset>
                             <div [hidden]="quantidade.valid || quantidade.pristine" class="alert alert-danger">
@@ -76,13 +76,13 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Gravar</button>
-                <button *ngIf="racaoLote.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
-                <button *ngIf="racaoLote.id" type="button" class="btn btn-danger" (click)="showModalExcluir()">Excluir</button>
+                <button *ngIf="medicamentoLote.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
+                <button *ngIf="medicamentoLote.id" type="button" class="btn btn-danger" (click)="showModalExcluir()">Excluir</button>
             </div>
         </div>
     </div>
 </form>
-<div class="card card-block" *ngIf="racaoLotes && racaoLotes.length >0">
+<div class="card card-block" *ngIf="medicamentoLotes && medicamentoLotes.length >0">
     <div class="row">
         <div class="col-lg-12">
             <input type="text" name="textoProcuradoLote" class="form-control" placeholder="Filtrar por Lote" #textoProcuradoLote (keyup)="0">
@@ -111,7 +111,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of racaoLotes | filtroPorMedicamentoLote: textoProcuradoLote.value | paginate: {id:'loteLista' , itemsPerPage: 10, currentPage: p1 }"
+                                        <tr *ngFor="let item of medicamentoLotes | filtroPorMedicamentoLote: textoProcuradoLote.value | paginate: {id:'loteLista' , itemsPerPage: 10, currentPage: p1 }"
                                             (dblclick)="carregarParaEdicao(item)">
                                             <td>
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="carregarParaEdicao(item)"></i>
@@ -146,7 +146,7 @@
     aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
-            <form role="form" (submit)="excluir($event)" *ngIf="racaoLoteExcluir">
+            <form role="form" (submit)="excluir($event)" *ngIf="medicamentoLoteExcluir">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
@@ -160,13 +160,13 @@
                                 <div class="card-block bg-white">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <h4 class="list-group-item-heading">Número: {{racaoLoteExcluir?.numero}}</h4>
+                                            <h4 class="list-group-item-heading">Número: {{medicamentoLoteExcluir?.numero}}</h4>
                                             <p class="list-group-item-text">
-                                                <span>Data lote: {{racaoLoteExcluir?.dataLote | date: 'dd/MM/yyyy' }}<br></span>
-                                                <span>Data Valiade: {{racaoLoteExcluir?.dataValidade | date: 'dd/MM/yyyy'}}<br></span>
-                                                <span>Valor lote: {{racaoLoteExcluir?.valor}}<br></span>
-                                                <span>Valor venda: {{racaoLoteExcluir?.valorVenda}}<br></span>
-                                                <span>Quantidade: {{racaoLoteExcluir?.quantidade}}<br></span>
+                                                <span>Data lote: {{medicamentoLoteExcluir?.dataLote | date: 'dd/MM/yyyy' }}<br></span>
+                                                <span>Data Valiade: {{medicamentoLoteExcluir?.dataValidade | date: 'dd/MM/yyyy'}}<br></span>
+                                                <span>Valor lote: {{medicamentoLoteExcluir?.valor}}<br></span>
+                                                <span>Valor venda: {{medicamentoLoteExcluir?.valorVenda}}<br></span>
+                                                <span>Quantidade: {{medicamentoLoteExcluir?.quantidade}}<br></span>
                                             </p>
                                         </div>
                                     </div>

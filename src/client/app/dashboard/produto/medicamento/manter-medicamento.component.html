@@ -53,7 +53,7 @@
 											<div class="col-lg-4">
 												<fieldset class="form-group">
 													<label>Tipo Pet</label>
-													<select class="form-control" id="tipoPet" name="tipoPet" [(ngModel)]="medicamento.tipoPet" #tipoPet="ngModel" required>
+													<select  multiple="" class="form-control" id="tipoPet" name="tipoPet" [(ngModel)]="tiposPetSelected" #tipoPet="ngModel" required>
 														<option *ngFor="let t of tiposPet" [ngValue]="t">{{t.dsNome}}</option>
 													</select>
 												</fieldset>
@@ -111,10 +111,10 @@
 							</div>
 						</div>
 					</form>
-					<!--<listar-medicamento [addMedicamento]="addMedicamento" (notifyAlerta)="onNotifyAlerta($event)" (notifyMedicamento)="onNotifyMedicamento($event)"></listar-medicamento>-->
+					<listar-medicamento [addMedicamento]="addMedicamento" (notifyAlerta)="onNotifyAlerta($event)" (notifyMedicamento)="onNotifyMedicamento($event)"></listar-medicamento>
 				</tab>
 				<tab heading="Lotes" *ngIf="medicamento.id">
-					<!--<tab-medicamento-lote [medicamento]="medicamento" (notifyAlerta)="onNotifyAlerta($event)" ></tab-medicamento-lote>-->
+					<tab-medicamento-lote [medicamento]="medicamento" (notifyAlerta)="onNotifyAlerta($event)" ></tab-medicamento-lote>
 				</tab>
 			</tabset>
 		</div>
@@ -145,8 +145,11 @@
 											<h4 class="list-group-item-heading">{{medicamentoExcluir?.nome}}</h4>
 											<p class="list-group-item-text">
 												<span>Marca: {{medicamentoExcluir?.marca}}</span><br>
-												<span>Tipo Pet: {{medicamentoExcluir?.tipoPet?.dsNome}}</span><br>
-												<span>Linha: {{medicamentoExcluir?.linha}}</span><br>
+												<span>Tipo Pet: 
+													<span *ngFor="let tipo of medicamentoExcluir?.medicamentoTipoPet">
+                                                    {{tipo?.tipoPet?.dsNome}} </span>
+													</span><br>
+												<span>Categoria: {{medicamentoExcluir?.categoria}}</span><br>
 												<span>Porte: {{medicamentoExcluir?.porte}}</span><br>
 												<span>Faixa Idade: {{medicamentoExcluir?.faixaIdade}}</span><br>
 											</p>

@@ -14,7 +14,7 @@ export class ListarMedicamentoComponent implements OnInit, OnChanges {
     @Output() notifyAlerta: EventEmitter<any> = new EventEmitter<any>();
     @Output() notifyMedicamento: EventEmitter<any> = new EventEmitter<any>();
     @Input() addMedicamento: number;
-    racoes: Medicamento[];
+    medicamentos: Medicamento[];
 
     /**
      * Construtor
@@ -58,6 +58,7 @@ export class ListarMedicamentoComponent implements OnInit, OnChanges {
      */
     public notifyAlertaEmit(message: any) {
         this.notifyAlerta.emit(message);
+        
     }
 
     /**
@@ -74,7 +75,7 @@ export class ListarMedicamentoComponent implements OnInit, OnChanges {
         this.medicamentoService.recuperarTodas()
             .subscribe(
             data => {
-                this.racoes = data.objeto;
+                this.medicamentos = data.objeto;
             },
             error => {
                 this.notifyAlertaEmit({

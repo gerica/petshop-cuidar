@@ -26,7 +26,7 @@ export class MedicamentoLoteService {
         this.utilsService.createAuthorizationHeader(contentHeaders);
 
         let objBody: any = {
-            medicamentoLote: medicamentoLote,
+            lote: medicamentoLote,
             idMedicamento: idMedicamento
         };
         let body = JSON.stringify(objBody);
