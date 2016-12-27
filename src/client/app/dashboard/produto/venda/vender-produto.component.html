@@ -30,23 +30,65 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card">
-                                    <div class="card-header card-default">
-                                        Produto
-                                    </div>
-                                    <div class="card-block bg-white">
-                                        <input class="form-control">
-                                    </div>
-                                </div>
+                            <div class="col-sm-12">
+                                <tyahead-produto (notifyProduto)="onSelectedProduto($event)"></tyahead-produto>
                             </div>
-                            <div class="col-sm-6">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-header card-default">
                                         Lista de Produtos
                                     </div>
                                     <div class="card-block bg-white">
-
+                                        <div class="card" *ngFor="let item of itensVenda; let i = index">
+                                            <div class="card-header card-default">
+                                                <span>{{item?.nome}}</span>
+                                                <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
+                                                    <li class="dropdown nav-item" dropdown>
+                                                        <span tooltipPlacement="left" tooltip="Remover produto." (click)="removerItem(i)">
+                                                        <i class="fa fa-trash"></i>
+                                                        </span>
+                                                    </li>
+                                                    <li class="dropdown nav-item" dropdown>
+                                                        <span tooltipPlacement="top" tooltip="Subtrair" (click)="subtrairItemVenda(i)">
+                                                        <i class="fa fa-minus-circle"></i>                                                        
+                                                        </span>
+                                                    </li>
+                                                    <li class="dropdown nav-item" dropdown>
+                                                        <span tooltipPlacement="top" tooltip="Adicionar" (click)="adicionarItemVenda(i)">
+                                                        <i class="fa fa-plus-circle"></i>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="card-block bg-white">
+                                                <div class="row">
+                                                    <div class="col-sm-1">
+                                                        <i class="fa fa-plus-square-o" style="cursor:pointer" *ngIf="!item.showDetalhe" aria-hidden="true" title="Saídas" (click)="showHideColuna(item)" title="Apresentar Detelhes"></i>
+                                                        <i class="fa fa-minus-square-o" style="cursor:pointer" *ngIf="item.showDetalhe" aria-hidden="true" title="Saídas" (click)="showHideColuna(item)" title="Apresentar Detelhes"></i>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <fieldset class="form-group">
+                                                            <label>Quantidade: {{item?.quantidadeVenda}}</label>
+                                                            <!--<input type="number" class="form-control" id="quantidade" name="quantidade" [(ngModel)]="item.quantidadeVenda">-->
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <fieldset class="form-group">
+                                                            <label>Valor: {{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</label>
+                                                            <!--<input type="number" class="form-control" id="quantidade" name="quantidade" [(ngModel)]="item.quantidadeVenda">-->
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-sm-5" *ngIf="item.showDetalhe">
+                                                        <span> Tipo: {{item?.tipoProduto}}<br></span>
+                                                        <span> Marca: {{item?.marca}}<br></span>
+                                                        <span> Valor: {{item?.valorVenda | currency:'BRL':true}}<br></span>
+                                                        <span> Quantidade: {{item?.quantidade}}<br></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +97,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Gravar</button>
-                                    <button type="reset" class="btn btn-danger">Limpar</button>
+                                    <button type="reset" class="btn btn-danger" (click)="novo()">Limpar</button>
                                 </div>
                             </div>
                         </div>

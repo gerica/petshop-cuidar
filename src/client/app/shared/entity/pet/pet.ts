@@ -1,8 +1,10 @@
+import { Pessoa } from './../pessoa/pessoa';
 import { Raca } from './raca';
 
 export class Pet {
     id: number;
-    dsNome: string;
+    nome: string;
     dtNacimento: Date;
     raca: Raca;
+    pessoa: Pessoa;
 }

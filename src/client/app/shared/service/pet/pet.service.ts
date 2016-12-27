@@ -13,6 +13,7 @@ export const URL_PET: string = URL_BACK_END + 'pet/';
 export const URL_GRAVAR: string = URL_PET + 'gravar';
 export const URL_EXCUIR: string = URL_PET + 'excluir';
 export const URI_RECUPERAR_POR_PESSOA_ID: string = URL_PET + 'recuperarPorPessoaId';
+export const URL_RECUPERAR_PET_POR_NOME: string = URL_PET + 'recuperarPetPorNome';
 
 
 @Injectable()
@@ -60,4 +61,14 @@ export class PetService {
             .catch(this.utilsService.handleError);
     }
 
+    public recuperarPetPorNome(nomePessoa: string): Observable<any> {
+        let contentHeaders = new Headers();
+        this.utilsService.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URL_RECUPERAR_PET_POR_NOME + '/' + nomePessoa, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.utilsService.extractData)
+            //...errors if any
+            .catch(this.utilsService.handleError);
+    }
 }

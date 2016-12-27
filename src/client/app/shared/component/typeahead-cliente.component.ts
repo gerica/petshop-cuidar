@@ -1,3 +1,5 @@
+import { Pet } from './../entity/pet/pet';
+import { PetService } from './../service/pet/pet.service';
 import { PessoaService } from './../../shared/service/pessoa/pessoa.service';
 import { Observable } from 'rxjs/Rx';
 import { Pessoa } from './../../shared/entity/pessoa/pessoa';
@@ -7,12 +9,13 @@ import { Component, Output, EventEmitter } from '@angular/core';
     moduleId: module.id,
     selector: 'tyahead-cliente',
     templateUrl: './typeahead-cliente.component.html',
-    providers: [PessoaService]
+    providers: [PessoaService, PetService]
 })
 
 export class TypeAheadClienteComponent {
     @Output() notifyCliente: EventEmitter<any> = new EventEmitter<any>();
     clientes: Pessoa[];
+    pets: Pet[];
     asyncSelected: string = '';
     dataSource: Observable<any>;
     typeaheadLoading: boolean = false;
@@ -21,24 +24,53 @@ export class TypeAheadClienteComponent {
     /**
      * Construtor
      */
-    constructor(private pessoaService: PessoaService) {
+    constructor(private pessoaService: PessoaService,
+        private petService: PetService) {
         this.dataSource = Observable.create((observer: any) => {
-            this.pessoaService.recuperarPessoaPorNome(this.asyncSelected)
-                .subscribe(
-                data => {
-                    this.clientes = data.objeto;
-                    observer.next();
-                },
-                error => {
-                    console.log(error.message === undefined ? error : error.message);
-                }
-                );
+            this.recuperarPessoaPorNome(observer);
         }).mergeMap(() => this.getStatesAsObservable());
 
     }
 
+    public recuperarPessoaPorNome(observer: any): void {
+        this.pessoaService.recuperarPessoaPorNome(this.asyncSelected)
+            .subscribe(
+            data => {
+                this.clientes = data.objeto;
+                if (this.clientes.length > 0) {
+                    observer.next();
+                } else {
+                    this.recuperarPetPorNome(observer);
+                }
+
+            },
+            error => {
+                console.log(error.message === undefined ? error : error.message);
+            }
+            );
+    }
+
+    public recuperarPetPorNome(observer: any): void {
+        this.petService.recuperarPetPorNome(this.asyncSelected)
+            .subscribe(
+            data => {
+                this.pets = data.objeto;
+                this.pets.forEach(e => {
+                    e.nome = e.pessoa.nome + ' - ' + e.nome;
+                });
+                observer.next();
+            },
+            error => {
+                console.log(error.message === undefined ? error : error.message);
+            }
+            );
+    }
+
     public getStatesAsObservable(): Observable<any> {
-        return Observable.of(this.clientes);
+        if (this.clientes.length > 0) {
+            return Observable.of(this.clientes);
+        }
+        return Observable.of(this.pets);
     }
 
     public changeTypeaheadLoading(e: boolean): void {
@@ -55,7 +87,12 @@ export class TypeAheadClienteComponent {
      * onSelectedCliene()
      */
     public notifyClienteEmit(e: any) {
-        this.notifyCliente.emit(e.item);
+        if (this.clientes.length > 0) {
+            this.notifyCliente.emit(e.item);
+        } else {
+            this.notifyCliente.emit(e.item.pessoa);
+        }
+
     }
 
 }

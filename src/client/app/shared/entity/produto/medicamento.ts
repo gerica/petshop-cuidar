@@ -1,5 +1,4 @@
 import { MedicamentoTipoPet } from './medicamento-tipo-pet';
-import { TipoPet } from './../pet/tipoPet';
 
 export class Medicamento {
     id: number;

@@ -1,3 +1,4 @@
+import { TypeAheadProdutoComponent } from './component/typeahead-produto.component';
 import { UtilsService } from './service/utils.service';
 import { TypeAheadClienteComponent } from './component/typeahead-cliente.component';
 import { NgModule, ModuleWithProviders } from '@angular/core';
@@ -33,7 +34,9 @@ import { InputMaskCurrentDirective } from '../shared/directive/input-mask-curren
         TooltipModule,
         ModalModule,
         TypeaheadModule],
-    declarations: [InputMaskCurrentDirective, TypeAheadClienteComponent],
+    declarations: [InputMaskCurrentDirective,
+        TypeAheadClienteComponent,
+        TypeAheadProdutoComponent],
     exports: [CommonModule,
         AlertModule,
         ButtonsModule,
@@ -49,7 +52,8 @@ import { InputMaskCurrentDirective } from '../shared/directive/input-mask-curren
         RouterModule,
         InputMaskCurrentDirective,
         ReactiveFormsModule,
-        TypeAheadClienteComponent]
+        TypeAheadClienteComponent,
+        TypeAheadProdutoComponent]
 })
 
 export class SharedModule {

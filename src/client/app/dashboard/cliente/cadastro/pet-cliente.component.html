@@ -19,7 +19,7 @@
                             </div>
                             <fieldset class="form-group">
                                 <label>Nome:</label>
-                                <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="pet.dsNome" #nome="ngModel" required>
+                                <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="pet.nome" #nome="ngModel" required>
                             </fieldset>
                             <div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
                                 A nome é obrigatório.
@@ -71,7 +71,7 @@
                         <div class="col-sm-6" *ngFor="let item of pets; let i = index">
                             <div class="list-group">
                                 <a href="javascript:;" class="list-group-item" (click)="carregarParaEdicao(item)">
-                                    <h4 class="list-group-item-heading">{{item?.dsNome}}</h4>
+                                    <h4 class="list-group-item-heading">{{item?.nome}}</h4>
                                     <p class="list-group-item-text">
                                         <span> Tipo: {{item?.raca?.tipoPet?.dsNome}}<br></span>
                                         <span> Raça: {{item?.raca?.dsNome}}<br></span>
@@ -107,10 +107,10 @@
                                 <div class="card-block bg-white">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <h4 class="list-group-item-heading">{{petExcluir?.dsNome}}</h4>
+                                            <h4 class="list-group-item-heading">{{petExcluir?.nome}}</h4>
                                             <p class="list-group-item-text">
-                                                <span>Tipo: {{petExcluir?.raca?.tipoPet?.dsNome}}<br></span>
-                                                <span>Raça: {{petExcluir?.raca?.dsNome}}<br></span>
+                                                <span>Tipo: {{petExcluir?.raca?.tipoPet?.nome}}<br></span>
+                                                <span>Raça: {{petExcluir?.raca?.nome}}<br></span>
                                                 <span>Data Nascimento: {{petExcluir?.dtNacimento | date: 'dd/MM/yyyy'}}</span>
                                             </p>
                                         </div>

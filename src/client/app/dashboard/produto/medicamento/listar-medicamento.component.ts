@@ -58,7 +58,7 @@ export class ListarMedicamentoComponent implements OnInit, OnChanges {
      */
     public notifyAlertaEmit(message: any) {
         this.notifyAlerta.emit(message);
-        
+
     }
 
     /**
