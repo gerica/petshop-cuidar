@@ -22,12 +22,12 @@ export class TypeAheadProdutoComponent {
      */
     constructor(private produtoService: ProdutoService) {
         this.dataSource = Observable.create((observer: any) => {
-            this.recuperarPessoaPorNome(observer);
+            this.recuperarProdutoPorDescricao(observer);
         }).mergeMap(() => this.getStatesAsObservable());
 
     }
 
-    public recuperarPessoaPorNome(observer: any): void {
+    public recuperarProdutoPorDescricao(observer: any): void {
         this.produtoService.recuperarProdutoPorDescricao(this.asyncSelected)
             .subscribe(
             data => {

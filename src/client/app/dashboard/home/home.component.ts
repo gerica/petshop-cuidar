@@ -1,3 +1,4 @@
+import { OrcamentoService } from './../../shared/service/venda/orcamento.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
 import { ActivatedRoute } from '@angular/router';
@@ -9,16 +10,18 @@ import { ActivatedRoute } from '@angular/router';
     moduleId: module.id,
     selector: 'home-cmp',
     templateUrl: 'home.component.html',
-    providers: []
+    providers: [OrcamentoService]
 })
 
 export class HomeComponent implements OnInit {
     alertaUtil: AlertaUtil = new AlertaUtil();
-    private sub: any;
+    sub: any;
+    qtdOrcamento: number;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute,
+        private orcamentoService: OrcamentoService) { }
 
-    ngOnInit() {
+    public ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
             if (params && params['desc']) {
                 this.alertaUtil.addMessage({
@@ -28,5 +31,23 @@ export class HomeComponent implements OnInit {
                 });
             }
         });
+        this.recuperarQuantidadeOrcamento();
+    }
+
+    public recuperarQuantidadeOrcamento(): void {
+        this.orcamentoService.recuperarQuantidadeOrcamento()
+            .subscribe(
+            data => {
+                this.qtdOrcamento = data.objeto;
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message === undefined ? err : err.message
+                });
+            }
+            );
     }
 }

@@ -1,6 +1,7 @@
 export class ItemVenda {
     //Dados Produto
-    id: number;
+    idProduto: number;
+    idProdutoCliente: number;
     marca: string;
     nome: string;
     tipoProduto: string;
@@ -16,7 +17,9 @@ export class ItemVenda {
     //Dados Venda
     quantidadeVenda: number;
     dataVenda: Date;
+    desconto: number;
 
     //Dados para tela
     showDetalhe: boolean = false;
+    temLote: boolean = false;
 }

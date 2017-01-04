@@ -1,3 +1,4 @@
+import { ListarOrcamentoRoutes } from './venda/orcamento/listar-orcamento.routes';
 import { ManterMedicamentoRoutes } from './produto/medicamento/manter-medicamento.routes';
 import { ManterRacaoRoutes } from './produto/racao/manter-racao.routes';
 import { ListarClienteRoutes } from './cliente/lista/listar-cliente.routes';
@@ -20,6 +21,7 @@ export const DashboardRoutes: Route[] = [{
         ...VenderProdutoRoutes,
         ...ListarClienteRoutes,
         ...ManterRacaoRoutes,
-        ...ManterMedicamentoRoutes
+        ...ManterMedicamentoRoutes,
+        ...ListarOrcamentoRoutes
     ]
 }];

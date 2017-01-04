@@ -1,3 +1,4 @@
+import { ListarOrcamentoModule } from './venda/orcamento/listar-orcamento.module';
 import { ManterMedicamentoModule } from './produto/medicamento/manter-medicamento.module';
 import { ManterRacaoModule } from './produto/racao/manter-racao.module';
 import { ListarClienteModule } from './cliente/lista/listar-cliente.module';
@@ -30,7 +31,8 @@ import { CadastrarClienteModule } from './cliente/cadastro/cadastrar-cliente.mod
         VenderProdutoModule,
         ListarClienteModule,
         ManterRacaoModule,
-        ManterMedicamentoModule
+        ManterMedicamentoModule,
+        ListarOrcamentoModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],

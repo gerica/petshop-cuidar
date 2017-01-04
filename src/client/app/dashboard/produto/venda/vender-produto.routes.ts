@@ -6,4 +6,8 @@ export const VenderProdutoRoutes: Route[] = [{
     path: 'vender-produto',
     component: VenderProdutoComponent,
     canActivate: [AuthGuard]
-}, ];
+}, {
+    path: 'vender-produto/:idOrcamento',
+    component: VenderProdutoComponent,
+    canActivate: [AuthGuard]
+}];

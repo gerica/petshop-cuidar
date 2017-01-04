@@ -25,68 +25,66 @@
                 <tab heading="Vendas">
                     <form role="form" [formGroup]="vendaForm" (submit)="gravar($event)" *ngIf="activeForm">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <tyahead-cliente (notifyCliente)="onSelectedCliene($event)"></tyahead-cliente>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-3">
+                                <tyahead-cliente (notifyCliente)="onSelectedCliene($event)" *ngIf="!orcamento.id"></tyahead-cliente>
+                                <div *ngIf="orcamento.id">
+                                    <div class="card-header card-default" >
+                                        Cliente
+                                    </div>
+                                    <div class="card-block bg-white">
+                                        <p class="form-control-static">{{orcamento?.pessoa?.nome}}</p>
+                                    </div>
+                                </div>
                                 <tyahead-produto (notifyProduto)="onSelectedProduto($event)"></tyahead-produto>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-9">
                                 <div class="card">
                                     <div class="card-header card-default">
                                         Lista de Produtos
                                     </div>
                                     <div class="card-block bg-white">
-                                        <div class="card" *ngFor="let item of itensVenda; let i = index">
-                                            <div class="card-header card-default">
-                                                <span>{{item?.nome}}</span>
-                                                <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
-                                                    <li class="dropdown nav-item" dropdown>
-                                                        <span tooltipPlacement="left" tooltip="Remover produto." (click)="removerItem(i)">
-                                                        <i class="fa fa-trash"></i>
-                                                        </span>
-                                                    </li>
-                                                    <li class="dropdown nav-item" dropdown>
-                                                        <span tooltipPlacement="top" tooltip="Subtrair" (click)="subtrairItemVenda(i)">
-                                                        <i class="fa fa-minus-circle"></i>                                                        
-                                                        </span>
-                                                    </li>
-                                                    <li class="dropdown nav-item" dropdown>
-                                                        <span tooltipPlacement="top" tooltip="Adicionar" (click)="adicionarItemVenda(i)">
-                                                        <i class="fa fa-plus-circle"></i>
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-block bg-white">
-                                                <div class="row">
-                                                    <div class="col-sm-1">
-                                                        <i class="fa fa-plus-square-o" style="cursor:pointer" *ngIf="!item.showDetalhe" aria-hidden="true" title="Saídas" (click)="showHideColuna(item)" title="Apresentar Detelhes"></i>
-                                                        <i class="fa fa-minus-square-o" style="cursor:pointer" *ngIf="item.showDetalhe" aria-hidden="true" title="Saídas" (click)="showHideColuna(item)" title="Apresentar Detelhes"></i>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <fieldset class="form-group">
-                                                            <label>Quantidade: {{item?.quantidadeVenda}}</label>
-                                                            <!--<input type="number" class="form-control" id="quantidade" name="quantidade" [(ngModel)]="item.quantidadeVenda">-->
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <fieldset class="form-group">
-                                                            <label>Valor: {{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</label>
-                                                            <!--<input type="number" class="form-control" id="quantidade" name="quantidade" [(ngModel)]="item.quantidadeVenda">-->
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-sm-5" *ngIf="item.showDetalhe">
-                                                        <span> Tipo: {{item?.tipoProduto}}<br></span>
-                                                        <span> Marca: {{item?.marca}}<br></span>
-                                                        <span> Valor: {{item?.valorVenda | currency:'BRL':true}}<br></span>
-                                                        <span> Quantidade: {{item?.quantidade}}<br></span>
-                                                    </div>
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-xl-12 col-lg-12">
+                                                <table class="table table-hover table-sm" *ngIf="itensVenda.length > 0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Ações</th>
+                                                            <th>Marca</th>
+                                                            <th>Nome</th>
+                                                            <th>Quantidade</th>
+                                                            <th>Valor</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of itensVenda; let i = index" [class.table-warning]="!item?.temLote">
+                                                            <td>
+                                                                <i class="fa fa-trash" aria-hidden="true" title="Remover" style="cursor:pointer" (click)="removerItem(i)"></i>
+                                                                <i class="fa fa-minus-circle" *ngIf="item?.temLote" aria-hidden="true" title="Subtrair" style="cursor:pointer" (click)="subtrairItemVenda(i)"></i>
+                                                                <i class="fa fa fa-plus-circle" *ngIf="item?.temLote" aria-hidden="true" title="Adicionar" style="cursor:pointer" (click)="adicionarItemVenda(i)"></i>
+                                                            </td>
+                                                            <td>{{item?.marca}}</td>
+                                                            <td>{{item?.nome}}</td>
+                                                            <td>{{item?.quantidadeVenda}}</td>
+                                                            <!--<td><input *ngIf="item?.temLote" type="number" class="form-control" style="width:50px;font-size: 13px" id="quantidade_i" name="quantidade_i" [(ngModel)]="item.quantidadeVenda" formControlName="quantidadeVenda"></td>-->
+                                                            <td><span *ngIf="item?.temLote">{{item?.quantidadeVenda * item?.valorVenda | currency:'BRL':true}}</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <strong>Desconto</strong>
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" class="form-control" style="width:60px;font-size: 13px"  id="desconto" name="desconto" [(ngModel)]="desconto" formControlName="desconto" 
+                                                                (change)="calcularTotalVenda()" (keyup)="calcularTotalVenda()">
+                                                            </td>
+                                                            <td >
+                                                                <strong>Total</strong>
+                                                            </td>
+                                                            <td><strong>{{totalVenda | currency:'BRL':true}}</strong></td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -98,6 +96,8 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Gravar</button>
                                     <button type="reset" class="btn btn-danger" (click)="novo()">Limpar</button>
+                                    <button *ngIf="orcamento.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
+                                    <button *ngIf="orcamento.id" type="button" class="btn btn-primary" (click)="realizarVenda()">Fechar Pedido</button>
                                 </div>
                             </div>
                         </div>
