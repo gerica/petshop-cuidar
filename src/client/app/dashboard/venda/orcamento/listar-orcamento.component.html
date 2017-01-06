@@ -53,7 +53,7 @@
                                                             <tr *ngFor="let item of orcamentos | filtroPorClienteOrcamento: textoProcurado.value  | paginate: { itemsPerPage: 10, currentPage: p }" (dblclick)="visualizar(item)">
                                                                 <td>
                                                                     <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="getPaginaEditar(item)"></i>
-                                                                    <i class="fa fa-money" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="fechar(item)"></i>
+                                                                    <i class="fa fa-money" aria-hidden="true" title="Fechar Pedido" style="cursor:pointer" (click)="realizarVenda(item)"></i>
 																    <i class="fa fa-eye" aria-hidden="true" title="Visualizar" style="cursor:pointer" (click)="visualizar(item)"></i>
                                                                 </td>
                                                                 <td>{{item.pessoa.nome}}</td>

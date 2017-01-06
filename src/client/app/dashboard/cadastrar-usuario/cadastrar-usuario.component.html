@@ -107,7 +107,7 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr *ngFor="let usuarioList of usuarios" (dblclick)="showModalOperacaoSaida(operacao)">
+														<tr *ngFor="let usuarioList of usuarios" (dblclick)="showModalEditarUsuario(usuarioList)">
 															<td>
 																<i class="fa fa-lock" *ngIf="usuarioList.accountLocked" aria-hidden="true" title="Usuário bloquedo"></i>
 																<i class="fa fa-unlock" *ngIf="!usuarioList.accountLocked" aria-hidden="true" title="Usuário desbloqueado"></i>

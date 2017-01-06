@@ -1,3 +1,4 @@
+import { VendaService } from './../../../shared/service/venda/venda.service';
 import { VenderProdutoModule } from './vender-produto.module';
 import { ActivatedRoute } from '@angular/router';
 import { Orcamento } from './../../../shared/entity/venda/orcamento';
@@ -13,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
     moduleId: module.id,
     selector: 'form-vender-produto',
     templateUrl: './vender-produto.component.html',
-    providers: [ProdutoService, OrcamentoService]
+    providers: [ProdutoService, OrcamentoService, VendaService]
 })
 
 export class VenderProdutoComponent implements OnInit {
@@ -34,7 +35,8 @@ export class VenderProdutoComponent implements OnInit {
     constructor(private produtoService: ProdutoService,
         private fb: FormBuilder,
         private orcamentoService: OrcamentoService,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private vendaService: VendaService) {
         this.vendaForm = fb.group({
             quantidadeVenda: [''],
             desconto: ['']
@@ -73,7 +75,7 @@ export class VenderProdutoComponent implements OnInit {
      */
     public gravar(event: any): void {
         event.preventDefault();
-        console.log('gravar');
+
         if (this.validarFormulario()) {
             this.retirarItemSemLote();
             this.atribuirDesconto();
@@ -264,8 +266,35 @@ export class VenderProdutoComponent implements OnInit {
 
     }
 
-    public realizarVenda(): void{
-        console.log('VenderProdutoModule...');
+    public realizarVenda(): void {
+        if (this.validarFormulario()) {
+            this.retirarItemSemLote();
+            this.vendaService.gravar(this.orcamento.id)
+                .subscribe(
+                result => {
+                    this.novo();
+                    this.alertaUtil.addMessage({
+                        type: 'success',
+                        closable: true,
+                        msg: result.message
+                    });
+                    console.log(result.objeto);
+                },
+                err => {
+                    // Log errors if any
+                    this.alertaUtil.addMessage({
+                        type: 'danger',
+                        closable: true,
+                        msg: err.message === undefined ? err : err.message
+                    });
+                });
+        } else {
+            this.alertaUtil.addMessage({
+                type: 'warning',
+                closable: true,
+                msg: 'Informe o cliente e os produtos.'
+            });
+        }
     }
 
 }

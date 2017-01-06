@@ -1,3 +1,4 @@
+import { VendaService } from './../../../shared/service/venda/venda.service';
 import { Router } from '@angular/router';
 import { Orcamento } from './../../../shared/entity/venda/orcamento';
 import { OrcamentoService } from './../../../shared/service/venda/orcamento.service';
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
     moduleId: module.id,
     selector: 'listar-orcamento',
     templateUrl: './listar-orcamento.component.html',
-    providers: [OrcamentoService]
+    providers: [OrcamentoService, VendaService]
 })
 
 export class ListarOrcamentoComponent implements OnInit {
@@ -21,7 +22,8 @@ export class ListarOrcamentoComponent implements OnInit {
      * Construtor
      */
     constructor(private orcamentoService: OrcamentoService,
-        private router: Router) {
+        private router: Router,
+        private vendaService: VendaService) {
 
     }
 
@@ -80,8 +82,29 @@ export class ListarOrcamentoComponent implements OnInit {
 
     }
 
-    public fechar(orcamento: Orcamento): void {
-        this.router.navigate(['/dashboard/vender-produto', orcamento.id]);
+    public realizarVenda(orcamento: Orcamento): void {
+
+        this.vendaService.gravar(orcamento.id)
+            .subscribe(
+            result => {                
+                this.alertaUtil.addMessage({
+                    type: 'success',
+                    closable: true,
+                    msg: result.message
+                });
+                this.recuperarTodos();
+            },
+            err => {
+                // Log errors if any
+                this.alertaUtil.addMessage({
+                    type: 'danger',
+                    closable: true,
+                    msg: err.message === undefined ? err : err.message
+                });
+            });
+
     }
+
+
 
 }
