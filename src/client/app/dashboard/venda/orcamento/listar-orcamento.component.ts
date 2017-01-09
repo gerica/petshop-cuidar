@@ -86,7 +86,7 @@ export class ListarOrcamentoComponent implements OnInit {
 
         this.vendaService.gravar(orcamento.id)
             .subscribe(
-            result => {                
+            result => {
                 this.alertaUtil.addMessage({
                     type: 'success',
                     closable: true,

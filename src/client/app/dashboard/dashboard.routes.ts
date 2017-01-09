@@ -1,3 +1,4 @@
+import { ManterLembreteRoutes } from './relacionamento/lembrete/manter-lembrete.routes';
 import { ListarOrcamentoRoutes } from './venda/orcamento/listar-orcamento.routes';
 import { ManterMedicamentoRoutes } from './produto/medicamento/manter-medicamento.routes';
 import { ManterRacaoRoutes } from './produto/racao/manter-racao.routes';
@@ -22,6 +23,7 @@ export const DashboardRoutes: Route[] = [{
         ...ListarClienteRoutes,
         ...ManterRacaoRoutes,
         ...ManterMedicamentoRoutes,
-        ...ListarOrcamentoRoutes
+        ...ListarOrcamentoRoutes,
+        ...ManterLembreteRoutes
     ]
 }];

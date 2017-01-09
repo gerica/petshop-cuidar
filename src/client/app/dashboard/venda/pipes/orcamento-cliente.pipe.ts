@@ -1,5 +1,4 @@
 import { Orcamento } from './../../../shared/entity/venda/orcamento';
-import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

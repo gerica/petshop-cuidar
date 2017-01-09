@@ -1,5 +1,4 @@
 import { VendaService } from './../../../shared/service/venda/venda.service';
-import { VenderProdutoModule } from './vender-produto.module';
 import { ActivatedRoute } from '@angular/router';
 import { Orcamento } from './../../../shared/entity/venda/orcamento';
 import { OrcamentoService } from './../../../shared/service/venda/orcamento.service';
