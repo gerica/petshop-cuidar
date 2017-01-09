@@ -32,8 +32,8 @@
 									</div>
 									<div class="card-block bg-white">
 										<div class="row">
-											<div class="col-lg-4">
-												<fieldset class="form-group">													
+											<div class="col-lg-6">
+												<fieldset class="form-group">
 													<tyahead-cliente (notifyCliente)="onSelectedCliene($event)" *ngIf="!lembrete.id"></tyahead-cliente>
 													<div *ngIf="lembrete.id">
 														<div class="card-header card-default">
@@ -43,71 +43,44 @@
 															<p class="form-control-static">{{lembrete?.pessoa?.nome}}</p>
 														</div>
 													</div>
-												</fieldset>												
+												</fieldset>
 											</div>
-											<div class="col-lg-4">
+											<div class="col-lg-6">
 												<fieldset class="form-group">
 													<label>Lembrar em:</label>
-													<select class="form-control" id="lembrarEm" name="lembrarEm" [(ngModel)]="dtLembrarEm" #lembrarEm="ngModel">
+													<select class="form-control" id="lembrarEm" name="lembrarEm" (change)="calcularDtLembrete($event.target.value)">
+														<option value="0">Selecione</option>
 														<option value="1s">1 Semana</option>
 														<option value="2s">2 Semanas</option>
-														<option value="3s">3 Semanas</option>
-														<option value="4s">4 Semanas</option>
+														<option value="3s">3 Semanas</option>														
 														<option value="1m">1 Mês</option>
 														<option value="3m">3 Mêses</option>
 														<option value="6m">6 Mêses</option>
 														<option value="1a">1 Ano</option>
 													</select>
 												</fieldset>
-												<!--<div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
-													A nome é obrigatório.
-												</div>-->
-											</div>
-											<div class="col-lg-4">
-												<fieldset class="form-group">
-													<label>Tipo Pet</label>
-													<!--<select class="form-control" id="tipoPet" name="tipoPet" [(ngModel)]="lembrete.tipoPet" #tipoPet="ngModel" required>
-														<option *ngFor="let t of tiposPet" [ngValue]="t">{{t.dsNome}}</option>
-													</select>-->
-												</fieldset>
-												<!--<div [hidden]="tipoPet.valid || tipoPet.pristine" class="alert alert-danger">
-													A Tipo Pet é obrigatório.
-												</div>-->
-											</div>
+											</div>											
 										</div>
 										<div class="row">
-											<div class="col-lg-4">
+											<div class="col-lg-6">
 												<fieldset class="form-group">
-													<label>Linha</label>
-													<!--<select class="form-control" id="linha" name="linha" [(ngModel)]="lembrete.linha" #linha="ngModel" required>
-														<option *ngFor="let t of linhas" [ngValue]="t">{{t}}</option>
-													</select>-->
+													<label>Data Lembrete:</label>
+													<input type="date" class="form-control" id="dtLembrete" name="dtLembrete" [(ngModel)]="strLembrete" #dtLembrete="ngModel"
+														required>
 												</fieldset>
-												<!--<div [hidden]="linha.valid || linha.pristine" class="alert alert-danger">
-													A linha é obrigatório.
-												</div>-->
+												<div [hidden]="dtLembrete.valid || dtLembrete.pristine" class="alert alert-danger">
+													A data do lembrete é obrigatório.
+												</div>
 											</div>
-											<div class="col-lg-4">
+											<div class="col-lg-6">
 												<fieldset class="form-group">
-													<label>Porte da raça</label>
-													<!--<select class="form-control" id="porte" name="porte" [(ngModel)]="lembrete.porte" #porte="ngModel" required>
-														<option *ngFor="let t of portes" [ngValue]="t">{{t}}</option>
-													</select>-->
+													<label>Observação</label>
+													<textarea class="form-control" rows="3" id="observacao" name="observacao" [(ngModel)]="lembrete.observacao" #observacao="ngModel"
+														required></textarea>
 												</fieldset>
-												<!--<div [hidden]="porte.valid || porte.pristine" class="alert alert-danger">
-													O porte da raça é obrigatório.
-												</div>-->
-											</div>
-											<div class="col-lg-4">
-												<fieldset class="form-group">
-													<label>Idade</label>
-													<!--<select class="form-control" id="faixaIdade" name="faixaIdade" [(ngModel)]="lembrete.faixaIdade" #faixaIdade="ngModel" required>
-														<option *ngFor="let t of idades" [ngValue]="t">{{t}}</option>
-													</select>-->
-												</fieldset>
-												<!--<div [hidden]="faixaIdade.valid || faixaIdade.pristine" class="alert alert-danger">
-													A idade é obrigatório.
-												</div>-->
+												<div [hidden]="observacao.valid || observacao.pristine" class="alert alert-danger">
+													A observação é obrigatório.
+												</div>
 											</div>
 										</div>
 									</div>
@@ -119,15 +92,15 @@
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary">Gravar</button>
 									<button *ngIf="lembrete.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
-									<button *ngIf="lembrete.id" type="button" class="btn btn-danger" (click)="showModalExcluir()">Excluir</button>
+									
 								</div>
 							</div>
 						</div>
 					</form>
-					<!--<listar-lembrete [addlembrete]="addlembrete" (notifyAlerta)="onNotifyAlerta($event)" (notifylembrete)="onNotifylembrete($event)"></listar-lembrete>-->
+					<listar-lembrete [addLembrete]="addlembrete" (notifyAlerta)="onNotifyAlerta($event)" (notifyLembrete)="onNotifyLembrete($event)"></listar-lembrete>
 				</tab>
-				<tab heading="Lotes" *ngIf="lembrete.id">
-					<!--<tab-lembrete-lote [lembrete]="lembrete" (notifyAlerta)="onNotifyAlerta($event)" ></tab-lembrete-lote>-->
+				<tab heading="xxxxx" *ngIf="false">
+					
 				</tab>
 			</tabset>
 		</div>

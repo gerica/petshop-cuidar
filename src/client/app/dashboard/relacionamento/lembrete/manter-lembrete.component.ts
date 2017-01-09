@@ -23,7 +23,7 @@ export class ManterLembreteComponent implements OnInit {
     addLembrete: number = 0;
     @ViewChild('modalExcluir') public modalExcluir: ModalDirective;
     lembreteExcluir: Lembrete;
-    dtLembrarEm: string;
+    strLembrete: string;
 
     /**
      * Construtor
@@ -44,6 +44,7 @@ export class ManterLembreteComponent implements OnInit {
         this.activeForm = false;
         setTimeout(() => this.activeForm = true, 0);
         this.lembrete = new Lembrete();
+        this.strLembrete = '';
     }
 
     public onNotifyAlerta(message: any): void {
@@ -59,25 +60,35 @@ export class ManterLembreteComponent implements OnInit {
      */
     public gravar(event: any): void {
         event.preventDefault();
-        this.lembreteService.gravar(this.lembrete, this.cliente.id)
-            .subscribe(
-            result => {
-                this.alertaUtil.addMessage({
-                    type: 'success',
-                    closable: true,
-                    msg: result.message
+        if (this.validarFormulario()) {
+            this.atribuirData();
+            this.lembreteService.gravar(this.lembrete, this.cliente.id)
+                .subscribe(
+                result => {
+                    this.alertaUtil.addMessage({
+                        type: 'success',
+                        closable: true,
+                        msg: result.message
+                    });
+                    this.novo();
+                    this.addLembrete++;
+                },
+                err => {
+                    // Log errors if any
+                    this.alertaUtil.addMessage({
+                        type: 'danger',
+                        closable: true,
+                        msg: err.message === undefined ? err : err.message
+                    });
                 });
-                this.novo();
-                this.addLembrete++;
-            },
-            err => {
-                // Log errors if any
-                this.alertaUtil.addMessage({
-                    type: 'danger',
-                    closable: true,
-                    msg: err.message === undefined ? err : err.message
-                });
+        } else {
+            // Log errors if any
+            this.alertaUtil.addMessage({
+                type: 'warning',
+                closable: true,
+                msg: 'O cliente é campo obrigatório, por favor informe.'
             });
+        }
 
     }
 
@@ -114,6 +125,76 @@ export class ManterLembreteComponent implements OnInit {
     public onSelectedCliene(cliente: Pessoa): void {
         this.cliente = cliente;
         console.log('Cliente: ', this.cliente);
+    }
+
+    public calcularDtLembrete(lembrarEm: string) {
+        console.log(lembrarEm);
+        let data = this.adicionarDiasDataLembrete(lembrarEm);
+        let ano = data.toLocaleDateString().substring(6, 10);
+        let mes = data.toLocaleDateString().substring(3, 5);
+        let dia = data.toLocaleDateString().substring(0, 2);
+        this.strLembrete = ano + '-' + mes + '-' + dia;
+    }
+
+    private adicionarDiasDataLembrete(lembrarEm: string): Date {
+        let valor = 0
+        let tipo = '';
+
+        switch (lembrarEm) {
+            case ('1s'):
+                valor = 7;
+                tipo = 'semana';
+                break;
+            case ('2s'):
+                valor = 14;
+                tipo = 'semana';
+                break;
+            case ('3s'):
+                valor = 21;
+                tipo = 'semana';
+                break;
+            case ('1m'):
+                valor = 1;
+                tipo = 'mes';
+                break;
+            case ('3m'):
+                valor = 3;
+                tipo = 'mes';
+                break;
+            case ('6m'):
+                valor = 6;
+                tipo = 'mes';
+                break;
+            case ('1a'):
+                valor = 1;
+                tipo = 'ano';
+                break;
+        }
+
+        let data = new Date();
+        if (tipo === 'semana') {
+            data.setTime(data.getTime() + valor * (24 * 60 * 60 * 1000)); // adds weeks to the date
+        } else if (tipo === 'mes') {
+            data.setMonth(data.getMonth() + valor);
+        } else if (tipo === 'ano') {
+            data.setFullYear(data.getFullYear() + valor);
+        }
+        return data;
+    }
+
+    private atribuirData(): void {
+        let e: any[] = this.strLembrete.split('-');
+        let d = new Date(Date.UTC(e[0], e[1] - 1, e[2]));
+        let dataLocal = new Date();
+        dataLocal.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
+        this.lembrete.dtLembrete = dataLocal;
+    }
+
+    private validarFormulario(): boolean {
+        if (this.cliente) {
+            return true;
+        }
+        return false;
     }
 
 }

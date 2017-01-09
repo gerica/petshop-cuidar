@@ -1,7 +1,7 @@
 <div class="card card-block">
     <div class="row">
         <div class="col-sm-12">
-            <input type="text" name="textoProcurado" class="form-control" placeholder="Filtrar Ração pelo nome" #textoProcurado (keyup)="0">
+            <input type="text" name="textoProcurado" class="form-control" placeholder="Filtrar Lembrete..." #textoProcurado (keyup)="0">
         </div>
     </div>
     <div class="row">
@@ -18,32 +18,28 @@
                                     <thead>
                                         <tr>
                                             <th>Ações</th>
-                                            <th>Marca</th>
-                                            <th>Nome</th>
-                                            <th>Linha</th>
-                                            <th>Porte</th>
-                                            <th>Idade</th>
-                                            <th>Tipo</th>
+                                            <th>Cliente</th>
+                                            <th>Data de Cadastro</th>
+                                            <th>Data do Lembrete</th>
+                                            <th>Observação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!--| filtroPorRacao: textoProcurado.value-->
-                                        <tr *ngFor="let item of lembretes  | paginate: {id:'racaoLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyRacaoEmit(item)">
+                                        <tr *ngFor="let item of lembretes  | paginate: {id:'racaoLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyLembreteEmit(item)">
                                             <td>
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="notifyRacaoEmit(item)"></i>                                                
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="notifyLembreteEmit(item)"></i>                                                                                                
                                             </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{item?.pessoa.nome}}</td>
+                                            <td>{{item?.dtCadastro | date:'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.dtLembrete | date:'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.observacao}}</td>                                            
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="4">
-                                                <pagination-controls  id="racaoLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
+                                                <pagination-controls id="racaoLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
                                             </td>
                                         </tr>
                                     </tfoot>

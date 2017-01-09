@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 // SERVIÇO DE AUTENTICAÇÃO
-export const URL_LEMBRETE: string = URL_BACK_END + 'Lembrete/';
+export const URL_LEMBRETE: string = URL_BACK_END + 'lembrete/';
 export const URL_GRAVAR: string = URL_LEMBRETE + 'gravar';
 export const URL_EXCUIR: string = URL_LEMBRETE + 'excluir';
 export const URI_RECUPERAR_ABERTO: string = URL_LEMBRETE + 'recuperarAberto';
