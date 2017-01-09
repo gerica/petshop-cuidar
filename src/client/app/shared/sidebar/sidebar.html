@@ -81,6 +81,18 @@
                 </ul>
             </li>
         </div>
+        <div class="nested-menu" *ngIf="isRelacionamento || isAdmin">
+            <a class="list-group-item" (click)="addExpandClass('pages6')">
+                <span><i class="fa fa-inbox"></i> &nbsp; Relacionamento</span>
+            </a>
+            <li class="nested" [ngClass]="{'expand' : showMenu === 'pages6' }" *ngIf="showMenu === 'pages6'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['manter-lembrete']" [routerLinkActive]="['router-link-active']" href><span>Lembrete</span></a>
+                    </li>                    
+                </ul>
+            </li>
+        </div>
         <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i> &nbsp;Página em Branco
         </a>

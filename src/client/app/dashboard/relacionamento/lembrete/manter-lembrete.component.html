@@ -33,68 +33,81 @@
 									<div class="card-block bg-white">
 										<div class="row">
 											<div class="col-lg-4">
-												<fieldset class="form-group">
-													<label>Marca:</label>
-													<input type="text" class="form-control" id="marca" name="marca" [(ngModel)]="racao.marca" #marca="ngModel" required>
-												</fieldset>
-												<div [hidden]="marca.valid || marca.pristine" class="alert alert-danger">
-													A marca é obrigatório.
-												</div>
+												<fieldset class="form-group">													
+													<tyahead-cliente (notifyCliente)="onSelectedCliene($event)" *ngIf="!lembrete.id"></tyahead-cliente>
+													<div *ngIf="lembrete.id">
+														<div class="card-header card-default">
+															Cliente
+														</div>
+														<div class="card-block bg-white">
+															<p class="form-control-static">{{lembrete?.pessoa?.nome}}</p>
+														</div>
+													</div>
+												</fieldset>												
 											</div>
 											<div class="col-lg-4">
 												<fieldset class="form-group">
-													<label>Nome:</label>
-													<input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="racao.nome" #nome="ngModel" required>
+													<label>Lembrar em:</label>
+													<select class="form-control" id="lembrarEm" name="lembrarEm" [(ngModel)]="dtLembrarEm" #lembrarEm="ngModel">
+														<option value="1s">1 Semana</option>
+														<option value="2s">2 Semanas</option>
+														<option value="3s">3 Semanas</option>
+														<option value="4s">4 Semanas</option>
+														<option value="1m">1 Mês</option>
+														<option value="3m">3 Mêses</option>
+														<option value="6m">6 Mêses</option>
+														<option value="1a">1 Ano</option>
+													</select>
 												</fieldset>
-												<div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
+												<!--<div [hidden]="nome.valid || nome.pristine" class="alert alert-danger">
 													A nome é obrigatório.
-												</div>
+												</div>-->
 											</div>
 											<div class="col-lg-4">
 												<fieldset class="form-group">
 													<label>Tipo Pet</label>
-													<select class="form-control" id="tipoPet" name="tipoPet" [(ngModel)]="racao.tipoPet" #tipoPet="ngModel" required>
+													<!--<select class="form-control" id="tipoPet" name="tipoPet" [(ngModel)]="lembrete.tipoPet" #tipoPet="ngModel" required>
 														<option *ngFor="let t of tiposPet" [ngValue]="t">{{t.dsNome}}</option>
-													</select>
+													</select>-->
 												</fieldset>
-												<div [hidden]="tipoPet.valid || tipoPet.pristine" class="alert alert-danger">
+												<!--<div [hidden]="tipoPet.valid || tipoPet.pristine" class="alert alert-danger">
 													A Tipo Pet é obrigatório.
-												</div>
+												</div>-->
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-4">
 												<fieldset class="form-group">
 													<label>Linha</label>
-													<select class="form-control" id="linha" name="linha" [(ngModel)]="racao.linha" #linha="ngModel" required>
+													<!--<select class="form-control" id="linha" name="linha" [(ngModel)]="lembrete.linha" #linha="ngModel" required>
 														<option *ngFor="let t of linhas" [ngValue]="t">{{t}}</option>
-													</select>
+													</select>-->
 												</fieldset>
-												<div [hidden]="linha.valid || linha.pristine" class="alert alert-danger">
+												<!--<div [hidden]="linha.valid || linha.pristine" class="alert alert-danger">
 													A linha é obrigatório.
-												</div>
+												</div>-->
 											</div>
 											<div class="col-lg-4">
 												<fieldset class="form-group">
 													<label>Porte da raça</label>
-													<select class="form-control" id="porte" name="porte" [(ngModel)]="racao.porte" #porte="ngModel" required>
+													<!--<select class="form-control" id="porte" name="porte" [(ngModel)]="lembrete.porte" #porte="ngModel" required>
 														<option *ngFor="let t of portes" [ngValue]="t">{{t}}</option>
-													</select>
+													</select>-->
 												</fieldset>
-												<div [hidden]="porte.valid || porte.pristine" class="alert alert-danger">
+												<!--<div [hidden]="porte.valid || porte.pristine" class="alert alert-danger">
 													O porte da raça é obrigatório.
-												</div>
+												</div>-->
 											</div>
 											<div class="col-lg-4">
 												<fieldset class="form-group">
 													<label>Idade</label>
-													<select class="form-control" id="faixaIdade" name="faixaIdade" [(ngModel)]="racao.faixaIdade" #faixaIdade="ngModel" required>
+													<!--<select class="form-control" id="faixaIdade" name="faixaIdade" [(ngModel)]="lembrete.faixaIdade" #faixaIdade="ngModel" required>
 														<option *ngFor="let t of idades" [ngValue]="t">{{t}}</option>
-													</select>
+													</select>-->
 												</fieldset>
-												<div [hidden]="faixaIdade.valid || faixaIdade.pristine" class="alert alert-danger">
+												<!--<div [hidden]="faixaIdade.valid || faixaIdade.pristine" class="alert alert-danger">
 													A idade é obrigatório.
-												</div>
+												</div>-->
 											</div>
 										</div>
 									</div>
@@ -105,16 +118,16 @@
 							<div class="col-lg-12">
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary">Gravar</button>
-									<button *ngIf="racao.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
-									<button *ngIf="racao.id" type="button" class="btn btn-danger" (click)="showModalExcluir()">Excluir</button>
+									<button *ngIf="lembrete.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
+									<button *ngIf="lembrete.id" type="button" class="btn btn-danger" (click)="showModalExcluir()">Excluir</button>
 								</div>
 							</div>
 						</div>
 					</form>
-					<!--<listar-racao [addRacao]="addRacao" (notifyAlerta)="onNotifyAlerta($event)" (notifyRacao)="onNotifyRacao($event)"></listar-racao>-->
+					<!--<listar-lembrete [addlembrete]="addlembrete" (notifyAlerta)="onNotifyAlerta($event)" (notifylembrete)="onNotifylembrete($event)"></listar-lembrete>-->
 				</tab>
-				<tab heading="Lotes" *ngIf="racao.id">
-					<!--<tab-racao-lote [racao]="racao" (notifyAlerta)="onNotifyAlerta($event)" ></tab-racao-lote>-->
+				<tab heading="Lotes" *ngIf="lembrete.id">
+					<!--<tab-lembrete-lote [lembrete]="lembrete" (notifyAlerta)="onNotifyAlerta($event)" ></tab-lembrete-lote>-->
 				</tab>
 			</tabset>
 		</div>
@@ -128,7 +141,7 @@
 	aria-hidden="true">
 	<div class="modal-dialog ">
 		<div class="modal-content">
-			<form role="form" (submit)="excluir($event)" *ngIf="racaoExcluir">
+			<form role="form" (submit)="excluir($event)" *ngIf="lembreteExcluir">
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-sm-12">
@@ -142,13 +155,13 @@
 								<div class="card-block bg-white">
 									<div class="row">
 										<div class="col-lg-12">
-											<h4 class="list-group-item-heading">{{racaoExcluir?.nome}}</h4>
+											<h4 class="list-group-item-heading">{{lembreteExcluir?.nome}}</h4>
 											<p class="list-group-item-text">
-												<span>Marca: {{racaoExcluir?.marca}}</span><br>
-												<span>Tipo Pet: {{racaoExcluir?.tipoPet?.dsNome}}</span><br>
-												<span>Linha: {{racaoExcluir?.linha}}</span><br>
-												<span>Porte: {{racaoExcluir?.porte}}</span><br>
-												<span>Faixa Idade: {{racaoExcluir?.faixaIdade}}</span><br>
+												<span>Marca: {{lembreteExcluir?.marca}}</span><br>
+												<span>Tipo Pet: {{lembreteExcluir?.tipoPet?.dsNome}}</span><br>
+												<span>Linha: {{lembreteExcluir?.linha}}</span><br>
+												<span>Porte: {{lembreteExcluir?.porte}}</span><br>
+												<span>Faixa Idade: {{lembreteExcluir?.faixaIdade}}</span><br>
 											</p>
 										</div>
 									</div>

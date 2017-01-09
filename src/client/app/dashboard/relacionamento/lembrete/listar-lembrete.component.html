@@ -27,16 +27,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let item of racoes | filtroPorRacao: textoProcurado.value | paginate: {id:'racaoLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyRacaoEmit(item)">
+                                        <!--| filtroPorRacao: textoProcurado.value-->
+                                        <tr *ngFor="let item of lembretes  | paginate: {id:'racaoLista', itemsPerPage: 10, currentPage: p }" (dblclick)="notifyRacaoEmit(item)">
                                             <td>
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="notifyRacaoEmit(item)"></i>                                                
                                             </td>
-                                            <td>{{item.marca}}</td>
-                                            <td>{{item.nome}}</td>
-                                            <td>{{item.linha}}</td>
-                                            <td>{{item.porte}}</td>
-                                            <td>{{item.faixaIdade}}</td>
-                                            <td>{{item.tipoPet.dsNome}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                     <tfoot>

@@ -19,10 +19,11 @@ export class ManterLembreteComponent implements OnInit {
     alertaUtil: AlertaUtil = new AlertaUtil();
     activeForm: boolean = true;
     lembrete: Lembrete;
-    pessoa: Pessoa;
+    cliente: Pessoa;
     addLembrete: number = 0;
     @ViewChild('modalExcluir') public modalExcluir: ModalDirective;
     lembreteExcluir: Lembrete;
+    dtLembrarEm: string;
 
     /**
      * Construtor
@@ -58,7 +59,7 @@ export class ManterLembreteComponent implements OnInit {
      */
     public gravar(event: any): void {
         event.preventDefault();
-        this.lembreteService.gravar(this.lembrete, this.pessoa.id)
+        this.lembreteService.gravar(this.lembrete, this.cliente.id)
             .subscribe(
             result => {
                 this.alertaUtil.addMessage({
@@ -108,6 +109,11 @@ export class ManterLembreteComponent implements OnInit {
     public showModalExcluir(): void {
         this.lembreteExcluir = this.lembrete;
         this.modalExcluir.show();
+    }
+
+    public onSelectedCliene(cliente: Pessoa): void {
+        this.cliente = cliente;
+        console.log('Cliente: ', this.cliente);
     }
 
 }
