@@ -95,6 +95,11 @@
 								</div>
 								<div class="card-block bg-white">
 									<div class="row">
+										<div class="col-sm-12">
+											<input type="text" name="textoProcuradoAtivo" class="form-control" placeholder="Filtrar Usuario..." #textoProcuradoAtivo (keyup)="0">
+										</div>
+									</div>
+									<div class="row">
 										<div class="col-xl-12 col-lg-12">
 											<div class="table-responsive">
 												<table class="table table-hover table-sm">
@@ -107,19 +112,26 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr *ngFor="let usuarioList of usuarios" (dblclick)="showModalEditarUsuario(usuarioList)">
+														<tr *ngFor="let usuarioList of usuarios | filtroPorUsuario: textoProcuradoAtivo.value | paginate: {id:'usuarioLista', itemsPerPage: 10, currentPage: p }" (dblclick)="showModalEditarUsuario(usuarioList)">
 															<td>
-																<i class="fa fa-lock" *ngIf="usuarioList.accountLocked" aria-hidden="true" title="Usuário bloquedo"></i>
+																<!--<i class="fa fa-lock" *ngIf="usuarioList.accountLocked" aria-hidden="true" title="Usuário bloquedo"></i>
 																<i class="fa fa-unlock" *ngIf="!usuarioList.accountLocked" aria-hidden="true" title="Usuário desbloqueado"></i>
 																<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" (click)="showModalEditarUsuario(usuarioList)"></i>
 																<i class="fa fa-times" aria-hidden="true" title="Excluir" style="cursor:pointer" (click)="showModalDesativar(usuarioList)"></i>
-																<i class="fa fa-cogs" aria-hidden="true" title="Reset Password" style="cursor:pointer" (click)="showModalResetPassword(usuarioList)"></i>
+																<i class="fa fa-cogs" aria-hidden="true" title="Reset Password" style="cursor:pointer" (click)="showModalResetPassword(usuarioList)"></i>-->
 															</td>
 															<td>{{usuarioList.username}}</td>
 															<td>{{usuarioList.email}}</td>
 															<td>{{getRolesUsuario(usuarioList)}}</td>
 														</tr>
 													</tbody>
+													<tfoot>
+														<tr>
+															<td colspan="4">
+																<pagination-controls id="usuarioLista" (pageChange)="p = $event" #api directionLinks="false" maxSize="9" autoHide="true"></pagination-controls>
+															</td>
+														</tr>
+													</tfoot>
 												</table>
 											</div>
 										</div>
@@ -137,6 +149,7 @@
 									Lista de usuário inabilitados
 								</div>
 								<div class="card-block bg-white">
+
 									<div class="row">
 										<div class="col-xl-12 col-lg-12">
 											<div class="table-responsive">
@@ -152,7 +165,7 @@
 													<tbody>
 														<tr *ngFor="let usuarioList of usuariosDisabilitados">
 															<td>
-																<i class="fa fa-eraser" aria-hidden="true" title="Ativar" style="cursor:pointer" (click)="showModalAtivar(usuarioList)"></i>
+																<!--<i class="fa fa-eraser" aria-hidden="true" title="Ativar" style="cursor:pointer" (click)="showModalAtivar(usuarioList)"></i>-->
 															</td>
 															<td>{{usuarioList.username}}</td>
 															<td>{{usuarioList.email}}</td>

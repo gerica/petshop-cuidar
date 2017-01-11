@@ -1,3 +1,4 @@
+import { FiltroPorClienteLembrete } from './../pipes/lemrete.pipe';
 import { ListarLembreteComponent } from './listar-lembrete.component';
 import { ManterLembreteComponent } from './manter-lembrete.component';
 import { Ng2PaginationModule } from 'ng2-pagination';
@@ -10,7 +11,8 @@ import { TextMaskModule } from 'angular2-text-mask';
         TextMaskModule,
         Ng2PaginationModule],
     declarations: [ManterLembreteComponent,
-        ListarLembreteComponent],
+        ListarLembreteComponent,
+        FiltroPorClienteLembrete],
     exports: [ManterLembreteComponent]
 })
 

@@ -1,3 +1,4 @@
+import { LembreteService } from './../../shared/service/relacionamento/lembrete.service';
 import { Usuario } from './../../shared/entity/authority/usuario';
 import { RoleEnum } from './../../shared/entity/authority/roleEnum';
 import { OrcamentoService } from './../../shared/service/venda/orcamento.service';
@@ -12,13 +13,14 @@ import { ActivatedRoute } from '@angular/router';
     moduleId: module.id,
     selector: 'home-cmp',
     templateUrl: 'home.component.html',
-    providers: [OrcamentoService]
+    providers: [OrcamentoService, LembreteService]
 })
 
 export class HomeComponent implements OnInit {
     alertaUtil: AlertaUtil = new AlertaUtil();
     sub: any;
     qtdOrcamento: number;
+    qtdLembrete: number;
 
     // Roles
     isAdmin = false;// ADMIN
@@ -29,7 +31,8 @@ export class HomeComponent implements OnInit {
     isVenda = false;//"VENDA"
 
     constructor(private route: ActivatedRoute,
-        private orcamentoService: OrcamentoService) { }
+        private orcamentoService: OrcamentoService,
+        private lembreteService: LembreteService) { }
 
     public ngOnInit(): void {
         this.sub = this.route.params.subscribe(params => {
@@ -49,6 +52,25 @@ export class HomeComponent implements OnInit {
     public recuperarQuantidadeOrcamento(): void {
         if (this.isAdmin || this.isVenda) {
             this.orcamentoService.recuperarQuantidadeOrcamento()
+                .subscribe(
+                data => {
+                    this.qtdOrcamento = data.objeto;
+                },
+                err => {
+                    // Log errors if any
+                    this.alertaUtil.addMessage({
+                        type: 'danger',
+                        closable: true,
+                        msg: err.message === undefined ? err : err.message
+                    });
+                }
+                );
+        }
+    }
+
+    public recuperarQuantidadeLembrete(): void {
+        if (this.isAdmin || this.isRelacionamento || this.isVenda) {
+            this.lembreteService.recuperarQuantidadeLembrete()
                 .subscribe(
                 data => {
                     this.qtdOrcamento = data.objeto;

@@ -67,7 +67,7 @@ export class ListarOrcamentoComponent implements OnInit {
                 });
                 e.valorOrcamentoSemDesconto = e.valorOrcamento;
                 if (e.valorDesconto > 0) {
-                    e.valorOrcamento = e.valorOrcamento - ((e.valorDesconto / 100) * e.valorOrcamento)
+                    e.valorOrcamento = e.valorOrcamento - ((e.valorDesconto / 100) * e.valorOrcamento);
                 }
             });
         }

@@ -3,7 +3,6 @@ import { Lembrete } from './../../../shared/entity/relacionamento/lembrete';
 import { LembreteService } from './../../../shared/service/relacionamento/lembrete.service';
 import { ModalDirective } from 'ng2-bootstrap/components/modal/modal.component';
 import { TipoPetService } from './../../../shared/service/pet/tipo-pet.service';
-import { TipoPet } from './../../../shared/entity/pet/tipoPet';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
 
@@ -137,7 +136,7 @@ export class ManterLembreteComponent implements OnInit {
     }
 
     private adicionarDiasDataLembrete(lembrarEm: string): Date {
-        let valor = 0
+        let valor = 0;
         let tipo = '';
 
         switch (lembrarEm) {

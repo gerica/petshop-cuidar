@@ -10,7 +10,7 @@
 			</h2>
 			<ol class="breadcrumb">
 				<li>
-					<i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Dashboard</a>
+					<i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" routerLink="/dashboard/home">Painel inicial</a>
 				</li>
 				<li class="active">
 					<i class="fa fa-edit"></i> Lembrete
@@ -92,12 +92,12 @@
 								<div class="form-group">
 									<button type="submit" class="btn btn-primary">Gravar</button>
 									<button *ngIf="lembrete.id" type="button" class="btn btn-secondary" (click)="novo()">Novo</button>
-									
+									<button *ngIf="lembrete.id" type="button" class="btn btn-danger" (click)="showModalExcluir()">Excluir</button>
 								</div>
 							</div>
 						</div>
 					</form>
-					<listar-lembrete [addLembrete]="addlembrete" (notifyAlerta)="onNotifyAlerta($event)" (notifyLembrete)="onNotifyLembrete($event)"></listar-lembrete>
+					<listar-lembrete [addLembrete]="addLembrete" (notifyAlerta)="onNotifyAlerta($event)" (notifyLembrete)="onNotifyLembrete($event)"></listar-lembrete>
 				</tab>
 				<tab heading="xxxxx" *ngIf="false">
 					
@@ -128,13 +128,10 @@
 								<div class="card-block bg-white">
 									<div class="row">
 										<div class="col-lg-12">
-											<h4 class="list-group-item-heading">{{lembreteExcluir?.nome}}</h4>
+											<h4 class="list-group-item-heading">{{lembreteExcluir?.pessoa.nome}}</h4>
 											<p class="list-group-item-text">
-												<span>Marca: {{lembreteExcluir?.marca}}</span><br>
-												<span>Tipo Pet: {{lembreteExcluir?.tipoPet?.dsNome}}</span><br>
-												<span>Linha: {{lembreteExcluir?.linha}}</span><br>
-												<span>Porte: {{lembreteExcluir?.porte}}</span><br>
-												<span>Faixa Idade: {{lembreteExcluir?.faixaIdade}}</span><br>
+												<span>Data Lembrete: {{lembreteExcluir?.dtLembrete | date:'dd/MM/yyyy'}}</span><br>
+												<span>Observação: {{lembreteExcluir?.observacao}}</span><br>
 											</p>
 										</div>
 									</div>

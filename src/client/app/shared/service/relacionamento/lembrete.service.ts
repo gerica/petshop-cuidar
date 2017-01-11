@@ -13,6 +13,7 @@ export const URL_LEMBRETE: string = URL_BACK_END + 'lembrete/';
 export const URL_GRAVAR: string = URL_LEMBRETE + 'gravar';
 export const URL_EXCUIR: string = URL_LEMBRETE + 'excluir';
 export const URI_RECUPERAR_ABERTO: string = URL_LEMBRETE + 'recuperarAberto';
+export const URI_RECUPERAR_QUANTIDADE_LEMBRETE: string = URL_LEMBRETE +'recuperarQuantidadeLembrete';
 
 @Injectable()
 export class LembreteService {
@@ -53,6 +54,17 @@ export class LembreteService {
         this.utilsService.createAuthorizationHeader(contentHeaders);
 
         return this.http.get(URI_RECUPERAR_ABERTO, { headers: contentHeaders })
+            // ...and calling .json() on the response to return data
+            .map(this.utilsService.extractData)
+            //...errors if any
+            .catch(this.utilsService.handleError);
+    }
+
+    public recuperarQuantidadeLembrete(): Observable<any> {
+        let contentHeaders = new Headers();
+        this.utilsService.createAuthorizationHeader(contentHeaders);
+
+        return this.http.get(URI_RECUPERAR_QUANTIDADE_LEMBRETE, { headers: contentHeaders })
             // ...and calling .json() on the response to return data
             .map(this.utilsService.extractData)
             //...errors if any

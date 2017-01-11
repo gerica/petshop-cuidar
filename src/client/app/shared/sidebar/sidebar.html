@@ -4,7 +4,7 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <ul class="list-group">
         <a routerLink="/dashboard/home" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-dashboard"></i> Dashboard
+            <i class="fa fa-fw fa-dashboard"></i> &nbsp; Painel inicial
         </a>
         <div class="nested-menu" *ngIf="isAdmin">
             <a class="list-group-item" (click)="addExpandClass('pages1')">
@@ -81,7 +81,7 @@
                 </ul>
             </li>
         </div>
-        <div class="nested-menu" *ngIf="isRelacionamento || isAdmin">
+        <div class="nested-menu" *ngIf="isRelacionamento || isVenda || isAdmin">
             <a class="list-group-item" (click)="addExpandClass('pages6')">
                 <span><i class="fa fa-handshake-o"></i> &nbsp; Relacionamento</span>
             </a>
@@ -93,8 +93,8 @@
                 </ul>
             </li>
         </div>
-        <a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <!--<a [routerLink]="['blankpage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i> &nbsp;Página em Branco
-        </a>
+        </a>-->
     </ul>
 </nav>
