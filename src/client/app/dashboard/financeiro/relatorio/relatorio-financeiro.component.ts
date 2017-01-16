@@ -1,3 +1,4 @@
+import { RelatorioVenda } from './../../../shared/entity/financeiro/relatorio-venda';
 import { RelatorioFinanceiroService } from './../../../shared/service/financeiro/relatorio.financeiro.service';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
 import { Component, OnInit } from '@angular/core';
@@ -16,6 +17,7 @@ export class RelatorioFinanceiroComponent implements OnInit {
   periodo: string = 'Selecione';
   dtInicio: Date;
   dtFinal: Date;
+  relatorioVendas: RelatorioVenda[];
 
   constructor(private relatorioFinanceiroService: RelatorioFinanceiroService) { }
 
@@ -28,6 +30,7 @@ export class RelatorioFinanceiroComponent implements OnInit {
       this.relatorioFinanceiroService.consultar(this.periodoValor, this.ano, this.periodo, this.dtInicio, this.dtFinal)
         .subscribe(
         result => {
+          this.relatorioVendas = result.objeto;
           this.alertaUtil.addMessage({
             type: 'success',
             closable: true,
@@ -57,8 +60,11 @@ export class RelatorioFinanceiroComponent implements OnInit {
     console.log('Valor ', valor);
   }
 
-  private validarConsulta(): boolean {    
-    if (this.periodo === 'Mensal') {
+  private validarConsulta(): boolean {
+    if (this.periodo === 'Anual') {
+      return (this.ano > 0);
+    } else if (this.periodo === 'Mensal' || this.periodo === 'Bimestral' || this.periodo === 'Trimestral'
+      || this.periodo === 'Simestral') {
       return (this.ano > 0 && this.periodoValor !== '00');
     }
     return false;
