@@ -93,6 +93,7 @@ export class ListarOrcamentoComponent implements OnInit {
                     msg: result.message
                 });
                 this.recuperarTodos();
+                this.orcamentoView = null;
             },
             err => {
                 // Log errors if any

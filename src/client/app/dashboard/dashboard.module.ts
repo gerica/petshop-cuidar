@@ -1,3 +1,5 @@
+import { RelatorioFinanceiroModule } from './financeiro/relatorio/relatorio-financeiro.module';
+
 import { ManterLembreteModule } from './relacionamento/lembrete/manter-lembrete.module';
 import { ListarOrcamentoModule } from './venda/orcamento/listar-orcamento.module';
 import { ManterMedicamentoModule } from './produto/medicamento/manter-medicamento.module';
@@ -34,7 +36,8 @@ import { CadastrarClienteModule } from './cliente/cadastro/cadastrar-cliente.mod
         ManterRacaoModule,
         ManterMedicamentoModule,
         ListarOrcamentoModule,
-        ManterLembreteModule
+        ManterLembreteModule,
+        RelatorioFinanceiroModule
     ],
     declarations: [DashboardComponent, TopNavComponent, SidebarComponent],
     exports: [DashboardComponent, TopNavComponent, SidebarComponent],
