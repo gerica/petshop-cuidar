@@ -7,7 +7,8 @@ import { ProdutoService } from './../../../shared/service/produto/produto.servic
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
     moduleId: module.id,
@@ -16,8 +17,9 @@ import { Component, OnInit } from '@angular/core';
     providers: [ProdutoService, OrcamentoService, VendaService]
 })
 
-export class VenderProdutoComponent implements OnInit {
+export class VenderProdutoComponent implements OnInit, OnDestroy {
     /*Variaveis*/
+    private subscription: Subscription;
     alertaUtil: AlertaUtil = new AlertaUtil();
     activeForm: boolean = true;
     // clienteControl: FormControl = new FormControl();
@@ -49,11 +51,15 @@ export class VenderProdutoComponent implements OnInit {
     public ngOnInit(): void {
         this.itensVenda = [];
         this.orcamento = new Orcamento();
-        this.route.params.subscribe(params => {
+        this.subscription = this.route.params.subscribe(params => {
             if (params && params['idOrcamento']) {
                 this.recuperarOrcamentoPorId(params['idOrcamento']);
             }
         });
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     public novo() {

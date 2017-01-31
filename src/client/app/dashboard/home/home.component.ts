@@ -2,9 +2,10 @@ import { LembreteService } from './../../shared/service/relacionamento/lembrete.
 import { Usuario } from './../../shared/entity/authority/usuario';
 import { RoleEnum } from './../../shared/entity/authority/roleEnum';
 import { OrcamentoService } from './../../shared/service/venda/orcamento.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertaUtil } from '../../shared/utils/alerta-util';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
 
 /**
  *    This class represents the lazy loaded HomeComponent.
@@ -16,9 +17,9 @@ import { ActivatedRoute } from '@angular/router';
     providers: [OrcamentoService, LembreteService]
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+    private subscription: Subscription;
     alertaUtil: AlertaUtil = new AlertaUtil();
-    sub: any;
     qtdOrcamento: number;
     qtdLembrete: number;
 
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
         private lembreteService: LembreteService) { }
 
     public ngOnInit(): void {
-        this.sub = this.route.params.subscribe(params => {
+        this.subscription = this.route.params.subscribe(params => {
             if (params && params['desc']) {
                 this.alertaUtil.addMessage({
                     type: 'success',
@@ -47,6 +48,10 @@ export class HomeComponent implements OnInit {
         this.checkRole(JSON.parse(localStorage.getItem('usuario_')));
         this.recuperarQuantidadeOrcamento();
 
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     public recuperarQuantidadeOrcamento(): void {

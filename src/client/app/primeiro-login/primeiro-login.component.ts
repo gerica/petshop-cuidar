@@ -1,9 +1,10 @@
 import { Usuario } from './../shared/entity/authority/usuario';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertaUtil } from '../shared/utils/alerta-util';
 import { PrimeiroLoginService } from './primeiro-login.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
 /**
 *	This class represents the lazy loaded PrimeiroLoginComponent.
 */
@@ -15,23 +16,30 @@ import { ActivatedRoute } from '@angular/router';
     providers: [PrimeiroLoginService]
 })
 
-export class PrimeiroLoginComponent implements OnInit {
+export class PrimeiroLoginComponent implements OnInit, OnDestroy {
+    private subscription: Subscription;
     alertaUtil: AlertaUtil;
     usuario: Usuario;
 
     /*Construtor*/
-    constructor(private router: Router, private primeiroLoginService: PrimeiroLoginService, private route: ActivatedRoute) {
+    constructor(private router: Router,
+        private primeiroLoginService: PrimeiroLoginService,
+        private route: ActivatedRoute) {
         this.alertaUtil = new AlertaUtil();
         this.usuario = new Usuario();
     }
     ngOnInit() {
-        this.route.params.subscribe(params => {
+        this.subscription = this.route.params.subscribe(params => {
             if (params && params['email']) {
                 this.usuario.email = params['email'];
             }
 
             // In a real app: dispatch action to load the details here.
         });
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     salvar(event: any): void {

@@ -1,7 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
+import { Subscription } from 'rxjs/Rx';
 
 
 @Component({
@@ -11,7 +12,8 @@ import { AlertaUtil } from './../../../shared/utils/alerta-util';
     providers: [PessoaService]
 })
 
-export class CadastrarProdutoComponent implements OnInit {
+export class CadastrarProdutoComponent implements OnInit, OnDestroy {
+    private subscription: Subscription;
     /*Variaveis*/
     alertaUtil: AlertaUtil = new AlertaUtil();
     activeForm: boolean = true;
@@ -28,6 +30,10 @@ export class CadastrarProdutoComponent implements OnInit {
      */
     public ngOnInit(): void {
         console.warn('Apagar esse componente se não for utilizar');
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     public novo() {

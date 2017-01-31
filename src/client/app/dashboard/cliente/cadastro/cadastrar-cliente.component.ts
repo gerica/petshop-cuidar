@@ -1,9 +1,11 @@
+import { Raca } from './../../../shared/entity/pet/raca';
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from './../../../shared/service/pessoa/pessoa.service';
 import { UtilsService } from './../../../shared/service/utils.service';
 import { Pessoa } from './../../../shared/entity/pessoa/pessoa';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertaUtil } from './../../../shared/utils/alerta-util';
+import { Subscription } from 'rxjs/Rx';
 
 
 @Component({
@@ -13,13 +15,14 @@ import { AlertaUtil } from './../../../shared/utils/alerta-util';
     providers: [PessoaService]
 })
 
-export class CadastrarClienteComponent implements OnInit {
+export class CadastrarClienteComponent implements OnInit, OnDestroy {
     /*Variaveis*/
+    private subscription: Subscription;
     alertaUtil: AlertaUtil = new AlertaUtil();
     activeClienteForm: boolean = true;
     activeEnderecoForm: boolean = true;
     pessoa: Pessoa;
-    pessoaDtNascimento: string;
+    pessoaDtNascimento: string;    
 
     /**
      * Construtor
@@ -35,12 +38,16 @@ export class CadastrarClienteComponent implements OnInit {
      */
     public ngOnInit(): void {
         this.pessoa = new Pessoa();
-        this.route.params.subscribe(params => {
+        this.subscription = this.route.params.subscribe(params => {
             if (params && params['idPessoa']) {
                 this.recuperarPessoaPorId(params['idPessoa']);
             }
         });
 
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     public novo() {

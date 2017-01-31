@@ -1,9 +1,10 @@
 import { Usuario } from './../shared/entity/authority/usuario';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertaUtil } from '../shared/utils/alerta-util';
 import { LoginService } from './login.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Rx';
 
 /**
  *  This class represents the lazy loaded LoginComponent.
@@ -16,16 +17,17 @@ import { ActivatedRoute } from '@angular/router';
     providers: [LoginService]
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+    private subscription: Subscription;
     usuario = new Usuario();
     alertaUtil: AlertaUtil = new AlertaUtil();
-    private sub: any;
 
-    constructor(private loginSerice: LoginService, private router: Router, private route: ActivatedRoute) { }
-
+    constructor(private loginSerice: LoginService,
+        private router: Router,
+        private route: ActivatedRoute) { }
 
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
+        this.subscription = this.route.params.subscribe(params => {
             if (params && params['desc']) {
                 this.alertaUtil.addMessage({
                     type: 'success',
@@ -36,6 +38,10 @@ export class LoginComponent implements OnInit {
 
             // In a real app: dispatch action to load the details here.
         });
+    }
+
+    public ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     login(event: any): void {
@@ -53,7 +59,7 @@ export class LoginComponent implements OnInit {
             },
             err => {
                 // Log errors if any
-                if (err.objeto &&  err.objeto.lock === true) {
+                if (err.objeto && err.objeto.lock === true) {
                     this.router.navigate(['/primeiro-login', err.objeto.usuarioEmail]);
                 }
                 this.alertaUtil.addMessage({
